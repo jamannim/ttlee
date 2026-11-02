@@ -445,15 +445,15 @@ img {
 
 .about-flow-grid {
   display: grid;
-  grid-template-columns: 1fr 52px 1fr 52px 1fr 52px 1fr;
+  grid-template-columns: 1fr 76px 1fr 76px 1fr 76px 1fr;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   margin-top: 48px;
 }
 
 .flow-step-item {
   background-color: var(--color-pure-white);
-  padding: 26px 22px;
+  padding: 26px 20px;
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-subtle);
   border: 1px solid var(--color-border);
@@ -470,25 +470,108 @@ img {
   border-color: var(--color-starbucks-green);
 }
 
-/* 왼쪽에서 오른쪽으로 움직이는 단계별 화살표 컴포넌트 */
+/* ==========================================================================
+   골드 계열 순차 릴레이 단계 화살표 (STEP 01->02, 02->03, 03->04)
+   ========================================================================== */
 .flow-arrow-divider {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 4px;
+  padding: 0 2px;
 }
 
-.flow-arrow-animated-img {
-  width: 52px;
-  height: 24px;
+.flow-gold-arrow-svg {
+  width: 76px;
+  height: 28px;
   display: block;
-  object-fit: contain;
-  filter: drop-shadow(0 2px 4px rgba(0, 112, 74, 0.15));
+  filter: drop-shadow(0 2px 6px rgba(197, 160, 89, 0.28));
   transition: transform 0.25s ease;
 }
 
-.flow-arrow-divider:hover .flow-arrow-animated-img {
-  transform: scale(1.12);
+.flow-arrow-divider:hover .flow-gold-arrow-svg {
+  transform: scale(1.1);
+}
+
+/* 골드 빛구체(Stream Ball) 이동 키프레임 */
+@keyframes goldStream {
+  0% {
+    transform: translateX(0px);
+    opacity: 0;
+  }
+  4% {
+    opacity: 1;
+  }
+  24% {
+    transform: translateX(52px);
+    opacity: 1;
+  }
+  30% {
+    transform: translateX(64px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(64px);
+    opacity: 0;
+  }
+}
+
+/* 3연속 쉐브론 순차 골드 발광 키프레임 */
+@keyframes goldChevFlash {
+  0%, 100% {
+    opacity: 0.35;
+    stroke: #B69B7D;
+  }
+  8% {
+    opacity: 1;
+    stroke: #F5D77F;
+    filter: drop-shadow(0 0 4px #D4AF37);
+  }
+  22% {
+    opacity: 0.35;
+    stroke: #B69B7D;
+  }
+}
+
+/* 1단계: STEP 01 -> STEP 02 (0.0s 시작) */
+.flow-arrow-step1 .gold-stream-ball {
+  animation: goldStream 3.0s cubic-bezier(0.4, 0, 0.2, 1) infinite 0.0s;
+}
+.flow-arrow-step1 .gold-chev-1 {
+  animation: goldChevFlash 3.0s ease-in-out infinite 0.12s;
+}
+.flow-arrow-step1 .gold-chev-2 {
+  animation: goldChevFlash 3.0s ease-in-out infinite 0.28s;
+}
+.flow-arrow-step1 .gold-chev-3 {
+  animation: goldChevFlash 3.0s ease-in-out infinite 0.44s;
+}
+
+/* 2단계: STEP 02 -> STEP 03 (1.0s 시작 - 1번 이후 순차 진행) */
+.flow-arrow-step2 .gold-stream-ball {
+  animation: goldStream 3.0s cubic-bezier(0.4, 0, 0.2, 1) infinite 1.0s;
+}
+.flow-arrow-step2 .gold-chev-1 {
+  animation: goldChevFlash 3.0s ease-in-out infinite 1.12s;
+}
+.flow-arrow-step2 .gold-chev-2 {
+  animation: goldChevFlash 3.0s ease-in-out infinite 1.28s;
+}
+.flow-arrow-step2 .gold-chev-3 {
+  animation: goldChevFlash 3.0s ease-in-out infinite 1.44s;
+}
+
+/* 3단계: STEP 03 -> STEP 04 (2.0s 시작 - 2번 이후 순차 진행) */
+.flow-arrow-step3 .gold-stream-ball {
+  animation: goldStream 3.0s cubic-bezier(0.4, 0, 0.2, 1) infinite 2.0s;
+}
+.flow-arrow-step3 .gold-chev-1 {
+  animation: goldChevFlash 3.0s ease-in-out infinite 2.12s;
+}
+.flow-arrow-step3 .gold-chev-2 {
+  animation: goldChevFlash 3.0s ease-in-out infinite 2.28s;
+}
+.flow-arrow-step3 .gold-chev-3 {
+  animation: goldChevFlash 3.0s ease-in-out infinite 2.44s;
 }
 
 .flow-step-num {
@@ -1316,10 +1399,6 @@ img {
     justify-content: center;
   }
 
-  .about-flow-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
   .why-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1334,7 +1413,7 @@ img {
 
   /* 태블릿 플라이휠 다이어그램 크기 최적화 */
   .about-flow-grid {
-    grid-template-columns: 1fr 36px 1fr 36px 1fr 36px 1fr;
+    grid-template-columns: 1fr 46px 1fr 46px 1fr 46px 1fr;
     gap: 8px;
   }
 
@@ -1342,8 +1421,9 @@ img {
     padding: 20px 14px;
   }
 
-  .flow-arrow-animated-img {
-    width: 36px;
+  .flow-gold-arrow-svg {
+    width: 46px;
+    height: 20px;
   }
 
   .flywheel-diagram {
@@ -1503,17 +1583,17 @@ img {
   }
 
   .flow-arrow-divider {
-    height: 38px;
+    height: 48px;
     padding: 6px 0;
   }
 
-  .flow-arrow-animated-img {
+  .flow-gold-arrow-svg {
     transform: rotate(90deg);
-    width: 44px;
+    width: 48px;
     height: 20px;
   }
 
-  .flow-arrow-divider:hover .flow-arrow-animated-img {
+  .flow-arrow-divider:hover .flow-gold-arrow-svg {
     transform: rotate(90deg) scale(1.1);
   }
 
