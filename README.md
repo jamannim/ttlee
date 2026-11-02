@@ -11,7 +11,7 @@
 - **대표이사:** 박세연
 - **포지션:** 미디어 커머스 기업
 - **슬로건:** 좋은 상품을 발견하고, 진짜 경험을 나누다.
-- **대표 채널:** 박대장이 쏜다! (YouTube: [@parkboss1](https://www.youtube.com/@parkboss1))
+- **대표 채널:** 박대장이 쏜다! (YouTube: [@parkboss1](https://www.youtube.com/@parkboss1), TikTok: [@parkboss_1](https://www.tiktok.com/@parkboss_1))
 
 ---
 
@@ -41,7 +41,9 @@
 │   └── style.css           # Warm Lifestyle 디자인 시스템 및 반응형 CSS
 ├── js/
 │   └── main.js             # 탭 전환, 비디오/문의 모달, 부드러운 스크롤 인터랙션
+├── MD_RULES.md             # UI 텍스트 중복 방지 및 콘텐츠 작성 규칙
 ├── TTLEE_md_기획파일.md     # 원본 기획안 문서
+├── vercel.json             # Vercel 배포 및 Cloudflare 프록시 최적화 설정
 └── README.md               # 프로젝트 안내 및 활용 매뉴얼
 ```
 
@@ -56,8 +58,7 @@
    - `SECTION 04. WHY TTLE`: 뜰레만의 4대 차별적 경쟁력
    - `SECTION 05. TTLEE ORIGINAL CHANNEL (박대장이 쏜다!)`:
      - 정규 편성 안내 (매주 수 17:00 라이브 / 매주 목 롱폼)
-     - 유튜브 실제 최신 콘텐츠 뷰 및 클릭 시 영상 모달 팝업 재생 지원
-     - 틱톡 검색 바로가기 탭 연동
+     - 유튜브 공식 채널([@parkboss1](https://www.youtube.com/@parkboss1)) 및 틱톡 공식 채널([@parkboss_1](https://www.tiktok.com/@parkboss_1)) 연동
      - 모바일 화면 대응: 카드형 가로 스냅 스크롤(Snap Scroll) 적용
    - `SECTION 06. PARTNERSHIP`: 고객 유형별(제조사/셀러/기업) 3대 맞춤 CTA 및 문의 모달 폼
    - `SECTION 07. FOOTER`: 기업 정보 및 카피라이트 표기
