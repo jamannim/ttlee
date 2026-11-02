@@ -45,7 +45,6 @@
 html {
   font-family: var(--font-family-base);
   font-size: 16px;
-  scroll-behavior: smooth;
   scroll-padding-top: calc(var(--header-height) + 12px);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -221,6 +220,12 @@ img {
 .btn-sm {
   padding: 10px 22px;
   font-size: 0.9rem;
+}
+
+.btn-lg {
+  padding: 16px 42px;
+  font-size: 1.05rem;
+  font-weight: 700;
 }
 
 /* 5. Header / Navigation */
@@ -1212,7 +1217,7 @@ img {
   box-shadow: var(--shadow-subtle);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   transition: var(--transition-smooth);
 }
 
@@ -1243,8 +1248,13 @@ img {
 .partner-card p {
   font-size: 0.95rem;
   color: var(--color-secondary);
-  line-height: 1.6;
-  margin-bottom: 32px;
+  line-height: 1.65;
+  margin-bottom: 0;
+}
+
+.partnership-cta-wrapper {
+  text-align: center;
+  margin-top: 48px;
 }
 
 /* 12. SECTION 07: FOOTER */

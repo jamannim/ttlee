@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 2-1. 스크롤 1단씩 이동 (Step Scrolling) & GNB 실시간 메뉴 표시
+  // 2-1. 유체역학적 1단 이동 글라이더 (Liquid Step Gliding Engine)
   const stepSections = [
     { id: 'hero', el: document.getElementById('hero'), gnb: null },
     { id: 'about', el: document.getElementById('about'), gnb: 'about' },
@@ -46,6 +46,17 @@ document.addEventListener('DOMContentLoaded', () => {
     { id: 'channel', el: document.getElementById('channel'), gnb: 'partnership' },
     { id: 'partnership', el: document.getElementById('partnership'), gnb: 'partnership' }
   ];
+
+  let isGliding = false;
+  let glideRafId = null;
+  let lastWheelTime = 0;
+  const GLIDE_DURATION = 900; // 물 흐르듯 유려한 900ms 글라이딩
+  const WHEEL_COOLDOWN = 800; // 연속 스크롤 시 부드러운 전환 대기 시간
+
+  // 물 흐르듯 자연스러운 유선형 완화 곡선 (easeInOutCubic: 부드러운 출발 -> 유려한 활주 -> 깃털 같은 부드러운 착지)
+  const easeInOutCubic = (t) => {
+    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  };
 
   const getSectionTargetTop = (targetEl, index) => {
     if (!targetEl || index === 0) return 0;
@@ -65,30 +76,44 @@ document.addEventListener('DOMContentLoaded', () => {
     return 0;
   };
 
-  let isStepAnimating = false;
-  let stepCooldownTimer = null;
-
-  const scrollToStepIndex = (targetIndex) => {
+  // 물 흐르듯 실키하게 목표 단으로 이동하는 글라이딩 함수
+  const glideToSection = (targetIndex) => {
     if (targetIndex < 0 || targetIndex >= stepSections.length) return;
     const targetItem = stepSections[targetIndex];
     if (!targetItem.el) return;
 
-    isStepAnimating = true;
-    clearTimeout(stepCooldownTimer);
+    if (glideRafId) cancelAnimationFrame(glideRafId);
 
-    const top = getSectionTargetTop(targetItem.el, targetIndex);
-    window.scrollTo({
-      top: top,
-      behavior: 'smooth'
-    });
+    const startY = window.pageYOffset || document.documentElement.scrollTop;
+    const endY = getSectionTargetTop(targetItem.el, targetIndex);
+    const distance = endY - startY;
 
-    // 관성 스크롤로 인한 연쇄 건너뜀 방지 쿨다운 (700ms)
-    stepCooldownTimer = setTimeout(() => {
-      isStepAnimating = false;
-    }, 700);
+    if (Math.abs(distance) < 2) return;
+
+    isGliding = true;
+    const startTime = performance.now();
+
+    const stepFrame = (now) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / GLIDE_DURATION, 1);
+      const easedT = easeInOutCubic(progress);
+
+      window.scrollTo(0, startY + distance * easedT);
+
+      if (progress < 1) {
+        glideRafId = requestAnimationFrame(stepFrame);
+      } else {
+        window.scrollTo(0, endY);
+        isGliding = false;
+        glideRafId = null;
+        updateActiveMenu();
+      }
+    };
+
+    glideRafId = requestAnimationFrame(stepFrame);
   };
 
-  // GNB 메뉴 클릭 시 부드러운 단별 이동
+  // GNB 메뉴 클릭 시 물 흐르듯 자연스러운 글라이딩 이동
   navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
       const href = link.getAttribute('href');
@@ -97,13 +122,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const targetIdx = stepSections.findIndex(s => s.id === id);
         if (targetIdx !== -1) {
           e.preventDefault();
-          scrollToStepIndex(targetIdx);
+          glideToSection(targetIdx);
         }
       }
     });
   });
 
-  // 마우스 휠 1번에 1단씩 이동
+  // 마우스 휠 스크롤: 물 흐르듯 자연스럽게 1단씩 글라이딩
   window.addEventListener('wheel', (e) => {
     // 모달창 오픈 중이거나 폼 입력 중일 때는 휠 인터랙션 제외
     if (document.body.style.overflow === 'hidden') return;
@@ -112,7 +137,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // 미세 떨림 무시
     if (Math.abs(e.deltaY) < 18) return;
 
-    if (isStepAnimating) {
+    const now = performance.now();
+
+    // 글라이딩 진행 중이거나 쿨다운 중일 때 휠 충돌 방지
+    if (isGliding || (now - lastWheelTime < WHEEL_COOLDOWN)) {
       e.preventDefault();
       return;
     }
@@ -120,36 +148,42 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentIndex = getActiveStepIndex();
 
     if (e.deltaY > 0) {
-      // 아래로 스크롤: 다음 단으로 1단 이동
+      // 아래로 스크롤: 다음 단으로 물 흐르듯 이동
       if (currentIndex < stepSections.length - 1) {
         e.preventDefault();
-        scrollToStepIndex(currentIndex + 1);
+        lastWheelTime = now;
+        glideToSection(currentIndex + 1);
       }
     } else if (e.deltaY < 0) {
-      // 위로 스크롤: 이전 단으로 1단 이동
+      // 위로 스크롤: 이전 단으로 물 흐르듯 이동
       if (currentIndex > 0) {
         e.preventDefault();
-        scrollToStepIndex(currentIndex - 1);
+        lastWheelTime = now;
+        glideToSection(currentIndex - 1);
       }
     }
   }, { passive: false });
 
-  // 키보드 방향키(PageDown/PageUp/ArrowDown/ArrowUp)로도 1단 이동 지원
+  // 키보드 방향키(PageDown/PageUp/ArrowDown/ArrowUp)로도 유려한 글라이딩 지원
   window.addEventListener('keydown', (e) => {
     if (document.body.style.overflow === 'hidden') return;
     if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName)) return;
 
+    const now = performance.now();
+    if (isGliding || (now - lastWheelTime < 400)) return;
+
+    const currentIndex = getActiveStepIndex();
     if (e.key === 'ArrowDown' || e.key === 'PageDown') {
-      const currentIndex = getActiveStepIndex();
       if (currentIndex < stepSections.length - 1) {
         e.preventDefault();
-        scrollToStepIndex(currentIndex + 1);
+        lastWheelTime = now;
+        glideToSection(currentIndex + 1);
       }
     } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
-      const currentIndex = getActiveStepIndex();
       if (currentIndex > 0) {
         e.preventDefault();
-        scrollToStepIndex(currentIndex - 1);
+        lastWheelTime = now;
+        glideToSection(currentIndex - 1);
       }
     }
   });
