@@ -343,12 +343,8 @@ img {
 
 /* 6. SECTION 01: MAIN VISUAL (HERO) */
 .hero-section {
-  min-height: calc(100vh - var(--header-height));
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-top: calc(var(--header-height) + 28px);
-  padding-bottom: 48px;
+  padding-top: calc(var(--header-height) + 48px);
+  padding-bottom: 64px;
   background-color: var(--color-warm-ivory);
   position: relative;
   overflow: hidden;

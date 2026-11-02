@@ -14,7 +14,15 @@
 
   <!-- 거대 공백 완전 제거 및 균형 잡힌 단별 레이아웃 (캐시 무관 즉시 강제 적용) -->
   <style id="custom-layout-fix">
-    /* 1. 모든 섹션 강제 100vh 및 수직 중앙정렬 해제 (위아래 300px 거대 공백 원천 차단) */
+    /* 1. 히어로 및 모든 섹션 강제 100vh / 수직 중앙정렬 해제 (위아래 거대 공백 원천 차단) */
+    .hero-section {
+      min-height: auto !important;
+      display: block !important;
+      padding-top: calc(var(--header-height) + 48px) !important;
+      padding-bottom: 64px !important;
+      box-sizing: border-box !important;
+    }
+
     .why-section,
     .about-section,
     .business-section,
