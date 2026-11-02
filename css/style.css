@@ -852,6 +852,31 @@ img {
   margin-bottom: 32px;
 }
 
+.footer-logo-box {
+  width: 150px;
+  height: 45px;
+  border: 1.5px dashed rgba(255, 255, 255, 0.35);
+  border-radius: var(--radius-sm);
+  background-color: rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  transition: var(--transition-smooth);
+}
+
+.footer-logo-box:hover {
+  border-color: var(--color-starbucks-green);
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.footer-logo-placeholder {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.05em;
+}
+
 .footer-brand h3 {
   font-size: 1.5rem;
   font-weight: 900;
