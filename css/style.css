@@ -508,11 +508,7 @@ img {
 
 /* 7. SECTION 02: ABOUT TTLEE */
 .about-section {
-  min-height: calc(100vh - var(--header-height));
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 48px 0;
+  padding: 72px 0;
   background-color: var(--color-pure-white);
 }
 
@@ -683,11 +679,7 @@ img {
 
 /* 8. SECTION 03: OUR BUSINESS (원형 선순환 플라이휠 다이어그램) */
 .business-section {
-  min-height: calc(100vh - var(--header-height));
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 48px 0;
+  padding: 72px 0;
   background: linear-gradient(180deg, #F5F1E8 0%, #EDE6D8 100%);
   position: relative;
   overflow: hidden;
@@ -926,11 +918,7 @@ img {
 
 /* 9. SECTION 04: WHY TTLE */
 .why-section {
-  min-height: calc(100vh - var(--header-height));
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 48px 0;
+  padding: 72px 0;
   background-color: var(--color-pure-white);
 }
 
@@ -943,9 +931,12 @@ img {
 .why-card {
   background-color: var(--color-warm-ivory);
   border-radius: var(--radius-lg);
-  padding: 32px 24px;
+  padding: 38px 26px;
   border: 1px solid var(--color-beige-subtle);
   transition: var(--transition-smooth);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .why-card:hover {
@@ -955,38 +946,36 @@ img {
 }
 
 .why-card-icon {
-  width: 44px;
-  height: 44px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   background-color: var(--color-pure-white);
   color: var(--color-starbucks-green);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
   box-shadow: var(--shadow-subtle);
 }
 
 .why-card h3 {
-  font-size: 1.15rem;
-  font-weight: 700;
+  font-size: 1.25rem;
+  font-weight: 800;
   color: var(--color-charcoal);
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  line-height: 1.35;
 }
 
 .why-card p {
-  font-size: 0.9rem;
-  color: var(--color-secondary);
-  line-height: 1.55;
+  font-size: 1rem;
+  color: var(--color-charcoal);
+  line-height: 1.6;
+  word-break: keep-all;
 }
 
 /* 10. SECTION 05: TTLEE ORIGINAL CHANNEL (박대장이 쏜다!) */
 .channel-section {
-  min-height: calc(100vh - var(--header-height));
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 48px 0;
+  padding: 72px 0;
   background: linear-gradient(160deg, #1E3932 0%, #132520 100%);
   color: var(--color-pure-white);
   position: relative;
@@ -1224,11 +1213,7 @@ img {
 
 /* 11. SECTION 06: PARTNERSHIP */
 .partnership-section {
-  min-height: calc(100vh - var(--header-height));
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 48px 0;
+  padding: 72px 0;
   background-color: var(--color-warm-ivory);
 }
 
