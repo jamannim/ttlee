@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 84" width="100%" height="100%">
+  <!-- 뜰레 오리지널 심볼: 둥근 사각 말풍선 & 재생 아이콘 -->
+  <g fill="none" stroke="#D32323" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 18 14 
+             H 62 
+             A 10 10 0 0 1 72 24 
+             V 52 
+             A 10 10 0 0 1 62 62 
+             H 50 
+             L 45 73 
+             L 38 62 
+             H 18 
+             A 10 10 0 0 1 8 52 
+             V 24 
+             A 10 10 0 0 1 18 14 Z" />
+  </g>
+  <!-- 재생 삼각형 (▶) -->
+  <polygon points="32 29, 32 47, 49 38" fill="#D32323" />
+
+  <!-- 한글 '뜰레' 워드마크 (오리지널 붓글씨 캘리그래피 느낌) -->
+  <text x="88" y="52" font-family="'Batang', 'Gungsuh', 'Apple SD Gothic Neo', serif" font-size="44" font-weight="900" fill="#D32323" letter-spacing="-1.5">뜰레</text>
+
+  <!-- 하단 영문 서브텍스트 'LIVE COMMERCE COMPANY' -->
+  <text x="10" y="78" font-family="'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="600" fill="#D32323" letter-spacing="3.2">LIVE COMMERCE COMPANY</text>
+</svg>

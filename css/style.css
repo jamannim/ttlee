@@ -212,19 +212,20 @@ img {
 .logo {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 1.5rem;
-  font-weight: 900;
-  letter-spacing: -0.03em;
-  color: var(--color-charcoal);
+  text-decoration: none;
 }
 
-.logo-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: var(--color-starbucks-green);
-  display: inline-block;
+.site-logo-img {
+  height: 42px;
+  width: auto;
+  max-width: 170px;
+  display: block;
+  object-fit: contain;
+  transition: transform 0.25s ease;
+}
+
+.logo:hover .site-logo-img {
+  transform: scale(1.03);
 }
 
 .nav-menu {
@@ -720,39 +721,7 @@ img {
   margin: 0;
 }
 
-/* 하단 요약 배지 */
-.flywheel-summary-badge {
-  margin-top: 40px;
-  background-color: var(--color-pure-white);
-  padding: 12px 28px;
-  border-radius: var(--radius-full);
-  box-shadow: var(--shadow-subtle);
-  border: 1px solid var(--color-border);
-}
 
-.cycle-indicator {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--color-charcoal);
-}
-
-.cycle-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: var(--color-starbucks-green);
-  box-shadow: 0 0 0 4px var(--color-starbucks-green-light);
-  animation: pulseDot 2s infinite;
-}
-
-@keyframes pulseDot {
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 112, 74, 0.4); }
-  70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(0, 112, 74, 0); }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 112, 74, 0); }
-}
 
 /* 9. SECTION 04: WHY TTLE */
 .why-section {
@@ -1118,28 +1087,24 @@ img {
 }
 
 .footer-logo-box {
-  width: 150px;
-  height: 45px;
-  border: 1.5px dashed rgba(255, 255, 255, 0.35);
+  width: 156px;
+  height: 48px;
   border-radius: var(--radius-sm);
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: var(--color-pure-white);
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 6px 12px;
   margin-bottom: 16px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
   transition: var(--transition-smooth);
 }
 
-.footer-logo-box:hover {
-  border-color: var(--color-starbucks-green);
-  background-color: rgba(255, 255, 255, 0.08);
-}
-
-.footer-logo-placeholder {
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.6);
-  letter-spacing: 0.05em;
+.footer-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 .footer-brand h3 {
@@ -1478,31 +1443,7 @@ img {
   }
 
   .flywheel-node:last-child::after {
-    content: '↺ 다시 1단계 상품 발굴로 선순환';
-    position: absolute;
-    bottom: -22px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 0.72rem;
-    font-weight: 700;
-    color: var(--color-starbucks-green);
-    background: #E8F4EE;
-    padding: 3px 12px;
-    border-radius: var(--radius-full);
-    white-space: nowrap;
-    border: 1px solid rgba(0, 112, 74, 0.25);
-    z-index: 10;
-  }
-
-  .flywheel-summary-badge {
-    margin-top: 36px;
-    padding: 10px 18px;
-    text-align: center;
-  }
-
-  .cycle-indicator {
-    font-size: 0.8rem;
-    justify-content: center;
+    display: none;
   }
 
   .about-flow-grid {
