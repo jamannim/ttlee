@@ -56,7 +56,7 @@
    - `SECTION 02. ABOUT TTLE`: 발견 → 검증 → 제작 → 판매 연결의 4단계 비즈니스 플로우
    - `SECTION 03. OUR BUSINESS`: 4대 핵심 사업(상품 발굴·검증, 콘텐츠 제작, 라이브커머스, 셀러 육성)
    - `SECTION 04. WHY TTLE`: 뜰레만의 4대 차별적 경쟁력
-   - `SECTION 05. TTLEE ORIGINAL CHANNEL (박대장이 쏜다!)`:
+   - `SECTION 05. TTLEE OFFICIAL CHANNEL (박대장이 쏜다!)`:
      - 정규 편성 안내 (매주 수 17:00 라이브 / 매주 목 롱폼)
      - 유튜브 공식 채널([@parkboss1](https://www.youtube.com/@parkboss1)) 및 틱톡 공식 채널([@parkboss_1](https://www.tiktok.com/@parkboss_1)) 연동
      - 모바일 화면 대응: 카드형 가로 스냅 스크롤(Snap Scroll) 적용

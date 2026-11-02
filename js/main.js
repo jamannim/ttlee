@@ -37,150 +37,143 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 2-1. GNB 메뉴 스크롤스파이 & 1단 이동 모션 (현재 메뉴 실시간 강조 및 단별 이동)
-  const gnbSections = [
-    { id: 'about', el: document.getElementById('about') },
-    { id: 'business', el: document.getElementById('business') },
-    { id: 'why', el: document.getElementById('why') },
-    { id: 'partnership', el: document.getElementById('partnership') }
+  // 2-1. 스크롤 1단씩 이동 (Step Scrolling) & GNB 실시간 메뉴 표시
+  const stepSections = [
+    { id: 'hero', el: document.getElementById('hero'), gnb: null },
+    { id: 'about', el: document.getElementById('about'), gnb: 'about' },
+    { id: 'business', el: document.getElementById('business'), gnb: 'business' },
+    { id: 'why', el: document.getElementById('why'), gnb: 'why' },
+    { id: 'channel', el: document.getElementById('channel'), gnb: 'partnership' },
+    { id: 'partnership', el: document.getElementById('partnership'), gnb: 'partnership' }
   ];
-  const stepIds = ['about', 'business', 'why', 'partnership'];
-  const stepDotLinks = document.querySelectorAll('.js-step-dot');
 
-  // 섹션 ID로 부드럽게 1단 이동하는 모션 함수
-  const scrollToSectionById = (id) => {
-    const target = document.getElementById(id);
-    if (!target) return;
+  const getSectionTargetTop = (targetEl, index) => {
+    if (!targetEl || index === 0) return 0;
     const headerHeight = document.querySelector('.header')?.offsetHeight || 76;
-    const targetTop = target.getBoundingClientRect().top + window.pageYOffset - headerHeight + 2;
-    window.scrollTo({
-      top: targetTop,
-      behavior: 'smooth'
-    });
+    return Math.max(0, targetEl.getBoundingClientRect().top + window.pageYOffset - headerHeight + 2);
   };
 
-  // GNB 메뉴 클릭 시 부드러운 1단 이동 모션
-  navLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-      const href = link.getAttribute('href');
-      if (href && href.startsWith('#')) {
-        const id = href.replace('#', '');
-        if (document.getElementById(id)) {
-          e.preventDefault();
-          scrollToSectionById(id);
-        }
-      }
-    });
-  });
-
-  // 우측 도트 네비게이션 클릭 시 해당 단으로 1단 이동
-  stepDotLinks.forEach(dot => {
-    dot.addEventListener('click', (e) => {
-      e.preventDefault();
-      const stepId = dot.dataset.step;
-      if (stepId) scrollToSectionById(stepId);
-    });
-  });
-
-  // 우측 이전 단 / 다음 단 화살표 컨트롤러
-  const prevStepBtn = document.querySelector('.js-step-prev');
-  const nextStepBtn = document.querySelector('.js-step-next');
-
-  const getCurrentStepIndex = () => {
-    const scrollPosition = window.scrollY + 160;
-    for (let i = stepIds.length - 1; i >= 0; i--) {
-      const el = document.getElementById(stepIds[i]);
-      if (el && scrollPosition >= el.offsetTop) {
+  const getActiveStepIndex = () => {
+    const headerHeight = document.querySelector('.header')?.offsetHeight || 76;
+    const currentScroll = window.scrollY + headerHeight + 60;
+    for (let i = stepSections.length - 1; i >= 0; i--) {
+      const sec = stepSections[i].el;
+      if (sec && currentScroll >= sec.offsetTop) {
         return i;
       }
     }
     return 0;
   };
 
-  if (prevStepBtn) {
-    prevStepBtn.addEventListener('click', () => {
-      const currentIndex = getCurrentStepIndex();
+  let isStepAnimating = false;
+  let stepCooldownTimer = null;
+
+  const scrollToStepIndex = (targetIndex) => {
+    if (targetIndex < 0 || targetIndex >= stepSections.length) return;
+    const targetItem = stepSections[targetIndex];
+    if (!targetItem.el) return;
+
+    isStepAnimating = true;
+    clearTimeout(stepCooldownTimer);
+
+    const top = getSectionTargetTop(targetItem.el, targetIndex);
+    window.scrollTo({
+      top: top,
+      behavior: 'smooth'
+    });
+
+    // 관성 스크롤로 인한 연쇄 건너뜀 방지 쿨다운 (700ms)
+    stepCooldownTimer = setTimeout(() => {
+      isStepAnimating = false;
+    }, 700);
+  };
+
+  // GNB 메뉴 클릭 시 부드러운 단별 이동
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        const id = href.replace('#', '');
+        const targetIdx = stepSections.findIndex(s => s.id === id);
+        if (targetIdx !== -1) {
+          e.preventDefault();
+          scrollToStepIndex(targetIdx);
+        }
+      }
+    });
+  });
+
+  // 마우스 휠 1번에 1단씩 이동
+  window.addEventListener('wheel', (e) => {
+    // 모달창 오픈 중이거나 폼 입력 중일 때는 휠 인터랙션 제외
+    if (document.body.style.overflow === 'hidden') return;
+    if (e.target.closest('.modal-overlay') || e.target.closest('form') || e.target.closest('textarea') || e.target.closest('input')) return;
+
+    // 미세 떨림 무시
+    if (Math.abs(e.deltaY) < 18) return;
+
+    if (isStepAnimating) {
+      e.preventDefault();
+      return;
+    }
+
+    const currentIndex = getActiveStepIndex();
+
+    if (e.deltaY > 0) {
+      // 아래로 스크롤: 다음 단으로 1단 이동
+      if (currentIndex < stepSections.length - 1) {
+        e.preventDefault();
+        scrollToStepIndex(currentIndex + 1);
+      }
+    } else if (e.deltaY < 0) {
+      // 위로 스크롤: 이전 단으로 1단 이동
       if (currentIndex > 0) {
-        scrollToSectionById(stepIds[currentIndex - 1]);
-      } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        e.preventDefault();
+        scrollToStepIndex(currentIndex - 1);
       }
-    });
-  }
+    }
+  }, { passive: false });
 
-  if (nextStepBtn) {
-    nextStepBtn.addEventListener('click', () => {
-      const currentIndex = getCurrentStepIndex();
-      if (currentIndex < stepIds.length - 1) {
-        scrollToSectionById(stepIds[currentIndex + 1]);
-      } else {
-        scrollToSectionById('partnership');
+  // 키보드 방향키(PageDown/PageUp/ArrowDown/ArrowUp)로도 1단 이동 지원
+  window.addEventListener('keydown', (e) => {
+    if (document.body.style.overflow === 'hidden') return;
+    if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName)) return;
+
+    if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+      const currentIndex = getActiveStepIndex();
+      if (currentIndex < stepSections.length - 1) {
+        e.preventDefault();
+        scrollToStepIndex(currentIndex + 1);
       }
-    });
-  }
+    } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+      const currentIndex = getActiveStepIndex();
+      if (currentIndex > 0) {
+        e.preventDefault();
+        scrollToStepIndex(currentIndex - 1);
+      }
+    }
+  });
 
-  const setActiveNavLink = (sectionId) => {
+  // GNB 메뉴 실시간 Active 표시 업데이트 (현재 보고 있는 섹션 표시)
+  const setActiveNavLink = (gnbId) => {
     navLinks.forEach(link => {
       const href = link.getAttribute('href');
-      if (sectionId && href === `#${sectionId}`) {
+      if (gnbId && href === `#${gnbId}`) {
         link.classList.add('active');
       } else {
         link.classList.remove('active');
       }
     });
-
-    stepDotLinks.forEach(dot => {
-      if (dot.dataset.step === sectionId) {
-        dot.classList.add('active');
-      } else {
-        dot.classList.remove('active');
-      }
-    });
   };
 
   const updateActiveMenu = () => {
-    const scrollPosition = window.scrollY + 140; // 헤더 높이(76px) + 뷰포트 버퍼
-    const windowHeight = window.innerHeight;
-    const documentHeight = document.documentElement.scrollHeight;
-
-    // 페이지 최하단(푸터 영역) 도달 시 마지막 '파트너쉽' 메뉴 활성화
-    if (window.scrollY + windowHeight >= documentHeight - 60) {
-      setActiveNavLink('partnership');
-      return;
-    }
-
-    let activeId = '';
-
-    // 섹션별 상단 도달 검사
-    for (let i = 0; i < gnbSections.length; i++) {
-      const section = gnbSections[i];
-      if (section.el) {
-        const top = section.el.offsetTop;
-        const height = section.el.offsetHeight;
-        if (scrollPosition >= top && scrollPosition < top + height) {
-          activeId = section.id;
-          break;
-        }
-      }
-    }
-
-    // Section 05 (채널 영역) 통과 시 파트너쉽과 자연스럽게 연계
-    if (!activeId) {
-      const channelSec = document.getElementById('channel');
-      if (channelSec) {
-        const cTop = channelSec.offsetTop;
-        const cHeight = channelSec.offsetHeight;
-        if (scrollPosition >= cTop && scrollPosition < cTop + cHeight) {
-          activeId = 'partnership';
-        }
-      }
-    }
-
-    setActiveNavLink(activeId);
+    const currentIndex = getActiveStepIndex();
+    const currentSection = stepSections[currentIndex];
+    setActiveNavLink(currentSection ? currentSection.gnb : null);
   };
 
   window.addEventListener('scroll', updateActiveMenu, { passive: true });
-  updateActiveMenu(); // 초기 실행
+  updateActiveMenu();
 
   // 3. 채널 탭 전환 (YouTube vs TikTok)
   const tabButtons = document.querySelectorAll('.platform-tab-btn');

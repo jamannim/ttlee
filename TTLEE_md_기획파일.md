@@ -104,7 +104,7 @@
 - 제조 현장 확인을 통한 상품 신뢰도 강화
 - 실제 판매 경험을 활용한 셀러 성장 지원
 
-### SECTION 05. TTLEE ORIGINAL CHANNEL — 박대장이 쏜다!
+### SECTION 05. TTLEE OFFICIAL CHANNEL — 박대장이 쏜다!
 
 **섹션 제목**
 
