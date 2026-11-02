@@ -146,7 +146,32 @@ document.addEventListener('DOMContentLoaded', () => {
   if (inquiryForm) {
     inquiryForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      // 유효성 검사 완료 가정 후 모의 접수 처리
+
+      const categorySelect = document.getElementById('inquiryCategory');
+      const categoryText = categorySelect ? categorySelect.options[categorySelect.selectedIndex].text : '';
+      const name = document.getElementById('inquiryName')?.value || '';
+      const contact = document.getElementById('inquiryContact')?.value || '';
+      const message = document.getElementById('inquiryMessage')?.value || '';
+
+      const inquiryData = {
+        id: 'inq_' + Date.now(),
+        date: new Date().toLocaleString('ko-KR'),
+        category: categoryText,
+        name,
+        contact,
+        message
+      };
+
+      // 브라우저 localStorage에 실시간 저장 (확인 및 테스트용)
+      try {
+        const existing = JSON.parse(localStorage.getItem('ttlee_inquiries') || '[]');
+        existing.unshift(inquiryData);
+        localStorage.setItem('ttlee_inquiries', JSON.stringify(existing));
+        console.info('[TTLEE] 새로운 제휴 문의가 저장되었습니다:', inquiryData);
+      } catch (err) {
+        console.warn('localStorage 저장 실패:', err);
+      }
+
       closeInquiryModal();
       inquiryForm.reset();
       showToast('성공적으로 문의가 접수되었습니다. 담당자가 빠른 시일 내에 연락드리겠습니다.');

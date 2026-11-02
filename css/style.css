@@ -83,25 +83,36 @@ img {
   padding: 0 24px;
 }
 
-/* 3. 공통 타이포그래피 & 배지 컴포넌트 */
+/* 3. 공통 타이포그래피 & 비버튼 배지 컴포넌트 (정적 라벨: 소프트 사각형) */
 .section-badge {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 14px;
-  border-radius: var(--radius-full);
-  font-size: 0.875rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: var(--radius-sm); /* 소프트 사각형 8px로 버튼의 알약형과 100% 분리 */
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
   background-color: var(--color-starbucks-green-light);
   color: var(--color-starbucks-green);
   margin-bottom: 16px;
+  cursor: default !important;
+  user-select: none;
+}
+
+.section-badge::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: currentColor;
+  display: inline-block;
 }
 
 .section-badge.on-dark {
   background-color: rgba(255, 255, 255, 0.12);
   color: #8DE0BD;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .section-header {
@@ -129,58 +140,85 @@ img {
   color: var(--color-starbucks-green);
 }
 
-/* 4. 버튼 컴포넌트 */
+/* 4. 버튼 규격 컴포넌트 (인터랙티브 액션: 풀 라운딩 알약형 + 입체 피드백) */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   padding: 14px 28px;
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-full); /* 버튼 전용 알약형 라운딩 */
   font-size: 1rem;
   font-weight: 600;
   transition: var(--transition-smooth);
-  cursor: pointer;
+  cursor: pointer !important;
+  user-select: none;
+  position: relative;
+  text-decoration: none;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0px) scale(0.98);
+}
+
+.btn svg {
+  transition: transform 0.2s ease;
+}
+
+.btn:hover svg {
+  transform: translateX(2px);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--color-starbucks-green);
+  outline-offset: 3px;
 }
 
 .btn-primary {
   background-color: var(--color-starbucks-green);
   color: var(--color-pure-white);
+  border: 1.5px solid transparent;
   box-shadow: 0 4px 14px rgba(0, 112, 74, 0.28);
 }
 
 .btn-primary:hover {
   background-color: var(--color-starbucks-green-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 112, 74, 0.38);
+  box-shadow: 0 8px 24px rgba(0, 112, 74, 0.38);
 }
 
 .btn-secondary {
   background-color: transparent;
   color: var(--color-charcoal);
   border: 1.5px solid var(--color-natural-beige);
+  box-shadow: var(--shadow-subtle);
 }
 
 .btn-secondary:hover {
-  background-color: var(--color-beige-subtle);
-  border-color: var(--color-charcoal);
-  transform: translateY(-2px);
+  background-color: rgba(182, 155, 125, 0.12);
+  border-color: var(--color-starbucks-green);
+  color: var(--color-starbucks-green);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
 }
 
 .btn-outline-white {
   background-color: transparent;
   color: var(--color-pure-white);
-  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .btn-outline-white:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.15);
   border-color: var(--color-pure-white);
-  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
 }
 
 .btn-sm {
-  padding: 10px 20px;
+  padding: 10px 22px;
   font-size: 0.9rem;
 }
 
@@ -273,13 +311,13 @@ img {
 
 .hero-grid {
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
-  gap: 48px;
+  gap: 40px;
 }
 
 .hero-content {
-  max-width: 620px;
+  max-width: 580px;
 }
 
 .hero-title {
@@ -334,14 +372,15 @@ img {
   border-radius: var(--radius-xl);
   overflow: hidden;
   box-shadow: var(--shadow-card);
-  background: var(--color-pure-white);
+  background: #141816;
   border: 1px solid var(--color-beige-subtle);
+  width: 100%;
 }
 
 .hero-visual-image-wrapper {
   position: relative;
-  padding-top: 64%;
-  background: #1A1A1A;
+  padding-top: 70%; /* 배경이미지 비율에 맞게 상하좌우 노출 영역 확장 */
+  background: #141816;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -355,12 +394,12 @@ img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center center;
+  object-position: center 25%;
   transition: transform 0.6s ease;
 }
 
 .hero-visual-card:hover .hero-main-img {
-  transform: scale(1.05);
+  transform: scale(1.04);
 }
 
 .hero-img-overlay {
@@ -369,7 +408,7 @@ img {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.08) 0%, rgba(19, 37, 32, 0.6) 100%);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.02) 45%, rgba(19, 37, 32, 0.75) 100%);
 }
 
 .hero-visual-inner {
@@ -378,7 +417,7 @@ img {
   left: 0;
   width: 100%;
   height: 100%;
-  padding: 24px;
+  padding: 22px 24px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -387,44 +426,39 @@ img {
 
 .hero-badge-tag {
   align-self: flex-start;
-  background-color: var(--color-pure-white);
+  background-color: rgba(255, 255, 255, 0.94);
   color: var(--color-starbucks-green);
-  font-size: 0.8rem;
+  font-size: 0.775rem;
   font-weight: 700;
-  padding: 6px 14px;
-  border-radius: var(--radius-full);
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
   box-shadow: var(--shadow-subtle);
+  cursor: default !important;
+  user-select: none;
 }
 
-.hero-media-preview {
-  position: relative;
+/* 최상단 이미지 박스 내부로 이동된 정기 편성 바 */
+.hero-schedule-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: rgba(19, 37, 32, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  padding: 12px 18px;
   border-radius: var(--radius-md);
-  background: rgba(19, 37, 32, 0.84);
-  backdrop-filter: blur(8px);
-  color: var(--color-pure-white);
-  padding: 16px 20px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
   box-shadow: var(--shadow-elevated);
 }
 
-.hero-media-preview h4 {
-  font-size: 1.05rem;
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-
-.hero-media-preview p {
-  font-size: 0.825rem;
-  color: rgba(255, 255, 255, 0.85);
-  margin-bottom: 8px;
-}
-
-.hero-media-stats {
+.hero-schedule-item {
   display: flex;
-  gap: 14px;
-  font-size: 0.775rem;
-  color: #8DE0BD;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
   font-weight: 600;
+  color: var(--color-pure-white);
 }
 
 /* 7. SECTION 02: ABOUT TTLE */
@@ -1494,12 +1528,19 @@ img {
   }
 
   .hero-visual-image-wrapper {
-    padding-top: 66%;
+    padding-top: 72%;
   }
 
   .hero-main-img {
     transform: none;
-    object-position: center center;
+    object-position: center 25%;
+  }
+
+  .hero-schedule-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 10px 14px;
   }
 
   /* 모바일 선순환 다이어그램 세로형 루프 레이아웃 */
@@ -1630,12 +1671,5 @@ img {
     max-width: 280px;
     scroll-snap-align: start;
     flex-shrink: 0;
-  }
-
-  .channel-schedule-bar {
-    flex-direction: column;
-    gap: 12px;
-    padding: 16px;
-    border-radius: var(--radius-lg);
   }
 }
