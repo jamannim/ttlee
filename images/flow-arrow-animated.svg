@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 76 28" width="100%" height="100%">
+  <defs>
+    <filter id="arrowGlow" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="1.5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <style>
+    /* 왼쪽에서 오른쪽으로 부드럽게 흐르는 펄스 빛 */
+    @keyframes streamDot {
+      0% {
+        transform: translateX(0px);
+        opacity: 0.1;
+      }
+      20% {
+        opacity: 0.9;
+      }
+      80% {
+        opacity: 0.9;
+      }
+      100% {
+        transform: translateX(44px);
+        opacity: 0;
+      }
+    }
+
+    /* 3연속 쉐브론 순차 발광 (Wave Effect) */
+    @keyframes chevPulse1 {
+      0%, 100% { opacity: 0.25; stroke: #B69B7D; }
+      25% { opacity: 1; stroke: #00704A; }
+    }
+    @keyframes chevPulse2 {
+      0%, 100% { opacity: 0.25; stroke: #B69B7D; }
+      50% { opacity: 1; stroke: #00704A; }
+    }
+    @keyframes chevPulse3 {
+      0%, 100% { opacity: 0.35; stroke: #00704A; }
+      75% { opacity: 1; stroke: #00704A; }
+    }
+
+    .base-track {
+      stroke: rgba(0, 112, 74, 0.22);
+      stroke-dasharray: 4 3;
+    }
+    .stream-ball {
+      animation: streamDot 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+    .chev-step-1 {
+      animation: chevPulse1 1.6s ease-in-out infinite;
+    }
+    .chev-step-2 {
+      animation: chevPulse2 1.6s ease-in-out infinite;
+    }
+    .chev-step-3 {
+      animation: chevPulse3 1.6s ease-in-out infinite;
+    }
+  </style>
+
+  <!-- 베이스 가이드 점선 라인 -->
+  <line x1="6" y1="14" x2="62" y2="14" class="base-track" stroke-width="2" stroke-linecap="round" />
+
+  <!-- 왼쪽에서 오른쪽으로 흘러가는 빛의 구체 -->
+  <circle cx="10" cy="14" r="3.5" fill="#00704A" filter="url(#arrowGlow)" class="stream-ball" />
+
+  <!-- 3연속 쉐브론 화살표 (왼쪽 -> 오른쪽 순차 점등) -->
+  <!-- 1번 쉐브론 -->
+  <path d="M 22 8 L 28 14 L 22 20" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="chev-step-1" />
+  <!-- 2번 쉐브론 -->
+  <path d="M 36 8 L 42 14 L 36 20" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" class="chev-step-2" />
+  <!-- 3번 최종 화살표 헤드 -->
+  <path d="M 50 8 L 58 14 L 50 20" fill="none" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" class="chev-step-3" filter="url(#arrowGlow)" />
+</svg>

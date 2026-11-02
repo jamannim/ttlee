@@ -441,25 +441,50 @@ img {
 
 .about-flow-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  grid-template-columns: 1fr 52px 1fr 52px 1fr 52px 1fr;
+  align-items: center;
+  gap: 12px;
   margin-top: 48px;
 }
 
 .flow-step-item {
   background-color: var(--color-pure-white);
-  padding: 28px 24px;
+  padding: 26px 22px;
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-subtle);
   border: 1px solid var(--color-border);
   position: relative;
   transition: var(--transition-smooth);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .flow-step-item:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-card);
-  border-color: var(--color-natural-beige);
+  border-color: var(--color-starbucks-green);
+}
+
+/* 왼쪽에서 오른쪽으로 움직이는 단계별 화살표 컴포넌트 */
+.flow-arrow-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+}
+
+.flow-arrow-animated-img {
+  width: 52px;
+  height: 24px;
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 112, 74, 0.15));
+  transition: transform 0.25s ease;
+}
+
+.flow-arrow-divider:hover .flow-arrow-animated-img {
+  transform: scale(1.12);
 }
 
 .flow-step-num {
@@ -479,7 +504,7 @@ img {
 }
 
 .flow-step-desc {
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   color: var(--color-secondary);
   line-height: 1.5;
 }
@@ -1304,6 +1329,19 @@ img {
   }
 
   /* 태블릿 플라이휠 다이어그램 크기 최적화 */
+  .about-flow-grid {
+    grid-template-columns: 1fr 36px 1fr 36px 1fr 36px 1fr;
+    gap: 8px;
+  }
+
+  .flow-step-item {
+    padding: 20px 14px;
+  }
+
+  .flow-arrow-animated-img {
+    width: 36px;
+  }
+
   .flywheel-diagram {
     width: 580px;
     height: 580px;
@@ -1448,6 +1486,22 @@ img {
 
   .about-flow-grid {
     grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .flow-arrow-divider {
+    height: 38px;
+    padding: 6px 0;
+  }
+
+  .flow-arrow-animated-img {
+    transform: rotate(90deg);
+    width: 44px;
+    height: 20px;
+  }
+
+  .flow-arrow-divider:hover .flow-arrow-animated-img {
+    transform: rotate(90deg) scale(1.1);
   }
 
   .why-grid {
