@@ -483,59 +483,275 @@ img {
   line-height: 1.5;
 }
 
-/* 8. SECTION 03: OUR BUSINESS */
+/* 8. SECTION 03: OUR BUSINESS (원형 선순환 플라이휠 다이어그램) */
 .business-section {
-  padding: 100px 0;
-  background-color: var(--color-warm-ivory);
+  padding: 110px 0;
+  background: linear-gradient(180deg, #F5F1E8 0%, #EDE6D8 100%);
+  position: relative;
+  overflow: hidden;
 }
 
-.business-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 28px;
-}
-
-.business-card {
-  background-color: var(--color-pure-white);
-  border-radius: var(--radius-lg);
-  padding: 36px;
-  border: 1px solid var(--color-border);
-  transition: var(--transition-smooth);
+.flywheel-wrapper {
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  box-shadow: var(--shadow-subtle);
+  align-items: center;
+  position: relative;
 }
 
-.business-card:hover {
-  transform: translateY(-4px);
+.flywheel-diagram {
+  position: relative;
+  width: 700px;
+  height: 700px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* SVG 원형 궤도 및 회전 화살표 */
+.flywheel-svg-track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.orbit-bg-circle {
+  stroke: rgba(0, 112, 74, 0.15);
+  stroke-width: 2.5;
+  stroke-dasharray: 6 6;
+}
+
+.orbit-dash-circle {
+  stroke: rgba(182, 155, 125, 0.3);
+  stroke-width: 1;
+}
+
+.flywheel-arrow-path {
+  stroke: var(--color-starbucks-green);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  filter: drop-shadow(0 2px 5px rgba(0, 112, 74, 0.25));
+  transition: var(--transition-smooth);
+}
+
+.flywheel-diagram:hover .flywheel-arrow-path {
+  stroke-width: 4;
+  filter: drop-shadow(0 4px 10px rgba(0, 112, 74, 0.4));
+}
+
+/* 중앙 코어 허브 (Center Core) */
+.flywheel-center-core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 184px;
+  height: 184px;
+  border-radius: 50%;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.core-pulse-ring {
+  position: absolute;
+  top: -12px;
+  left: -12px;
+  right: -12px;
+  bottom: -12px;
+  border-radius: 50%;
+  border: 2px dashed rgba(0, 112, 74, 0.28);
+  animation: rotatePulse 30s linear infinite;
+}
+
+@keyframes rotatePulse {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.core-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1E3932 0%, #132520 100%);
+  color: var(--color-pure-white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 16px;
+  box-shadow: 0 14px 34px rgba(19, 37, 32, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+  border: 3px solid rgba(182, 155, 125, 0.4);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.flywheel-diagram:hover .core-inner {
+  transform: scale(1.03);
+  box-shadow: 0 18px 42px rgba(0, 112, 74, 0.32), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+.core-tag {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #8DE0BD;
+  margin-bottom: 4px;
+}
+
+.core-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+
+.core-sub {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* 4대 노드 스타일 */
+.flywheel-node {
+  position: absolute;
+  width: 250px;
+  background-color: var(--color-pure-white);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
   box-shadow: var(--shadow-card);
-  border-color: var(--color-natural-beige);
+  border: 1px solid rgba(51, 58, 53, 0.08);
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  z-index: 5;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
-.business-icon-wrapper {
-  width: 54px;
-  height: 54px;
+.flywheel-node:hover {
+  box-shadow: 0 18px 36px rgba(0, 112, 74, 0.15);
+  border-color: var(--color-starbucks-green);
+}
+
+/* 노드 원형 궤도 절대 좌표 (700px 기준) */
+/* 1. 상단 (12시) */
+.node-top {
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.node-top:hover {
+  transform: translateX(-50%) translateY(-5px);
+}
+
+/* 2. 우측 (3시) */
+.node-right {
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
+.node-right:hover {
+  transform: translateY(-50%) translateX(5px);
+}
+
+/* 3. 하단 (6시) */
+.node-bottom {
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.node-bottom:hover {
+  transform: translateX(-50%) translateY(5px);
+}
+
+/* 4. 좌측 (9시) */
+.node-left {
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+.node-left:hover {
+  transform: translateY(-50%) translateX(-5px);
+}
+
+/* 노드 내부 */
+.node-icon-box {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
   border-radius: var(--radius-md);
-  background-color: var(--color-beige-subtle);
+  background-color: var(--color-starbucks-green-light);
   color: var(--color-starbucks-green);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 24px;
 }
 
-.business-card h3 {
-  font-size: 1.35rem;
+.node-step-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background-color: var(--color-deep-green);
+  color: #FFFFFF;
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: var(--radius-full);
+  line-height: 1.1;
+}
+
+.node-content h3 {
+  font-size: 1.05rem;
   font-weight: 700;
   color: var(--color-charcoal);
-  margin-bottom: 12px;
+  margin-bottom: 5px;
+  line-height: 1.3;
 }
 
-.business-card p {
-  font-size: 0.975rem;
+.node-content p {
+  font-size: 0.835rem;
   color: var(--color-secondary);
-  line-height: 1.6;
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* 하단 요약 배지 */
+.flywheel-summary-badge {
+  margin-top: 40px;
+  background-color: var(--color-pure-white);
+  padding: 12px 28px;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-subtle);
+  border: 1px solid var(--color-border);
+}
+
+.cycle-indicator {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-charcoal);
+}
+
+.cycle-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--color-starbucks-green);
+  box-shadow: 0 0 0 4px var(--color-starbucks-green-light);
+  animation: pulseDot 2s infinite;
+}
+
+@keyframes pulseDot {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 112, 74, 0.4); }
+  70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(0, 112, 74, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 112, 74, 0); }
 }
 
 /* 9. SECTION 04: WHY TTLE */
@@ -1121,6 +1337,34 @@ img {
   .partnership-grid {
     grid-template-columns: 1fr;
   }
+
+  /* 태블릿 플라이휠 다이어그램 크기 최적화 */
+  .flywheel-diagram {
+    width: 580px;
+    height: 580px;
+  }
+
+  .flywheel-node {
+    width: 210px;
+    padding: 14px 16px;
+  }
+
+  .node-content h3 {
+    font-size: 0.95rem;
+  }
+
+  .node-content p {
+    font-size: 0.78rem;
+  }
+
+  .flywheel-center-core {
+    width: 160px;
+    height: 160px;
+  }
+
+  .core-title {
+    font-size: 1.1rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1163,8 +1407,102 @@ img {
     font-size: 1.05rem;
   }
 
-  .business-grid {
-    grid-template-columns: 1fr;
+  /* 모바일 선순환 다이어그램 세로형 루프 레이아웃 */
+  .flywheel-diagram {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 0;
+  }
+
+  .flywheel-svg-track {
+    display: none;
+  }
+
+  .flywheel-center-core {
+    position: static;
+    transform: none;
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    margin-bottom: 12px;
+  }
+
+  .core-pulse-ring {
+    display: none;
+  }
+
+  .core-inner {
+    border-radius: var(--radius-lg);
+    padding: 18px 24px;
+  }
+
+  .flywheel-node {
+    position: relative;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    transform: none !important;
+    width: 100%;
+    max-width: 400px;
+    padding: 20px 22px;
+  }
+
+  .flywheel-node:not(:last-child)::after {
+    content: '↓';
+    position: absolute;
+    bottom: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--color-starbucks-green);
+    background: #FFFFFF;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-subtle);
+    border: 1px solid rgba(0, 112, 74, 0.2);
+    z-index: 10;
+  }
+
+  .flywheel-node.node-bottom:not(:last-child)::after {
+    content: '↓';
+  }
+
+  .flywheel-node:last-child::after {
+    content: '↺ 다시 1단계 상품 발굴로 선순환';
+    position: absolute;
+    bottom: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--color-starbucks-green);
+    background: #E8F4EE;
+    padding: 3px 12px;
+    border-radius: var(--radius-full);
+    white-space: nowrap;
+    border: 1px solid rgba(0, 112, 74, 0.25);
+    z-index: 10;
+  }
+
+  .flywheel-summary-badge {
+    margin-top: 36px;
+    padding: 10px 18px;
+    text-align: center;
+  }
+
+  .cycle-indicator {
+    font-size: 0.8rem;
+    justify-content: center;
   }
 
   .about-flow-grid {

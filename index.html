@@ -160,69 +160,125 @@
     <div class="container">
       <div class="section-header">
         <span class="section-badge">OUR BUSINESS</span>
-        <h2>경험에서 콘텐츠로, 콘텐츠에서 판매로</h2>
-        <p>상품의 발견부터 육성까지, 미디어 커머스의 유기적 선순환 체계를 운영합니다.</p>
+        <h2>선순환으로 완성되는 미디어 커머스</h2>
+        <p>상품 발굴에서 콘텐츠, 라이브 판매, 셀러 육성까지 유기적으로 순환하며 지속 가능한 성장을 만듭니다.</p>
       </div>
 
-      <div class="business-grid">
-        <!-- 1. 상품 발굴·검증 -->
-        <div class="business-card">
-          <div>
-            <div class="business-icon-wrapper">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <!-- 원형 선순환 다이어그램 (Circular Flywheel Diagram) -->
+      <div class="flywheel-wrapper">
+        <div class="flywheel-diagram">
+          
+          <!-- SVG 순환 궤도 및 회전 화살표 -->
+          <svg class="flywheel-svg-track" viewBox="0 0 640 640" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="orbitGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#00704A" stop-opacity="0.8" />
+                <stop offset="50%" stop-color="#1E3932" stop-opacity="0.8" />
+                <stop offset="100%" stop-color="#B69B7D" stop-opacity="0.8" />
+              </linearGradient>
+              <marker id="flywheelArrow" markerWidth="10" markerHeight="10" refX="6" refY="4" orient="auto">
+                <polygon points="0 1, 8 4, 0 7" fill="#00704A" />
+              </marker>
+            </defs>
+
+            <!-- 배경 궤도 원 -->
+            <circle cx="320" cy="320" r="230" class="orbit-bg-circle" />
+            <circle cx="320" cy="320" r="230" class="orbit-dash-circle" />
+
+            <!-- 4개 사분면 순환 화살표 (시계방향: 상단 -> 우측 -> 하단 -> 좌측 -> 상단) -->
+            <!-- 1) 상단 -> 우측 (12시에서 3시 방향) -->
+            <path d="M 370 95 A 230 230 0 0 1 545 270" class="flywheel-arrow-path" marker-end="url(#flywheelArrow)" />
+            <!-- 2) 우측 -> 하단 (3시에서 6시 방향) -->
+            <path d="M 545 370 A 230 230 0 0 1 370 545" class="flywheel-arrow-path" marker-end="url(#flywheelArrow)" />
+            <!-- 3) 하단 -> 좌측 (6시에서 9시 방향) -->
+            <path d="M 270 545 A 230 230 0 0 1 95 370" class="flywheel-arrow-path" marker-end="url(#flywheelArrow)" />
+            <!-- 4) 좌측 -> 상단 (9시에서 12시 방향 순환 완성) -->
+            <path d="M 95 270 A 230 230 0 0 1 270 95" class="flywheel-arrow-path" marker-end="url(#flywheelArrow)" />
+          </svg>
+
+          <!-- 중앙 코어 허브 (Center Core Hub) -->
+          <div class="flywheel-center-core">
+            <div class="core-pulse-ring"></div>
+            <div class="core-inner">
+              <span class="core-tag">TTLEE</span>
+              <strong class="core-title">선순환 체계</strong>
+              <span class="core-sub">지속 성장 플라이휠</span>
+            </div>
+          </div>
+
+          <!-- 4개 선순환 노드 (원형 궤도 배치) -->
+          <!-- STEP 01 (상단 - 12시) -->
+          <div class="flywheel-node node-top">
+            <div class="node-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
               </svg>
+              <span class="node-step-badge">01</span>
             </div>
-            <h3>상품 발굴·검증</h3>
-            <p>직접 사용하고 제조 현장을 확인해 상품의 본질적인 가치와 신뢰도를 빈틈없이 검증합니다.</p>
+            <div class="node-content">
+              <h3>상품 발굴·검증</h3>
+              <p>원산지와 공정을 직접 답사하여 본질적인 품질과 가치를 확인합니다.</p>
+            </div>
           </div>
-        </div>
 
-        <!-- 2. 콘텐츠 제작 -->
-        <div class="business-card">
-          <div>
-            <div class="business-icon-wrapper">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <!-- STEP 02 (우측 - 3시) -->
+          <div class="flywheel-node node-right">
+            <div class="node-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <polygon points="23 7 16 12 23 17 23 7"></polygon>
                 <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
               </svg>
+              <span class="node-step-badge">02</span>
             </div>
-            <h3>콘텐츠 제작</h3>
-            <p>실제 경험을 바탕으로 제품의 매력을 가장 진솔하게 전달하여 소비자가 공감하는 숏폼·롱폼 콘텐츠를 제작합니다.</p>
+            <div class="node-content">
+              <h3>콘텐츠 제작</h3>
+              <p>직접 경험한 스토리를 담아 공감을 이끄는 숏폼·롱폼을 자체 제작합니다.</p>
+            </div>
           </div>
-        </div>
 
-        <!-- 3. 라이브커머스 -->
-        <div class="business-card">
-          <div>
-            <div class="business-icon-wrapper">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <!-- STEP 03 (하단 - 6시) -->
+          <div class="flywheel-node node-bottom">
+            <div class="node-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"></path>
                 <path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5"></path>
                 <circle cx="12" cy="12" r="2"></circle>
                 <path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5"></path>
                 <path d="M19.1 4.9C23 8.8 23 15.1 19.1 19"></path>
               </svg>
+              <span class="node-step-badge">03</span>
             </div>
-            <h3>라이브커머스</h3>
-            <p>실시간 라이브 방송과 특별 공동구매 기획으로 소비자와 양방향으로 긴밀하게 소통하며 판매를 성사시킵니다.</p>
+            <div class="node-content">
+              <h3>라이브커머스</h3>
+              <p>실시간 소통과 공동구매로 소비자와 직접 연결하며 신뢰 판매를 만듭니다.</p>
+            </div>
           </div>
-        </div>
 
-        <!-- 4. 셀러 육성 -->
-        <div class="business-card">
-          <div>
-            <div class="business-icon-wrapper">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <!-- STEP 04 (좌측 - 9시) -->
+          <div class="flywheel-node node-left">
+            <div class="node-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
                 <circle cx="9" cy="7" r="4"></circle>
                 <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
                 <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
               </svg>
+              <span class="node-step-badge">04</span>
             </div>
-            <h3>셀러 육성</h3>
-            <p>실제 판매 경험과 현업 운영 노하우를 아낌없이 전수하여 신규 셀러 및 크리에이터의 지속 가능한 성장을 지원합니다.</p>
+            <div class="node-content">
+              <h3>셀러 육성</h3>
+              <p>실전 노하우와 유통망을 공유하여 협력 셀러의 동반 성장을 견인합니다.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 하단 선순환 요약 배지 -->
+        <div class="flywheel-summary-badge">
+          <div class="cycle-indicator">
+            <span class="cycle-dot"></span>
+            <span>4단계 성과가 다시 새로운 1단계 상품 발굴로 이어지는 지속 가능한 선순환 구조</span>
           </div>
         </div>
       </div>
