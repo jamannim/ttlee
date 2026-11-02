@@ -580,8 +580,7 @@
     <div class="container">
       <div class="section-header">
         <span class="section-badge">PARTNERSHIP</span>
-        <h2>좋은 상품과 좋은 사람을 기다립니다.</h2>
-        <p>뜰레와 함께 새로운 커머스 기회를 만들어 갈 파트너를 찾습니다.</p>
+        <h2>뜰레와 함께 <span class="highlight-green">새로운 커머스 기회</span>를 만들어갈 파트너를 찾습니다.</h2>
       </div>
 
       <div class="partnership-grid">
@@ -659,6 +658,40 @@
       </div>
     </div>
   </footer>
+
+  <!-- ==================== 우측 1단 이동 플로팅 네비게이터 ==================== -->
+  <aside class="floating-step-nav" aria-label="메뉴별 1단 이동 컨트롤러">
+    <button type="button" class="step-nav-btn js-step-prev" aria-label="이전 메뉴로 1단 이동" title="이전 단 이동">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="18 15 12 9 6 15"></polyline>
+      </svg>
+    </button>
+
+    <ul class="step-dots-list">
+      <li class="step-dot-item">
+        <a href="#about" class="step-dot-link js-step-dot" data-step="about" aria-label="1단: 회사 소개"></a>
+        <span class="step-dot-tooltip">01 회사 소개</span>
+      </li>
+      <li class="step-dot-item">
+        <a href="#business" class="step-dot-link js-step-dot" data-step="business" aria-label="2단: 사업 영역"></a>
+        <span class="step-dot-tooltip">02 사업 영역</span>
+      </li>
+      <li class="step-dot-item">
+        <a href="#why" class="step-dot-link js-step-dot" data-step="why" aria-label="3단: 핵심 가치"></a>
+        <span class="step-dot-tooltip">03 핵심 가치</span>
+      </li>
+      <li class="step-dot-item">
+        <a href="#partnership" class="step-dot-link js-step-dot" data-step="partnership" aria-label="4단: 파트너쉽"></a>
+        <span class="step-dot-tooltip">04 파트너쉽</span>
+      </li>
+    </ul>
+
+    <button type="button" class="step-nav-btn js-step-next" aria-label="다음 메뉴로 1단 이동" title="다음 단 이동">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="6 9 12 15 18 9"></polyline>
+      </svg>
+    </button>
+  </aside>
 
   <!-- ==================== 비디오 재생 모달 ==================== -->
   <div class="modal-overlay" id="videoModal" role="dialog" aria-modal="true" aria-label="동영상 재생">
