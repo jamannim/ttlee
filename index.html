@@ -211,6 +211,43 @@
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
         font-weight: 700 !important;
       }
+
+      /* 비디오 카드 컴팩트 세로 높이 최적화 */
+      .video-card {
+        height: auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+      }
+
+      .video-info {
+        padding: 14px 16px 16px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        flex-grow: 1 !important;
+        justify-content: flex-start !important;
+      }
+
+      .video-tag {
+        font-size: 0.78rem !important;
+        font-weight: 700 !important;
+        color: #8DE0BD !important;
+        text-transform: uppercase !important;
+        margin-bottom: 4px !important;
+        letter-spacing: -0.01em !important;
+      }
+
+      .video-title {
+        font-size: 0.98rem !important;
+        font-weight: 700 !important;
+        line-height: 1.4 !important;
+        margin: 0 !important;
+        color: #FFFFFF !important;
+        word-break: keep-all !important;
+      }
+
+      .video-meta {
+        display: none !important;
+      }
     }
 
     /* 2. 태블릿 레이아웃 (769px ~ 1024px) */
@@ -496,7 +533,12 @@
         min-width: 100% !important;
         max-width: 100% !important;
         width: 100% !important;
+        height: auto !important;
         box-sizing: border-box !important;
+      }
+
+      .video-info {
+        padding: 12px 14px 14px !important;
       }
 
       .tiktok-panel {
@@ -955,14 +997,8 @@
               </div>
             </div>
             <div class="video-info">
-              <div>
-                <span class="video-tag">EP.01 첫 라이브</span>
-                <h4 class="video-title">시청자 4명인데 10분 제한까지? 첫 라이브부터 티격태격ㅋㅋ</h4>
-              </div>
-              <div class="video-meta">
-                <span>박대장이 쏜다!</span>
-                <span>유튜브 롱폼</span>
-              </div>
+              <span class="video-tag">EP.01 첫 라이브</span>
+              <h4 class="video-title">시청자 4명인데 10분 제한까지? 첫 라이브부터 티격태격ㅋㅋ</h4>
             </div>
           </div>
 
@@ -980,14 +1016,8 @@
               </div>
             </div>
             <div class="video-info">
-              <div>
-                <span class="video-tag">EP.02 비하인드</span>
-                <h4 class="video-title">대표님의 진짜 걱정 "너무 유명해질까 봐" | 현실 티키타카 토크</h4>
-              </div>
-              <div class="video-meta">
-                <span>박대장이 쏜다!</span>
-                <span>정규 라이브</span>
-              </div>
+              <span class="video-tag">EP.02 비하인드</span>
+              <h4 class="video-title">대표님의 진짜 걱정 "너무 유명해질까 봐" | 현실 티키타카 토크</h4>
             </div>
           </div>
 
@@ -1005,14 +1035,8 @@
               </div>
             </div>
             <div class="video-info">
-              <div>
-                <span class="video-tag">EP.03 판매 라이브</span>
-                <h4 class="video-title">"가성비 따지면 사지 마세요" 했던 셀러의 첫 정규 판매 라이브</h4>
-              </div>
-              <div class="video-meta">
-                <span>박대장이 쏜다!</span>
-                <span>정규 라이브</span>
-              </div>
+              <span class="video-tag">EP.03 판매 라이브</span>
+              <h4 class="video-title">"가성비 따지면 사지 마세요" 했던 셀러의 첫 정규 판매 라이브</h4>
             </div>
           </div>
         </div>
@@ -1036,10 +1060,6 @@
             <div class="video-info">
               <span class="video-tag">TikTok 클립</span>
               <h4 class="video-title">구독자 100명도 안 되는데, 내 광고가 보트에 붙었다?!</h4>
-              <div class="video-meta">
-                <span>화제의 숏폼</span>
-                <span>틱톡 바로가기</span>
-              </div>
             </div>
           </a>
 
@@ -1058,10 +1078,6 @@
             <div class="video-info">
               <span class="video-tag">TikTok 클립</span>
               <h4 class="video-title">첫 공구 따왔는데… "가성비 따지면 사지 마세요"</h4>
-              <div class="video-meta">
-                <span>EP.05 공구 비하인드</span>
-                <span>틱톡 바로가기</span>
-              </div>
             </div>
           </a>
 
@@ -1080,10 +1096,6 @@
             <div class="video-info">
               <span class="video-tag">TikTok 클립</span>
               <h4 class="video-title">집들이 선물로 휴지? 팔아보겠다고 공장까지 습격한 썰</h4>
-              <div class="video-meta">
-                <span>EP.04 공장 습격기</span>
-                <span>틱톡 바로가기</span>
-              </div>
             </div>
           </a>
         </div>

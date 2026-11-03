@@ -1045,36 +1045,32 @@ img {
 }
 
 .video-info {
-  padding: 24px;
+  padding: 14px 16px 16px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .video-tag {
-  font-size: 0.8125rem;
+  font-size: 0.78rem;
   font-weight: 700;
   color: #8DE0BD;
   text-transform: uppercase;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .video-title {
-  font-size: 1.05rem;
+  font-size: 0.98rem;
   font-weight: 700;
-  line-height: 1.45;
-  margin-bottom: 16px;
+  line-height: 1.4;
+  margin-bottom: 0;
   color: var(--color-pure-white);
+  word-break: keep-all;
 }
 
 .video-meta {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.6);
-  padding-top: 12px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: none !important;
 }
 
 .channel-cta-area {
