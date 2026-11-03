@@ -620,16 +620,16 @@ img {
   word-break: keep-all;
 }
 
-/* 8. SECTION 03: OUR BUSINESS (원형 선순환 플라이휠 다이어그램) */
+/* 8. SECTION 03: OUR BUSINESS (선순환 플라이휠) */
 .business-section {
-  padding: 72px 0;
+  padding: 56px 0 64px;
   background: linear-gradient(180deg, #F5F1E8 0%, #EDE6D8 100%);
   position: relative;
   overflow: hidden;
 }
 
 .flywheel-wrapper {
-  margin-top: 20px;
+  margin-top: 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -638,55 +638,46 @@ img {
 
 .flywheel-diagram {
   position: relative;
-  width: 580px;
-  height: 580px;
-  max-width: 100%;
-  margin: 0 auto;
-}
-
-/* SVG 원형 궤도 및 회전 화살표 */
-.flywheel-svg-track {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
+  max-width: 1040px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 230px 1fr;
+  grid-template-rows: auto auto;
+  gap: 20px 32px;
+  align-items: center;
 }
 
-.orbit-bg-circle {
-  stroke: rgba(0, 112, 74, 0.15);
-  stroke-width: 2.5;
-  stroke-dasharray: 6 6;
+/* 4대 노드 그리드 위치 */
+.node-step1 {
+  grid-column: 1;
+  grid-row: 1;
 }
 
-.orbit-dash-circle {
-  stroke: rgba(182, 155, 125, 0.3);
-  stroke-width: 1;
+.node-step4 {
+  grid-column: 1;
+  grid-row: 2;
 }
 
-.flywheel-arrow-path {
-  stroke: var(--color-starbucks-green);
-  stroke-width: 3.5;
-  stroke-linecap: round;
-  filter: drop-shadow(0 2px 5px rgba(0, 112, 74, 0.25));
-  transition: var(--transition-smooth);
+.node-step2 {
+  grid-column: 3;
+  grid-row: 1;
 }
 
-.flywheel-diagram:hover .flywheel-arrow-path {
-  stroke-width: 4;
-  filter: drop-shadow(0 4px 10px rgba(0, 112, 74, 0.4));
+.node-step3 {
+  grid-column: 3;
+  grid-row: 2;
 }
 
-/* 중앙 코어 허브 (Center Core) */
+/* 중앙 코어 허브 (Center Core Hub) - 100% 완전 노출 보장 */
 .flywheel-center-core {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 184px;
-  height: 184px;
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  justify-self: center;
+  align-self: center;
+  position: relative;
+  width: 190px;
+  height: 190px;
   border-radius: 50%;
   z-index: 4;
   display: flex;
@@ -694,20 +685,24 @@ img {
   justify-content: center;
 }
 
-.core-pulse-ring {
+.core-orbit-ring {
   position: absolute;
-  top: -12px;
-  left: -12px;
-  right: -12px;
-  bottom: -12px;
-  border-radius: 50%;
-  border: 2px dashed rgba(0, 112, 74, 0.28);
-  animation: rotatePulse 30s linear infinite;
+  top: -16px;
+  left: -16px;
+  right: -16px;
+  bottom: -16px;
+  pointer-events: none;
+  animation: rotateCoreOrbit 26s linear infinite;
 }
 
-@keyframes rotatePulse {
+@keyframes rotateCoreOrbit {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.core-orbit-svg {
+  width: 100%;
+  height: 100%;
 }
 
 .core-inner {
@@ -721,9 +716,9 @@ img {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 16px;
+  padding: 18px;
   box-shadow: 0 14px 34px rgba(19, 37, 32, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.25);
-  border: 3px solid rgba(182, 155, 125, 0.4);
+  border: 3px solid rgba(182, 155, 125, 0.45);
   transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
@@ -755,64 +750,26 @@ img {
 
 /* 4대 노드 스타일 */
 .flywheel-node {
-  position: absolute;
-  width: 250px;
+  position: relative;
+  width: 100%;
+  max-width: 100%;
   background-color: var(--color-pure-white);
   border-radius: var(--radius-lg);
-  padding: 18px 20px;
+  padding: 20px 22px;
   box-shadow: var(--shadow-card);
   border: 1px solid rgba(51, 58, 53, 0.08);
   display: flex;
   align-items: flex-start;
   gap: 14px;
   z-index: 5;
+  box-sizing: border-box;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .flywheel-node:hover {
+  transform: translateY(-4px);
   box-shadow: 0 18px 36px rgba(0, 112, 74, 0.15);
   border-color: var(--color-starbucks-green);
-}
-
-/* 노드 원형 궤도 절대 좌표 (700px 기준) */
-/* 1. 상단 (12시) */
-.node-top {
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-.node-top:hover {
-  transform: translateX(-50%) translateY(-5px);
-}
-
-/* 2. 우측 (3시) */
-.node-right {
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
-}
-.node-right:hover {
-  transform: translateY(-50%) translateX(5px);
-}
-
-/* 3. 하단 (6시) */
-.node-bottom {
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-.node-bottom:hover {
-  transform: translateX(-50%) translateY(5px);
-}
-
-/* 4. 좌측 (9시) */
-.node-left {
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-}
-.node-left:hover {
-  transform: translateY(-50%) translateX(-5px);
 }
 
 /* 노드 내부 */
@@ -1640,21 +1597,19 @@ img {
     padding: 10px 0;
   }
 
-  .flywheel-svg-track {
+  .flywheel-svg-track,
+  .core-orbit-ring {
     display: none;
   }
 
   .flywheel-center-core {
+    order: -1;
     position: static;
     transform: none;
     width: 100%;
     max-width: 100%;
     height: auto;
     margin-bottom: 12px;
-  }
-
-  .core-pulse-ring {
-    display: none;
   }
 
   .core-inner {
@@ -1674,6 +1629,11 @@ img {
     padding: 18px 18px;
     box-sizing: border-box;
   }
+
+  .node-step1 { order: 1; }
+  .node-step2 { order: 2; }
+  .node-step3 { order: 3; }
+  .node-step4 { order: 4; }
 
   .flywheel-node:not(:last-child)::after {
     content: '↓';

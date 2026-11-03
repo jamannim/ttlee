@@ -272,12 +272,17 @@
 
       /* 비즈니스 플라이휠 모바일 */
       .flywheel-diagram {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 14px !important;
         width: 100% !important;
         max-width: 100% !important;
         padding: 0 !important;
       }
 
       .flywheel-center-core {
+        order: -1 !important;
         width: 100% !important;
         max-width: 100% !important;
       }
@@ -288,6 +293,11 @@
         padding: 16px !important;
         box-sizing: border-box !important;
       }
+
+      .node-step1 { order: 1 !important; }
+      .node-step2 { order: 2 !important; }
+      .node-step3 { order: 3 !important; }
+      .node-step4 { order: 4 !important; }
 
       /* 공식 채널 모바일: 가로 스크롤 제거 & 단일 컬럼 세로 스택 */
       .channel-schedule-bar {
@@ -595,51 +605,12 @@
         <p>상품 발굴에서 콘텐츠, 라이브 판매, 셀러 육성까지 유기적으로 순환하며 지속 가능한 성장을 만듭니다.</p>
       </div>
 
-      <!-- 원형 선순환 다이어그램 (Circular Flywheel Diagram) -->
+      <!-- 선순환 플라이휠 아키텍처 (3열 밸런스 그리드) -->
       <div class="flywheel-wrapper">
         <div class="flywheel-diagram">
           
-          <!-- SVG 순환 궤도 및 회전 화살표 -->
-          <svg class="flywheel-svg-track" viewBox="0 0 640 640" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <defs>
-              <linearGradient id="orbitGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#00704A" stop-opacity="0.8" />
-                <stop offset="50%" stop-color="#1E3932" stop-opacity="0.8" />
-                <stop offset="100%" stop-color="#B69B7D" stop-opacity="0.8" />
-              </linearGradient>
-              <marker id="flywheelArrow" markerWidth="10" markerHeight="10" refX="6" refY="4" orient="auto">
-                <polygon points="0 1, 8 4, 0 7" fill="#00704A" />
-              </marker>
-            </defs>
-
-            <!-- 배경 궤도 원 -->
-            <circle cx="320" cy="320" r="230" class="orbit-bg-circle" />
-            <circle cx="320" cy="320" r="230" class="orbit-dash-circle" />
-
-            <!-- 4개 사분면 순환 화살표 (시계방향: 상단 -> 우측 -> 하단 -> 좌측 -> 상단) -->
-            <!-- 1) 상단 -> 우측 (12시에서 3시 방향) -->
-            <path d="M 370 95 A 230 230 0 0 1 545 270" class="flywheel-arrow-path" marker-end="url(#flywheelArrow)" />
-            <!-- 2) 우측 -> 하단 (3시에서 6시 방향) -->
-            <path d="M 545 370 A 230 230 0 0 1 370 545" class="flywheel-arrow-path" marker-end="url(#flywheelArrow)" />
-            <!-- 3) 하단 -> 좌측 (6시에서 9시 방향) -->
-            <path d="M 270 545 A 230 230 0 0 1 95 370" class="flywheel-arrow-path" marker-end="url(#flywheelArrow)" />
-            <!-- 4) 좌측 -> 상단 (9시에서 12시 방향 순환 완성) -->
-            <path d="M 95 270 A 230 230 0 0 1 270 95" class="flywheel-arrow-path" marker-end="url(#flywheelArrow)" />
-          </svg>
-
-          <!-- 중앙 코어 허브 (Center Core Hub) -->
-          <div class="flywheel-center-core">
-            <div class="core-pulse-ring"></div>
-            <div class="core-inner">
-              <span class="core-tag">TTLEE</span>
-              <strong class="core-title">선순환 체계</strong>
-              <span class="core-sub">지속 성장 플라이휠</span>
-            </div>
-          </div>
-
-          <!-- 4개 선순환 노드 (원형 궤도 배치) -->
-          <!-- STEP 01 (상단 - 12시) -->
-          <div class="flywheel-node node-top">
+          <!-- STEP 01 (좌상단) -->
+          <div class="flywheel-node node-step1">
             <div class="node-icon-box">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="11" cy="11" r="8"></circle>
@@ -653,8 +624,48 @@
             </div>
           </div>
 
-          <!-- STEP 02 (우측 - 3시) -->
-          <div class="flywheel-node node-right">
+          <!-- STEP 04 (좌하단) -->
+          <div class="flywheel-node node-step4">
+            <div class="node-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+              <span class="node-step-badge">04</span>
+            </div>
+            <div class="node-content">
+              <h3>셀러 육성</h3>
+              <p>실전 노하우와 유통망을 공유하여 협력 셀러의 동반 성장을 견인합니다.</p>
+            </div>
+          </div>
+
+          <!-- 중앙 코어 허브 (Center Core Hub - 100% 완전 노출) -->
+          <div class="flywheel-center-core">
+            <div class="core-orbit-ring">
+              <svg class="core-orbit-svg" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="120" cy="120" r="106" stroke="rgba(0, 112, 74, 0.22)" stroke-width="2.5" stroke-dasharray="6 6" />
+                <path d="M 85 14 A 106 106 0 0 1 155 14" stroke="#00704A" stroke-width="3.5" stroke-linecap="round" marker-end="url(#flywheelOrbitArrow)" />
+                <path d="M 226 85 A 106 106 0 0 1 226 155" stroke="#00704A" stroke-width="3.5" stroke-linecap="round" marker-end="url(#flywheelOrbitArrow)" />
+                <path d="M 155 226 A 106 106 0 0 1 85 226" stroke="#00704A" stroke-width="3.5" stroke-linecap="round" marker-end="url(#flywheelOrbitArrow)" />
+                <path d="M 14 155 A 106 106 0 0 1 14 85" stroke="#00704A" stroke-width="3.5" stroke-linecap="round" marker-end="url(#flywheelOrbitArrow)" />
+                <defs>
+                  <marker id="flywheelOrbitArrow" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto">
+                    <polygon points="0 0, 6 3, 0 6" fill="#00704A" />
+                  </marker>
+                </defs>
+              </svg>
+            </div>
+            <div class="core-inner">
+              <span class="core-tag">TTLEE</span>
+              <strong class="core-title">선순환 체계</strong>
+              <span class="core-sub">지속 성장 플라이휠</span>
+            </div>
+          </div>
+
+          <!-- STEP 02 (우상단) -->
+          <div class="flywheel-node node-step2">
             <div class="node-icon-box">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <polygon points="23 7 16 12 23 17 23 7"></polygon>
@@ -668,8 +679,8 @@
             </div>
           </div>
 
-          <!-- STEP 03 (하단 - 6시) -->
-          <div class="flywheel-node node-bottom">
+          <!-- STEP 03 (우하단) -->
+          <div class="flywheel-node node-step3">
             <div class="node-icon-box">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"></path>
@@ -683,23 +694,6 @@
             <div class="node-content">
               <h3>라이브커머스</h3>
               <p>실시간 소통과 공동구매로 소비자와 직접 연결하며 신뢰 판매를 만듭니다.</p>
-            </div>
-          </div>
-
-          <!-- STEP 04 (좌측 - 9시) -->
-          <div class="flywheel-node node-left">
-            <div class="node-icon-box">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                <circle cx="9" cy="7" r="4"></circle>
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-              </svg>
-              <span class="node-step-badge">04</span>
-            </div>
-            <div class="node-content">
-              <h3>셀러 육성</h3>
-              <p>실전 노하우와 유통망을 공유하여 협력 셀러의 동반 성장을 견인합니다.</p>
             </div>
           </div>
 
