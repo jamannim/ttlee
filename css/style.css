@@ -525,9 +525,9 @@ img {
 
 .about-flow-grid {
   display: grid;
-  grid-template-columns: 1fr 76px 1fr 76px 1fr 76px 1fr;
+  grid-template-columns: 1fr 76px 1fr 76px 1fr;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   margin-top: 32px;
 }
 
@@ -589,10 +589,7 @@ img {
   animation: goldBoldPulse 2.4s ease-in-out infinite 0s;
 }
 .flow-arrow-step2 .gold-bold-arrow {
-  animation: goldBoldPulse 2.4s ease-in-out infinite 0.8s;
-}
-.flow-arrow-step3 .gold-bold-arrow {
-  animation: goldBoldPulse 2.4s ease-in-out infinite 1.6s;
+  animation: goldBoldPulse 2.4s ease-in-out infinite 1.2s;
 }
 
 .flow-step-num {
@@ -829,7 +826,7 @@ img {
 
 .why-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
 
@@ -1396,7 +1393,7 @@ img {
   }
 
   .why-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .video-cards-grid {
@@ -1409,7 +1406,7 @@ img {
 
   /* 태블릿 플라이휠 다이어그램 크기 최적화 */
   .about-flow-grid {
-    grid-template-columns: 1fr 46px 1fr 46px 1fr 46px 1fr;
+    grid-template-columns: 1fr 46px 1fr 46px 1fr;
     gap: 8px;
   }
 
