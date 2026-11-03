@@ -10,7 +10,7 @@
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
   
   <!-- 메인 스타일시트 -->
-  <link rel="stylesheet" href="css/style.css?v=20261102_03">
+  <link rel="stylesheet" href="css/style.css?v=20261103_03">
 
   <!-- 거대 공백 완전 제거 및 반응형 UI/UX 정합성 보장 (캐시 무관 즉시 강제 적용) -->
   <style id="custom-layout-fix">
@@ -67,35 +67,43 @@
       .why-card {
         background-color: var(--color-warm-ivory) !important;
         border-radius: var(--radius-lg) !important;
-        padding: 40px 28px !important;
+        padding: 28px 22px !important;
         border: 1px solid var(--color-beige-subtle) !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: flex-start !important;
-        min-height: 270px !important;
+        min-height: auto !important;
         height: 100% !important;
+        box-sizing: border-box !important;
+        transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+      }
+
+      .why-card:hover {
+        transform: translateY(-4px) !important;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06) !important;
+        border-color: rgba(0, 112, 74, 0.3) !important;
       }
 
       .why-card-icon {
-        width: 54px !important;
-        height: 54px !important;
-        margin-bottom: 22px !important;
+        width: 48px !important;
+        height: 48px !important;
+        margin-bottom: 0 !important;
       }
 
       .why-card h3 {
-        font-size: 1.3rem !important;
+        font-size: 1.25rem !important;
         font-weight: 800 !important;
         color: var(--color-charcoal) !important;
-        margin-bottom: 12px !important;
+        margin-bottom: 8px !important;
         line-height: 1.35 !important;
       }
 
       .why-card p {
-        font-size: 1.025rem !important;
+        font-size: 0.95rem !important;
         color: var(--color-charcoal) !important;
-        line-height: 1.65 !important;
+        line-height: 1.55 !important;
         word-break: keep-all !important;
-        margin-bottom: 18px !important;
+        margin-bottom: 14px !important;
       }
     }
 
@@ -252,27 +260,27 @@
       .why-card {
         width: 100% !important;
         min-height: auto !important;
-        padding: 26px 20px !important;
+        padding: 24px 18px !important;
         box-sizing: border-box !important;
         display: flex !important;
         flex-direction: column !important;
       }
 
       .why-card-icon {
-        width: 48px !important;
-        height: 48px !important;
-        margin-bottom: 16px !important;
+        width: 44px !important;
+        height: 44px !important;
+        margin-bottom: 0 !important;
       }
 
       .why-card h3 {
-        font-size: 1.25rem !important;
+        font-size: 1.2rem !important;
         margin-bottom: 8px !important;
       }
 
       .why-card p {
-        font-size: 1rem !important;
-        line-height: 1.6 !important;
-        margin-bottom: 14px !important;
+        font-size: 0.95rem !important;
+        line-height: 1.55 !important;
+        margin-bottom: 12px !important;
       }
 
       /* 비즈니스 플라이휠 모바일 */
@@ -404,17 +412,62 @@
       }
     }
 
+    .why-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .why-card-num {
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: rgba(0, 112, 74, 0.22);
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+
+    .why-points {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 18px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .why-points li {
+      font-size: 0.875rem;
+      color: #4A5568;
+      line-height: 1.45;
+      position: relative;
+      padding-left: 14px;
+      word-break: keep-all;
+    }
+
+    .why-points li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--color-starbucks-green);
+      font-weight: 800;
+      font-size: 0.95rem;
+      line-height: 1.3;
+    }
+
     .why-tag {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
       align-self: flex-start;
       margin-top: auto;
       font-size: 0.85rem;
       font-weight: 700;
       color: var(--color-starbucks-green);
       background-color: rgba(0, 112, 74, 0.08);
-      padding: 4px 10px;
+      padding: 5px 12px;
       border-radius: var(--radius-full);
-      border: 1px solid rgba(0, 112, 74, 0.16);
+      border: 1px solid rgba(0, 112, 74, 0.2);
+      letter-spacing: -0.01em;
     }
   </style>
 </head>
@@ -732,50 +785,78 @@
 
       <div class="why-grid">
         <div class="why-card">
-          <div class="why-card-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-            </svg>
+          <div class="why-card-top">
+            <div class="why-card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+            </div>
+            <span class="why-card-num">01</span>
           </div>
           <h3>직접 검증</h3>
-          <p>일상 속 엄격한 실사용 테스트를 통과한 가성비 상품 엄선</p>
-          <span class="why-tag">실사용 100% 통과</span>
+          <p>일상 속 엄격한 테스트 통과 상품만 선별</p>
+          <ul class="why-points">
+            <li>대표·임직원 전원 실사용 사전 테스트</li>
+            <li>불만족·기준 미달 상품 즉시 제외</li>
+          </ul>
+          <span class="why-tag">실사용 검증</span>
         </div>
 
         <div class="why-card">
-          <div class="why-card-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-            </svg>
+          <div class="why-card-top">
+            <div class="why-card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+              </svg>
+            </div>
+            <span class="why-card-num">02</span>
           </div>
           <h3>콘텐츠 제작</h3>
-          <p>기획부터 송출까지 내부 제작팀 원스톱 완성</p>
-          <span class="why-tag">원스탑 자체 제작</span>
+          <p>기획부터 영상 송출까지 원스톱 완성</p>
+          <ul class="why-points">
+            <li>자체 스튜디오 및 전문 촬영팀 전담</li>
+            <li>구매 전환율 중심 영상 기획·제작</li>
+          </ul>
+          <span class="why-tag">인하우스 제작</span>
         </div>
 
         <div class="why-card">
-          <div class="why-card-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-            </svg>
+          <div class="why-card-top">
+            <div class="why-card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+              </svg>
+            </div>
+            <span class="why-card-num">03</span>
           </div>
-          <h3>제조 현장 방문</h3>
-          <p>원산지·생산라인 직접 답사로 투명한 소비자 신뢰 확보</p>
-          <span class="why-tag">원산지 직접 답사</span>
+          <h3>제조공장 답사</h3>
+          <p>생산라인 직접 확인으로 소비자 신뢰 확보</p>
+          <ul class="why-points">
+            <li>제조 공장 및 설비 위생 직접 점검</li>
+            <li>유통 단계 축소로 최적 단가 실현</li>
+          </ul>
+          <span class="why-tag">제조공장 답사</span>
         </div>
 
         <div class="why-card">
-          <div class="why-card-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="12" y1="20" x2="12" y2="10"></line>
-              <line x1="18" y1="20" x2="18" y2="4"></line>
-              <line x1="6" y1="20" x2="6" y2="16"></line>
-            </svg>
+          <div class="why-card-top">
+            <div class="why-card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="20" x2="12" y2="10"></line>
+                <line x1="18" y1="20" x2="18" y2="4"></line>
+                <line x1="6" y1="20" x2="6" y2="16"></line>
+              </svg>
+            </div>
+            <span class="why-card-num">04</span>
           </div>
           <h3>실전 기반 셀러 성장</h3>
-          <p>실전 필드 노하우 공유로 협력 셀러 동반 성장 견인</p>
+          <p>현장 필드 노하우 기반 동반 성장 견인</p>
+          <ul class="why-points">
+            <li>억대 매출 실전 노하우 및 전략 전수</li>
+            <li>공동 마케팅 및 안정적 판로 지원</li>
+          </ul>
           <span class="why-tag">상생 파트너십 구축</span>
         </div>
       </div>
