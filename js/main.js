@@ -353,18 +353,20 @@ document.addEventListener('DOMContentLoaded', () => {
       // 2. [추천 1위 & 2위] 설정된 이메일 및 구글 시트로 비동기 실시간 발송
       try {
         const cfg = JSON.parse(localStorage.getItem('ttlee_config') || '{}');
+        const targetEmail = cfg.email || 'jamannim@gmail.com';
+        const targetSheetWebhookUrl = cfg.googleSheetWebhookUrl || 'https://script.google.com/macros/s/AKfycbyKK4tk5G8qa8Va8WJHXE_KUfEITCk8O-dsVwgtXVnd1jrwskoxpdATzh6uhz447FTWjw/exec';
 
         // [추천 1위] 대표님 이메일 즉시 수신 (이메일 주소만 입력되어 있으면 FormSubmit으로 즉시 발송)
-        if (cfg.email) {
+        if (targetEmail) {
           const emailEndpoint = cfg.emailAccessKey 
             ? 'https://api.web3forms.com/submit'
-            : `https://formsubmit.co/ajax/${encodeURIComponent(cfg.email)}`;
+            : `https://formsubmit.co/ajax/${encodeURIComponent(targetEmail)}`;
 
           const emailPayload = cfg.emailAccessKey ? {
             access_key: cfg.emailAccessKey,
             subject: `[TTLEE 제휴문의] ${inquiryData.category} - ${inquiryData.name}`,
             from_name: '주식회사 뜰레(TTLEE) 고객문의 시스템',
-            recipient_email: cfg.email || undefined,
+            recipient_email: targetEmail,
             inquiry_category: inquiryData.category,
             applicant_name: inquiryData.name,
             applicant_contact: inquiryData.contact,
@@ -389,8 +391,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // [추천 2위] 구글 스프레드시트 Webhook 실시간 추가
-        const sheetWebhookUrl = cfg.googleSheetWebhookUrl;
-        if (sheetWebhookUrl && (sheetWebhookUrl.includes('script.google.com') || sheetWebhookUrl.includes('/exec'))) {
+        if (targetSheetWebhookUrl && (targetSheetWebhookUrl.includes('script.google.com') || targetSheetWebhookUrl.includes('/exec'))) {
           const sheetPayload = {
             category: inquiryData.category,
             name: inquiryData.name,
@@ -404,7 +405,7 @@ document.addEventListener('DOMContentLoaded', () => {
             접수일시: inquiryData.date
           };
 
-          fetch(sheetWebhookUrl, {
+          fetch(targetSheetWebhookUrl, {
             method: 'POST',
             mode: 'no-cors',
             headers: { 'Content-Type': 'text/plain;charset=utf-8' },

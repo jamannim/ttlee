@@ -375,8 +375,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const loadConfig = () => {
     try {
       const cfg = JSON.parse(localStorage.getItem(STORAGE_KEY_CONFIG) || '{}');
-      settingEmail.value = cfg.email || '';
-      settingSheetWebhook.value = cfg.googleSheetWebhookUrl || '';
+      settingEmail.value = cfg.email || 'jamannim@gmail.com';
+      settingSheetWebhook.value = cfg.googleSheetWebhookUrl || 'https://script.google.com/macros/s/AKfycbyKK4tk5G8qa8Va8WJHXE_KUfEITCk8O-dsVwgtXVnd1jrwskoxpdATzh6uhz447FTWjw/exec';
     } catch (err) {
       console.warn('설정 로드 실패:', err);
     }
