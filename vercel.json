@@ -5,6 +5,14 @@
   "trailingSlash": false,
   "routes": [
     {
+      "src": "/admin",
+      "dest": "/admin.html"
+    },
+    {
+      "src": "/admin.html",
+      "dest": "/admin.html"
+    },
+    {
       "handle": "filesystem"
     },
     {

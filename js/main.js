@@ -336,17 +336,58 @@ document.addEventListener('DOMContentLoaded', () => {
         category: categoryText,
         name,
         contact,
-        message
+        message,
+        status: '신규 접수'
       };
 
-      // 브라우저 localStorage에 실시간 저장 (확인 및 테스트용)
+      // 1. 관리자 시스템용 브라우저 저장소에 실시간 저장
       try {
         const existing = JSON.parse(localStorage.getItem('ttlee_inquiries') || '[]');
         existing.unshift(inquiryData);
         localStorage.setItem('ttlee_inquiries', JSON.stringify(existing));
-        console.info('[TTLEE] 새로운 제휴 문의가 저장되었습니다:', inquiryData);
+        console.info('[TTLEE] 새로운 제휴 문의가 관리자 시스템에 저장되었습니다:', inquiryData);
       } catch (err) {
         console.warn('localStorage 저장 실패:', err);
+      }
+
+      // 2. [추천 1위 & 2위] 설정된 이메일 및 구글 시트로 비동기 실시간 발송
+      try {
+        const cfg = JSON.parse(localStorage.getItem('ttlee_config') || '{}');
+
+        // [추천 1위] 대표님 이메일 즉시 수신 (Web3Forms API)
+        if (cfg.emailAccessKey) {
+          fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({
+              access_key: cfg.emailAccessKey,
+              subject: `[TTLEE 제휴문의] ${inquiryData.category} - ${inquiryData.name}`,
+              from_name: '주식회사 뜰레(TTLEE) 고객문의 시스템',
+              recipient_email: cfg.email || undefined,
+              inquiry_category: inquiryData.category,
+              applicant_name: inquiryData.name,
+              applicant_contact: inquiryData.contact,
+              message: inquiryData.message,
+              submitted_at: inquiryData.date
+            })
+          }).then(res => res.json()).then(resData => {
+            console.log('[TTLEE] 이메일 알림 발송 결과:', resData);
+          }).catch(err => console.warn('이메일 발송 오류:', err));
+        }
+
+        // [추천 2위] 구글 스프레드시트 Webhook 실시간 추가
+        if (cfg.googleSheetWebhookUrl) {
+          fetch(cfg.googleSheetWebhookUrl, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(inquiryData)
+          }).then(() => {
+            console.log('[TTLEE] 구글 시트 데이터 전송 완료');
+          }).catch(err => console.warn('구글 시트 전송 오류:', err));
+        }
+      } catch (cfgErr) {
+        console.warn('연동 설정 처리 중 예외 발생:', cfgErr);
       }
 
       closeInquiryModal();
