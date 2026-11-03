@@ -372,15 +372,35 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // 7. 추천 1, 2위 연동 설정 센터
+  const DEFAULT_CONFIG = {
+    email: 'jamannim@gmail.com',
+    googleSheetWebhookUrl: 'https://script.google.com/macros/s/AKfycbyKK4tk5G8qa8Va8WJHXE_KUfEITCk8O-dsVwgtXVnd1jrwskoxpdATzh6uhz447FTWjw/exec'
+  };
+
   const loadConfig = () => {
     try {
-      const cfg = JSON.parse(localStorage.getItem(STORAGE_KEY_CONFIG) || '{}');
-      settingEmail.value = cfg.email || 'jamannim@gmail.com';
-      settingSheetWebhook.value = cfg.googleSheetWebhookUrl || 'https://script.google.com/macros/s/AKfycbyKK4tk5G8qa8Va8WJHXE_KUfEITCk8O-dsVwgtXVnd1jrwskoxpdATzh6uhz447FTWjw/exec';
+      const stored = localStorage.getItem(STORAGE_KEY_CONFIG);
+      let cfg = stored ? JSON.parse(stored) : {};
+
+      const effectiveEmail = (cfg.email && cfg.email.trim() !== '') ? cfg.email : DEFAULT_CONFIG.email;
+      const effectiveSheet = (cfg.googleSheetWebhookUrl && cfg.googleSheetWebhookUrl.trim() !== '') ? cfg.googleSheetWebhookUrl : DEFAULT_CONFIG.googleSheetWebhookUrl;
+
+      if (settingEmail) settingEmail.value = effectiveEmail;
+      if (settingSheetWebhook) settingSheetWebhook.value = effectiveSheet;
+
+      // 브라우저 저장소에 영구 보존 동기화
+      localStorage.setItem(STORAGE_KEY_CONFIG, JSON.stringify({
+        ...cfg,
+        email: effectiveEmail,
+        googleSheetWebhookUrl: effectiveSheet
+      }));
     } catch (err) {
       console.warn('설정 로드 실패:', err);
     }
   };
+
+  // 페이지 접속 즉시 설정값 영구 동기화
+  loadConfig();
 
   openSettingsBtn.addEventListener('click', () => {
     loadConfig();
@@ -395,24 +415,40 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.target === settingsModal) settingsModal.classList.remove('active');
   });
 
-  // 구글 시트 URL 입력 감지 및 실시간 유효성 경고
-  const sheetUrlWarning = document.getElementById('sheetUrlWarning');
-  if (settingSheetWebhook && sheetUrlWarning) {
-    settingSheetWebhook.addEventListener('input', () => {
-      const val = settingSheetWebhook.value.trim();
-      if (val.includes('docs.google.com/spreadsheets')) {
-        sheetUrlWarning.style.display = 'block';
-        sheetUrlWarning.innerHTML = '🚨 <b>잘못된 주소 형식:</b> 현재 주소는 [구글 시트 문서 주소]입니다. Apps Script의 [배포] &gt; [새 배포] 후 생성되는 <code>https://script.google.com/macros/s/.../exec</code> 주소를 입력하셔야 시트에 누적됩니다.';
-      } else {
-        sheetUrlWarning.style.display = 'none';
-      }
+  // 사용자가 한 글자라도 입력하거나 수정하면 즉시 실시간 영구 자동 저장 (초기화 절대 방지)
+  if (settingEmail) {
+    settingEmail.addEventListener('input', () => {
+      const cfg = JSON.parse(localStorage.getItem(STORAGE_KEY_CONFIG) || '{}');
+      cfg.email = settingEmail.value.trim();
+      localStorage.setItem(STORAGE_KEY_CONFIG, JSON.stringify(cfg));
     });
   }
 
-  // 연동 설정 저장
+  // 구글 시트 URL 입력 감지 및 실시간 유효성 경고 + 즉시 자동 저장
+  const sheetUrlWarning = document.getElementById('sheetUrlWarning');
+  if (settingSheetWebhook) {
+    settingSheetWebhook.addEventListener('input', () => {
+      const val = settingSheetWebhook.value.trim();
+      if (sheetUrlWarning) {
+        if (val.includes('docs.google.com/spreadsheets')) {
+          sheetUrlWarning.style.display = 'block';
+          sheetUrlWarning.innerHTML = '🚨 <b>잘못된 주소 형식:</b> 현재 주소는 [구글 시트 문서 주소]입니다. Apps Script의 [배포] &gt; [새 배포] 후 생성되는 <code>https://script.google.com/macros/s/.../exec</code> 주소를 입력하셔야 시트에 누적됩니다.';
+        } else {
+          sheetUrlWarning.style.display = 'none';
+        }
+      }
+      // 실시간 자동 저장
+      const cfg = JSON.parse(localStorage.getItem(STORAGE_KEY_CONFIG) || '{}');
+      cfg.googleSheetWebhookUrl = val;
+      localStorage.setItem(STORAGE_KEY_CONFIG, JSON.stringify(cfg));
+    });
+  }
+
+  // 연동 설정 저장 버튼
   saveSettingsBtn.addEventListener('click', () => {
     const existing = JSON.parse(localStorage.getItem(STORAGE_KEY_CONFIG) || '{}');
-    const sheetUrl = settingSheetWebhook.value.trim();
+    const emailVal = settingEmail.value.trim() || DEFAULT_CONFIG.email;
+    const sheetUrl = settingSheetWebhook.value.trim() || DEFAULT_CONFIG.googleSheetWebhookUrl;
 
     if (sheetUrl && sheetUrl.includes('docs.google.com/spreadsheets')) {
       alert('⚠️ 주의: 구글 시트 연동 주소로 [시트 문서 주소]를 입력하셨습니다.\n\n구글 시트에 데이터가 쌓이려면 반드시 Apps Script의 [배포] > [새 배포]에서 발급받은 웹 앱 URL(https://script.google.com/macros/s/.../exec)을 입력하셔야 합니다.');
@@ -420,12 +456,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const cfg = {
       ...existing,
-      email: settingEmail.value.trim(),
+      email: emailVal,
       googleSheetWebhookUrl: sheetUrl
     };
     localStorage.setItem(STORAGE_KEY_CONFIG, JSON.stringify(cfg));
     settingsModal.classList.remove('active');
-    showToast('연동 설정이 안전하게 저장되었습니다.');
+    showToast('연동 설정이 안전하게 영구 저장되었습니다.');
   });
 
   // 추천 1위: 테스트 이메일 발송 (이메일 주소만 있으면 FormSubmit으로 즉시 발송!)
