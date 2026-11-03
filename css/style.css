@@ -96,7 +96,7 @@ img {
   gap: 6px;
   padding: 5px 12px;
   border-radius: var(--radius-sm); /* 소프트 사각형 8px로 버튼의 알약형과 100% 분리 */
-  font-size: 0.8rem;
+  font-size: 0.875rem;
   font-weight: 700;
   letter-spacing: 0.04em;
   background-color: var(--color-starbucks-green-light);
@@ -410,7 +410,7 @@ img {
 }
 
 .metric-label {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: var(--color-secondary);
 }
 
@@ -475,7 +475,7 @@ img {
   align-self: flex-start;
   background-color: rgba(255, 255, 255, 0.94);
   color: var(--color-starbucks-green);
-  font-size: 0.775rem;
+  font-size: 0.85rem;
   font-weight: 700;
   padding: 5px 12px;
   border-radius: var(--radius-sm);
@@ -503,7 +503,7 @@ img {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   font-weight: 600;
   color: var(--color-pure-white);
 }
@@ -728,7 +728,7 @@ img {
 }
 
 .core-tag {
-  font-size: 0.72rem;
+  font-size: 0.8125rem;
   font-weight: 800;
   letter-spacing: 0.12em;
   color: #8DE0BD;
@@ -744,8 +744,8 @@ img {
 }
 
 .core-sub {
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.85);
 }
 
 /* 4대 노드 스타일 */
@@ -792,25 +792,30 @@ img {
   right: -6px;
   background-color: var(--color-deep-green);
   color: #FFFFFF;
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   font-weight: 800;
+  min-width: 20px;
+  height: 20px;
   padding: 2px 6px;
   border-radius: var(--radius-full);
   line-height: 1.1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .node-content h3 {
-  font-size: 1.05rem;
+  font-size: 1.15rem;
   font-weight: 700;
   color: var(--color-charcoal);
-  margin-bottom: 5px;
-  line-height: 1.3;
+  margin-bottom: 6px;
+  line-height: 1.35;
 }
 
 .node-content p {
-  font-size: 0.835rem;
+  font-size: 0.95rem;
   color: var(--color-secondary);
-  line-height: 1.45;
+  line-height: 1.55;
   margin: 0;
 }
 
@@ -916,7 +921,7 @@ img {
 .schedule-badge {
   padding: 4px 10px;
   border-radius: var(--radius-full);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   background-color: #EF4444;
   color: #fff;
@@ -1051,7 +1056,7 @@ img {
 }
 
 .video-tag {
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   color: #8DE0BD;
   text-transform: uppercase;
@@ -1069,7 +1074,7 @@ img {
 .video-meta {
   display: flex;
   justify-content: space-between;
-  font-size: 0.8rem;
+  font-size: 0.875rem;
   color: rgba(255, 255, 255, 0.6);
   padding-top: 12px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -1142,7 +1147,7 @@ img {
 }
 
 .partner-target-badge {
-  font-size: 0.8rem;
+  font-size: 0.875rem;
   font-weight: 700;
   color: var(--color-starbucks-green);
   background-color: var(--color-starbucks-green-light);
@@ -1160,7 +1165,7 @@ img {
 }
 
 .partner-card p {
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: var(--color-secondary);
   line-height: 1.65;
   margin-bottom: 0;
@@ -1239,8 +1244,8 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 /* 13. 모달 팝업 컴포넌트 */
@@ -1418,30 +1423,30 @@ img {
   }
 
   .flywheel-diagram {
-    width: 580px;
-    height: 580px;
+    max-width: 720px;
+    gap: 16px 20px;
   }
 
   .flywheel-node {
-    width: 210px;
-    padding: 14px 16px;
+    padding: 16px 18px;
   }
 
   .node-content h3 {
-    font-size: 0.95rem;
+    font-size: 1.1rem;
   }
 
   .node-content p {
-    font-size: 0.78rem;
+    font-size: 0.925rem;
+    line-height: 1.5;
   }
 
   .flywheel-center-core {
-    width: 160px;
-    height: 160px;
+    width: 170px;
+    height: 170px;
   }
 
   .core-title {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
   }
 }
 
@@ -1517,13 +1522,13 @@ img {
   }
 
   .section-header h2 {
-    font-size: 1.65rem;
+    font-size: 1.7rem;
     line-height: 1.35;
     margin-bottom: 8px;
   }
 
   .section-header p {
-    font-size: 0.95rem;
+    font-size: 1rem;
     line-height: 1.55;
   }
 
@@ -1534,13 +1539,13 @@ img {
   }
 
   .hero-title {
-    font-size: 1.95rem;
+    font-size: 2rem;
     line-height: 1.3;
     margin-bottom: 14px;
   }
 
   .hero-subtitle {
-    font-size: 0.975rem;
+    font-size: 1.05rem;
     line-height: 1.5;
     margin-bottom: 20px;
   }
@@ -1557,7 +1562,7 @@ img {
     width: 100%;
     justify-content: center;
     padding: 13px 20px;
-    font-size: 0.95rem;
+    font-size: 1rem;
   }
 
   .hero-trust-metrics {
@@ -1570,11 +1575,11 @@ img {
   }
 
   .metric-number {
-    font-size: 1.35rem;
+    font-size: 1.4rem;
   }
 
   .metric-label {
-    font-size: 0.75rem;
+    font-size: 0.85rem;
   }
 
   .hero-visual-image-wrapper {
@@ -1628,6 +1633,15 @@ img {
     max-width: 100%;
     padding: 18px 18px;
     box-sizing: border-box;
+  }
+
+  .flywheel-node .node-content h3 {
+    font-size: 1.15rem;
+  }
+
+  .flywheel-node .node-content p {
+    font-size: 0.95rem;
+    line-height: 1.55;
   }
 
   .node-step1 { order: 1; }
@@ -1684,6 +1698,11 @@ img {
     box-sizing: border-box;
   }
 
+  .flow-step-desc {
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
   .flow-arrow-divider {
     height: 52px;
     display: flex;
@@ -1717,6 +1736,11 @@ img {
     box-sizing: border-box;
   }
 
+  .why-card p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
   /* 공식 채널 모바일: 가로 스크롤 제거 & 단일 컬럼 세로 스택 */
   .channel-schedule-bar {
     display: flex;
@@ -1732,7 +1756,7 @@ img {
   }
 
   .schedule-item {
-    font-size: 0.85rem;
+    font-size: 0.925rem;
     gap: 8px;
     text-align: center;
   }
@@ -1749,7 +1773,7 @@ img {
     flex: 1;
     justify-content: center;
     padding: 10px 10px;
-    font-size: 0.85rem;
+    font-size: 0.925rem;
     white-space: nowrap;
   }
 
@@ -1788,6 +1812,11 @@ img {
     box-sizing: border-box;
   }
 
+  .partner-card p {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
   .partnership-cta-area .btn {
     width: 100%;
     justify-content: center;
@@ -1807,10 +1836,15 @@ img {
     gap: 24px;
   }
 
+  .footer-info {
+    font-size: 0.925rem;
+  }
+
   .footer-bottom {
     flex-direction: column;
     gap: 12px;
     text-align: center;
+    font-size: 0.875rem;
   }
 }
 
