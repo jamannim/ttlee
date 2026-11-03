@@ -78,6 +78,7 @@
         overflow: hidden !important;
         border-radius: var(--radius-lg) !important;
         padding: 0 !important;
+        background-color: #0b110e !important;
         border: 1px solid rgba(255, 255, 255, 0.12) !important;
         display: flex !important;
         flex-direction: column !important;
@@ -85,30 +86,33 @@
         min-height: 165px !important;
         height: 100% !important;
         box-sizing: border-box !important;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08) !important;
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2) !important;
         transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease !important;
       }
 
       .why-card:hover {
         transform: translateY(-4px) !important;
-        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22) !important;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35) !important;
         border-color: rgba(74, 222, 128, 0.5) !important;
       }
 
       .why-card-bg {
         position: absolute !important;
-        top: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        bottom: 0 !important;
+        top: -12px !important;
+        left: -12px !important;
+        right: -12px !important;
+        bottom: -12px !important;
         background-size: cover !important;
         background-position: center !important;
-        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        filter: blur(8px) brightness(0.35) contrast(1.05) !important;
+        transform: scale(1.05) !important;
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease !important;
         z-index: 1 !important;
       }
 
       .why-card:hover .why-card-bg {
-        transform: scale(1.08) !important;
+        transform: scale(1.12) !important;
+        filter: blur(6px) brightness(0.42) contrast(1.05) !important;
       }
 
       .why-card-overlay {
@@ -117,13 +121,13 @@
         left: 0 !important;
         right: 0 !important;
         bottom: 0 !important;
-        background: linear-gradient(180deg, rgba(14, 28, 22, 0.72) 0%, rgba(8, 18, 14, 0.90) 100%) !important;
+        background: linear-gradient(180deg, rgba(8, 12, 10, 0.65) 0%, rgba(3, 6, 4, 0.88) 100%) !important;
         transition: background 0.3s ease !important;
         z-index: 2 !important;
       }
 
       .why-card:hover .why-card-overlay {
-        background: linear-gradient(180deg, rgba(12, 24, 19, 0.62) 0%, rgba(6, 15, 12, 0.85) 100%) !important;
+        background: linear-gradient(180deg, rgba(6, 10, 8, 0.55) 0%, rgba(2, 5, 3, 0.82) 100%) !important;
       }
 
       .why-card-content {
@@ -147,15 +151,15 @@
         width: 36px !important;
         height: 36px !important;
         border-radius: 8px !important;
-        background: rgba(255, 255, 255, 0.16) !important;
+        background: rgba(0, 112, 74, 0.32) !important;
         backdrop-filter: blur(8px) !important;
         color: #4ADE80 !important;
-        border: 1px solid rgba(255, 255, 255, 0.25) !important;
+        border: 1px solid rgba(74, 222, 128, 0.35) !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
         flex-shrink: 0 !important;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2) !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
         margin: 0 !important;
       }
 
@@ -166,25 +170,27 @@
         margin: 0 !important;
         line-height: 1.3 !important;
         letter-spacing: -0.01em !important;
-        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5) !important;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.85) !important;
       }
 
       .why-card p {
         font-size: 0.925rem !important;
-        color: rgba(255, 255, 255, 0.92) !important;
-        line-height: 1.5 !important;
+        color: #F3F4F6 !important;
+        line-height: 1.55 !important;
         word-break: keep-all !important;
         margin-bottom: 12px !important;
         flex-grow: 1 !important;
-        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) !important;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85) !important;
+        font-weight: 500 !important;
       }
 
       .why-card .why-tag {
         color: #A7F3D0 !important;
-        background-color: rgba(0, 112, 74, 0.45) !important;
-        border: 1px solid rgba(110, 231, 183, 0.4) !important;
+        background-color: rgba(0, 0, 0, 0.6) !important;
+        border: 1px solid rgba(110, 231, 183, 0.45) !important;
         backdrop-filter: blur(6px) !important;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
+        font-weight: 700 !important;
       }
     }
 
@@ -367,12 +373,16 @@
 
       .why-card-header h3 {
         font-size: 1.05rem !important;
+        color: #FFFFFF !important;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.85) !important;
         margin: 0 !important;
       }
 
       .why-card p {
         font-size: 0.875rem !important;
+        color: #F3F4F6 !important;
         line-height: 1.45 !important;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85) !important;
         margin-bottom: 10px !important;
       }
 
