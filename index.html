@@ -10,7 +10,7 @@
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
   
   <!-- 메인 스타일시트 -->
-  <link rel="stylesheet" href="css/style.css?v=20261103_03">
+  <link rel="stylesheet" href="css/style.css?v=20261103_04">
 
   <!-- 거대 공백 완전 제거 및 반응형 UI/UX 정합성 보장 (캐시 무관 즉시 강제 적용) -->
   <style id="custom-layout-fix">
@@ -79,8 +79,13 @@
         grid-template-columns: repeat(3, 1fr) !important;
         gap: 20px !important;
       }
+    }
 
-      .why-card {
+    /* ========================================================
+       전 해상도 공통: WHY 카드 배경 실사 이미지 & 오버레이 & 고대비 텍스트
+       (모바일, 태블릿, 데스크톱 전 기기 공통 강제 적용)
+       ======================================================== */
+    .why-card {
         position: relative !important;
         overflow: hidden !important;
         border-radius: var(--radius-lg) !important;
@@ -248,7 +253,6 @@
       .video-meta {
         display: none !important;
       }
-    }
 
     /* 2. 태블릿 레이아웃 (769px ~ 1024px) */
     @media (max-width: 1024px) and (min-width: 769px) {
@@ -887,7 +891,7 @@
       <div class="why-grid">
         <!-- STEP 01: 직접 검증 및 공장 답사 -->
         <div class="why-card">
-          <div class="why-card-bg" style="background-image: url('images/why_factory_visit.jpg');"></div>
+          <div class="why-card-bg" style="background-image: url('images/why_factory_visit.jpg?v=20261103_04');"></div>
           <div class="why-card-overlay"></div>
           <div class="why-card-content">
             <div class="why-card-header">
@@ -909,7 +913,7 @@
 
         <!-- STEP 02: 영상 콘텐츠 제작 운영 -->
         <div class="why-card">
-          <div class="why-card-bg" style="background-image: url('images/why_video_studio.jpg');"></div>
+          <div class="why-card-bg" style="background-image: url('images/why_video_studio.jpg?v=20261103_04');"></div>
           <div class="why-card-overlay"></div>
           <div class="why-card-content">
             <div class="why-card-header">
@@ -931,7 +935,7 @@
 
         <!-- STEP 03: 실전 기반 셀러 성장 -->
         <div class="why-card">
-          <div class="why-card-bg" style="background-image: url('images/why_seller_growth.jpg');"></div>
+          <div class="why-card-bg" style="background-image: url('images/why_seller_growth.jpg?v=20261103_04');"></div>
           <div class="why-card-overlay"></div>
           <div class="why-card-content">
             <div class="why-card-header">
