@@ -297,10 +297,19 @@
         </p>
 
         <div style="display: flex; gap: 8px; margin-bottom: 8px;">
-          <input type="url" id="settingSheetWebhook" class="login-input" placeholder="구글 시트 웹 앱 (Webhook) URL 붙여넣기">
+          <input type="url" id="settingSheetWebhook" class="login-input" placeholder="구글 시트 웹 앱 URL 붙여넣기 (https://script.google.com/macros/s/.../exec)">
           <button type="button" class="table-btn" id="testSheetBtn" style="white-space: nowrap; padding: 10px 16px; font-weight: 700;">
             📊 시트 전송 테스트
           </button>
+        </div>
+        <div id="sheetUrlWarning" style="display: none; margin-bottom: 8px; padding: 8px 12px; border-radius: 6px; background: #FEF2F2; color: #DC2626; font-size: 0.8rem; font-weight: 600;"></div>
+
+        <!-- 연동 실패 방지 핵심 체크리스트 -->
+        <div style="background: var(--admin-bg); padding: 10px 14px; border-radius: 8px; font-size: 0.8rem; line-height: 1.6; margin-bottom: 8px; border: 1px solid var(--admin-border);">
+          <div style="font-weight: 700; color: #D97706; margin-bottom: 4px;">⚠️ 구글 시트에 안 쌓일 때 3가지 필수 체크:</div>
+          <div>1. <b>URL 형식:</b> <code>https://docs.google.com/...</code>(시트 주소)는 작동하지 않습니다. 반드시 <b>Apps Script [배포] 후 나오는 <code>https://script.google.com/macros/s/.../exec</code></b> 주소를 넣어야 합니다.</div>
+          <div>2. <b>배포 권한:</b> [배포] &gt; [새 배포] 시 <b>'액세스 권한이 있는 사용자'를 반드시 <u>'모든 사용자(Anyone)'</u></b>로 지정해야 데이터가 들어옵니다.</div>
+          <div>3. <b>시트 첫 행:</b> 구글 시트 1행에 [접수일시, 분류, 이름, 연락처, 내용]을 적어두시면 2행부터 자동 누적됩니다.</div>
         </div>
 
         <details style="font-size: 0.825rem; color: var(--admin-text-sub); cursor: pointer; margin-top: 6px;">
@@ -308,10 +317,24 @@
           <div class="code-snippet-box" style="margin-top: 8px;">
             <button type="button" class="code-copy-btn" id="copyAppsScriptBtn">코드 복사</button>
 <pre><code>function doPost(e) {
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-  var data = JSON.parse(e.postData.contents);
-  sheet.appendRow([new Date(), data.category, data.name, data.contact, data.message]);
-  return ContentService.createTextOutput(JSON.stringify({result: "success"})).setMimeType(ContentService.MimeType.JSON);
+  try {
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    var data = {};
+    if (e &amp;&amp; e.postData &amp;&amp; e.postData.contents) {
+      try { data = JSON.parse(e.postData.contents); } catch(err) { data = e.parameter || {}; }
+    } else if (e &amp;&amp; e.parameter) {
+      data = e.parameter;
+    }
+    var now = Utilities.formatDate(new Date(), "Asia/Seoul", "yyyy-MM-dd HH:mm:ss");
+    var category = data.category || data.문의유형 || '-';
+    var name = data.name || data.신청자명 || '-';
+    var contact = data.contact || data.연락처 || '-';
+    var message = data.message || data.문의내용 || '-';
+    sheet.appendRow([now, category, name, contact, message]);
+    return ContentService.createTextOutput(JSON.stringify({result: "success"})).setMimeType(ContentService.MimeType.JSON);
+  } catch(error) {
+    return ContentService.createTextOutput(JSON.stringify({result: "error", error: error.toString()})).setMimeType(ContentService.MimeType.JSON);
+  }
 }</code></pre>
           </div>
         </details>

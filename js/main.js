@@ -389,12 +389,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // [추천 2위] 구글 스프레드시트 Webhook 실시간 추가
-        if (cfg.googleSheetWebhookUrl) {
-          fetch(cfg.googleSheetWebhookUrl, {
+        const sheetWebhookUrl = cfg.googleSheetWebhookUrl;
+        if (sheetWebhookUrl && (sheetWebhookUrl.includes('script.google.com') || sheetWebhookUrl.includes('/exec'))) {
+          const sheetPayload = {
+            category: inquiryData.category,
+            name: inquiryData.name,
+            contact: inquiryData.contact,
+            message: inquiryData.message,
+            date: inquiryData.date,
+            문의유형: inquiryData.category,
+            신청자명: inquiryData.name,
+            연락처: inquiryData.contact,
+            문의내용: inquiryData.message,
+            접수일시: inquiryData.date
+          };
+
+          fetch(sheetWebhookUrl, {
             method: 'POST',
             mode: 'no-cors',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(inquiryData)
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(sheetPayload)
           }).then(() => {
             console.log('[TTLEE] 구글 시트 데이터 전송 완료');
           }).catch(err => console.warn('구글 시트 전송 오류:', err));

@@ -395,13 +395,33 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.target === settingsModal) settingsModal.classList.remove('active');
   });
 
+  // 구글 시트 URL 입력 감지 및 실시간 유효성 경고
+  const sheetUrlWarning = document.getElementById('sheetUrlWarning');
+  if (settingSheetWebhook && sheetUrlWarning) {
+    settingSheetWebhook.addEventListener('input', () => {
+      const val = settingSheetWebhook.value.trim();
+      if (val.includes('docs.google.com/spreadsheets')) {
+        sheetUrlWarning.style.display = 'block';
+        sheetUrlWarning.innerHTML = '🚨 <b>잘못된 주소 형식:</b> 현재 주소는 [구글 시트 문서 주소]입니다. Apps Script의 [배포] &gt; [새 배포] 후 생성되는 <code>https://script.google.com/macros/s/.../exec</code> 주소를 입력하셔야 시트에 누적됩니다.';
+      } else {
+        sheetUrlWarning.style.display = 'none';
+      }
+    });
+  }
+
   // 연동 설정 저장
   saveSettingsBtn.addEventListener('click', () => {
     const existing = JSON.parse(localStorage.getItem(STORAGE_KEY_CONFIG) || '{}');
+    const sheetUrl = settingSheetWebhook.value.trim();
+
+    if (sheetUrl && sheetUrl.includes('docs.google.com/spreadsheets')) {
+      alert('⚠️ 주의: 구글 시트 연동 주소로 [시트 문서 주소]를 입력하셨습니다.\n\n구글 시트에 데이터가 쌓이려면 반드시 Apps Script의 [배포] > [새 배포]에서 발급받은 웹 앱 URL(https://script.google.com/macros/s/.../exec)을 입력하셔야 합니다.');
+    }
+
     const cfg = {
       ...existing,
       email: settingEmail.value.trim(),
-      googleSheetWebhookUrl: settingSheetWebhook.value.trim()
+      googleSheetWebhookUrl: sheetUrl
     };
     localStorage.setItem(STORAGE_KEY_CONFIG, JSON.stringify(cfg));
     settingsModal.classList.remove('active');
@@ -453,9 +473,24 @@ document.addEventListener('DOMContentLoaded', () => {
   testSheetBtn.addEventListener('click', async () => {
     const webhookUrl = settingSheetWebhook.value.trim();
     if (!webhookUrl) {
-      alert('구글 시트 웹 앱 (Webhook) URL을 먼저 입력해주세요.');
+      alert('구글 시트 웹 앱 URL을 먼저 입력해주세요.');
       settingSheetWebhook.focus();
       return;
+    }
+
+    // URL 형식 사전 검사
+    if (webhookUrl.includes('docs.google.com/spreadsheets')) {
+      alert('⚠️ 입력하신 주소는 [구글 시트 웹문서 링크]입니다!\n\n구글 시트에 데이터가 자동으로 한 줄씩 추가되려면 스프레드시트 주소가 아니라,\nApps Script의 [배포] > [새 배포] 후 생성되는 [웹 앱 URL]을 넣으셔야 합니다.\n\n올바른 주소 형식 예시:\nhttps://script.google.com/macros/s/AKfycb.../exec\n\n하단의 3대 필수 체크리스트를 확인해주세요.');
+      settingSheetWebhook.focus();
+      return;
+    }
+
+    if (!webhookUrl.includes('script.google.com') || (!webhookUrl.endsWith('/exec') && !webhookUrl.includes('/exec?'))) {
+      const confirmProceed = confirm('⚠️ 주의: 입력하신 주소가 일반적인 Apps Script 웹 앱 배포 주소(/exec)와 다릅니다.\n(입력값: ' + webhookUrl + ')\n\n웹 앱 배포 주소가 아니면 데이터가 시트에 저장되지 않습니다.\n그래도 테스트 전송을 계속 진행하시겠습니까?');
+      if (!confirmProceed) {
+        settingSheetWebhook.focus();
+        return;
+      }
     }
 
     testSheetBtn.disabled = true;
@@ -465,33 +500,58 @@ document.addEventListener('DOMContentLoaded', () => {
       await fetch(webhookUrl, {
         method: 'POST',
         mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify({
           category: '[테스트] 입점 및 공구 제휴',
           name: '뜰레 관리자 테스트',
           contact: '010-0000-0000',
-          message: '구글 스프레드시트 연동 테스트 데이터입니다.'
+          message: '구글 스프레드시트 연동 테스트 데이터입니다.',
+          문의유형: '[테스트] 입점 및 공구 제휴',
+          신청자명: '뜰레 관리자 테스트',
+          연락처: '010-0000-0000',
+          문의내용: '구글 스프레드시트 연동 테스트 데이터입니다.'
         })
       });
+
+      // 설정 자동 저장
+      const existing = JSON.parse(localStorage.getItem(STORAGE_KEY_CONFIG) || '{}');
+      existing.googleSheetWebhookUrl = webhookUrl;
+      localStorage.setItem(STORAGE_KEY_CONFIG, JSON.stringify(existing));
+
       showToast('구글 시트로 테스트 데이터가 전송되었습니다! 시트를 확인하세요.');
+      alert('구글 시트로 테스트 데이터를 전송했습니다.\n구글 스프레드시트에 새 행이 추가되었는지 확인해보세요!\n\n※ 만약 시트에 여전히 안 들어왔다면:\n1. Apps Script [배포] 시 [액세스 권한: 모든 사용자]로 했는지\n2. 최초 1회 [액세스 승인]을 완료했는지 확인해주세요.');
     } catch (err) {
       alert('전송 중 오류가 발생했습니다: ' + err.message);
     } finally {
       testSheetBtn.disabled = false;
-      testSheetBtn.textContent = '📊 구글 시트 테스트 데이터 전송해보기';
+      testSheetBtn.textContent = '📊 시트 전송 테스트';
     }
   });
 
   // 구글 시트 Apps Script 코드 복사
   copyAppsScriptBtn.addEventListener('click', () => {
     const code = `function doPost(e) {
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-  var data = JSON.parse(e.postData.contents);
-  sheet.appendRow([new Date(), data.category, data.name, data.contact, data.message]);
-  return ContentService.createTextOutput(JSON.stringify({result: "success"})).setMimeType(ContentService.MimeType.JSON);
+  try {
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    var data = {};
+    if (e && e.postData && e.postData.contents) {
+      try { data = JSON.parse(e.postData.contents); } catch(err) { data = e.parameter || {}; }
+    } else if (e && e.parameter) {
+      data = e.parameter;
+    }
+    var now = Utilities.formatDate(new Date(), "Asia/Seoul", "yyyy-MM-dd HH:mm:ss");
+    var category = data.category || data.문의유형 || '-';
+    var name = data.name || data.신청자명 || '-';
+    var contact = data.contact || data.연락처 || '-';
+    var message = data.message || data.문의내용 || '-';
+    sheet.appendRow([now, category, name, contact, message]);
+    return ContentService.createTextOutput(JSON.stringify({result: "success"})).setMimeType(ContentService.MimeType.JSON);
+  } catch(error) {
+    return ContentService.createTextOutput(JSON.stringify({result: "error", error: error.toString()})).setMimeType(ContentService.MimeType.JSON);
+  }
 }`;
     navigator.clipboard.writeText(code).then(() => {
-      showToast('구글 시트 스크립트 코드가 복사되었습니다.');
+      showToast('강화된 구글 시트 스크립트 코드가 복사되었습니다.');
     });
   });
 
