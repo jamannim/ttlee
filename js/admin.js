@@ -539,13 +539,20 @@ document.addEventListener('DOMContentLoaded', () => {
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify({
           category: '[테스트] 입점 및 공구 제휴',
-          name: '뜰레 관리자 테스트',
+          name: '주식회사 뜰레 / 테스트 담당자',
           contact: '010-0000-0000',
-          message: '구글 스프레드시트 연동 테스트 데이터입니다.',
+          message: '관리자 표 셀 항목 8개 100% 매칭 테스트입니다.',
+          status: '신규 접수',
+          memo: '테스트',
+          date: new Date().toLocaleString('ko-KR'),
+          접수일시: new Date().toLocaleString('ko-KR'),
           문의유형: '[테스트] 입점 및 공구 제휴',
-          신청자명: '뜰레 관리자 테스트',
+          회사명신청자: '주식회사 뜰레 / 테스트 담당자',
+          신청자명: '주식회사 뜰레 / 테스트 담당자',
           연락처: '010-0000-0000',
-          문의내용: '구글 스프레드시트 연동 테스트 데이터입니다.'
+          문의내용: '관리자 표 셀 항목 8개 100% 매칭 테스트입니다.',
+          진행상태: '신규 접수',
+          관리: '테스트'
         })
       });
 
@@ -554,8 +561,8 @@ document.addEventListener('DOMContentLoaded', () => {
       existing.googleSheetWebhookUrl = webhookUrl;
       localStorage.setItem(STORAGE_KEY_CONFIG, JSON.stringify(existing));
 
-      showToast('구글 시트로 테스트 데이터가 전송되었습니다! 시트를 확인하세요.');
-      alert('구글 시트로 테스트 데이터를 전송했습니다.\n구글 스프레드시트에 새 행이 추가되었는지 확인해보세요!\n\n※ 만약 시트에 여전히 안 들어왔다면:\n1. Apps Script [배포] 시 [액세스 권한: 모든 사용자]로 했는지\n2. 최초 1회 [액세스 승인]을 완료했는지 확인해주세요.');
+      showToast('구글 시트로 8개 항목 테스트 데이터가 전송되었습니다! 시트를 확인하세요.');
+      alert('구글 시트로 8개 항목 테스트 데이터를 전송했습니다.\n관리자의 표 항목과 동일하게 새 행이 추가되었는지 확인해보세요!');
     } catch (err) {
       alert('전송 중 오류가 발생했습니다: ' + err.message);
     } finally {
@@ -564,30 +571,43 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 구글 시트 Apps Script 코드 복사
+  // 구글 시트 Apps Script 코드 복사 (관리자 8개 셀 항목 100% 일치 버전)
   copyAppsScriptBtn.addEventListener('click', () => {
     const code = `function doPost(e) {
   try {
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    
+    // 1행이 비어있는 경우 관리자 테이블과 100% 동일한 8개 헤더 자동 생성
+    if (sheet.getLastRow() === 0) {
+      sheet.appendRow(["번호", "접수일시", "문의 유형", "회사명 / 신청자", "연락처", "문의 및 제안 내용 요약", "진행 상태", "관리"]);
+    }
+    
     var data = {};
     if (e && e.postData && e.postData.contents) {
       try { data = JSON.parse(e.postData.contents); } catch(err) { data = e.parameter || {}; }
     } else if (e && e.parameter) {
       data = e.parameter;
     }
+    
+    var num = sheet.getLastRow(); // 1행이 헤더이므로 누적 번호 자동 계산
     var now = Utilities.formatDate(new Date(), "Asia/Seoul", "yyyy-MM-dd HH:mm:ss");
+    var date = data.date || data.접수일시 || now;
     var category = data.category || data.문의유형 || '-';
-    var name = data.name || data.신청자명 || '-';
+    var name = data.name || data.회사명신청자 || data.신청자명 || '-';
     var contact = data.contact || data.연락처 || '-';
     var message = data.message || data.문의내용 || '-';
-    sheet.appendRow([now, category, name, contact, message]);
-    return ContentService.createTextOutput(JSON.stringify({result: "success"})).setMimeType(ContentService.MimeType.JSON);
+    var status = data.status || data.진행상태 || '신규 접수';
+    var memo = data.memo || data.관리 || '-';
+    
+    // [번호 | 접수일시 | 문의 유형 | 회사명 / 신청자 | 연락처 | 문의 및 제안 내용 요약 | 진행 상태 | 관리]
+    sheet.appendRow([num, date, category, name, contact, message, status, memo]);
+    return ContentService.createTextOutput(JSON.stringify({result: "success", rowNumber: num})).setMimeType(ContentService.MimeType.JSON);
   } catch(error) {
     return ContentService.createTextOutput(JSON.stringify({result: "error", error: error.toString()})).setMimeType(ContentService.MimeType.JSON);
   }
 }`;
     navigator.clipboard.writeText(code).then(() => {
-      showToast('강화된 구글 시트 스크립트 코드가 복사되었습니다.');
+      showToast('8개 셀 항목 100% 일치 구글 시트 스크립트 코드가 복사되었습니다.');
     });
   });
 

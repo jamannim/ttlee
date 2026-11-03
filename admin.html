@@ -309,7 +309,7 @@
           <div style="font-weight: 700; color: #D97706; margin-bottom: 4px;">⚠️ 구글 시트에 안 쌓일 때 3가지 필수 체크:</div>
           <div>1. <b>URL 형식:</b> <code>https://docs.google.com/...</code>(시트 주소)는 작동하지 않습니다. 반드시 <b>Apps Script [배포] 후 나오는 <code>https://script.google.com/macros/s/.../exec</code></b> 주소를 넣어야 합니다.</div>
           <div>2. <b>배포 권한:</b> [배포] &gt; [새 배포] 시 <b>'액세스 권한이 있는 사용자'를 반드시 <u>'모든 사용자(Anyone)'</u></b>로 지정해야 데이터가 들어옵니다.</div>
-          <div>3. <b>시트 첫 행:</b> 구글 시트 1행에 [접수일시, 분류, 이름, 연락처, 내용]을 적어두시면 2행부터 자동 누적됩니다.</div>
+          <div>3. <b>셀 항목 100% 일치:</b> [번호, 접수일시, 문의 유형, 회사명 / 신청자, 연락처, 문의 및 제안 내용 요약, 진행 상태, 관리] 8개 항목 순서대로 자동 정리되어 기록됩니다. (시트가 비어있으면 1행에 헤더 자동 생성)</div>
         </div>
 
         <details style="font-size: 0.825rem; color: var(--admin-text-sub); cursor: pointer; margin-top: 6px;">
@@ -319,19 +319,32 @@
 <pre><code>function doPost(e) {
   try {
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    
+    // 1행이 비어있는 경우 관리자 테이블과 100% 동일한 8개 헤더 자동 생성
+    if (sheet.getLastRow() === 0) {
+      sheet.appendRow(["번호", "접수일시", "문의 유형", "회사명 / 신청자", "연락처", "문의 및 제안 내용 요약", "진행 상태", "관리"]);
+    }
+    
     var data = {};
     if (e &amp;&amp; e.postData &amp;&amp; e.postData.contents) {
       try { data = JSON.parse(e.postData.contents); } catch(err) { data = e.parameter || {}; }
     } else if (e &amp;&amp; e.parameter) {
       data = e.parameter;
     }
+    
+    var num = sheet.getLastRow(); // 1행이 헤더이므로 누적 번호 자동 계산
     var now = Utilities.formatDate(new Date(), "Asia/Seoul", "yyyy-MM-dd HH:mm:ss");
+    var date = data.date || data.접수일시 || now;
     var category = data.category || data.문의유형 || '-';
-    var name = data.name || data.신청자명 || '-';
+    var name = data.name || data.회사명신청자 || data.신청자명 || '-';
     var contact = data.contact || data.연락처 || '-';
     var message = data.message || data.문의내용 || '-';
-    sheet.appendRow([now, category, name, contact, message]);
-    return ContentService.createTextOutput(JSON.stringify({result: "success"})).setMimeType(ContentService.MimeType.JSON);
+    var status = data.status || data.진행상태 || '신규 접수';
+    var memo = data.memo || data.관리 || '-';
+    
+    // [번호 | 접수일시 | 문의 유형 | 회사명 / 신청자 | 연락처 | 문의 및 제안 내용 요약 | 진행 상태 | 관리]
+    sheet.appendRow([num, date, category, name, contact, message, status, memo]);
+    return ContentService.createTextOutput(JSON.stringify({result: "success", rowNumber: num})).setMimeType(ContentService.MimeType.JSON);
   } catch(error) {
     return ContentService.createTextOutput(JSON.stringify({result: "error", error: error.toString()})).setMimeType(ContentService.MimeType.JSON);
   }

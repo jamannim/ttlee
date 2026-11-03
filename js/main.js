@@ -398,11 +398,16 @@ document.addEventListener('DOMContentLoaded', () => {
             contact: inquiryData.contact,
             message: inquiryData.message,
             date: inquiryData.date,
+            status: inquiryData.status || '신규 접수',
+            memo: '-',
+            접수일시: inquiryData.date,
             문의유형: inquiryData.category,
+            회사명신청자: inquiryData.name,
             신청자명: inquiryData.name,
             연락처: inquiryData.contact,
             문의내용: inquiryData.message,
-            접수일시: inquiryData.date
+            진행상태: inquiryData.status || '신규 접수',
+            관리: '-'
           };
 
           fetch(targetSheetWebhookUrl, {
