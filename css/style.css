@@ -557,101 +557,42 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 2px;
+  padding: 0 4px;
 }
 
 .flow-gold-arrow-svg {
-  width: 76px;
-  height: 28px;
+  width: 58px;
+  height: 44px;
   display: block;
-  filter: drop-shadow(0 2px 6px rgba(197, 160, 89, 0.28));
+  filter: drop-shadow(0 3px 8px rgba(197, 160, 89, 0.38));
   transition: transform 0.25s ease;
 }
 
 .flow-arrow-divider:hover .flow-gold-arrow-svg {
-  transform: scale(1.1);
+  transform: scale(1.12);
 }
 
-/* 골드 빛구체(Stream Ball) 이동 키프레임 */
-@keyframes goldStream {
-  0% {
-    transform: translateX(0px);
-    opacity: 0;
-  }
-  4% {
-    opacity: 1;
-  }
-  24% {
-    transform: translateX(52px);
-    opacity: 1;
-  }
-  30% {
-    transform: translateX(64px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(64px);
-    opacity: 0;
-  }
-}
-
-/* 3연속 쉐브론 순차 골드 발광 키프레임 */
-@keyframes goldChevFlash {
+/* 단일 볼드 화살표 순차 전진 펄스 */
+@keyframes goldBoldPulse {
   0%, 100% {
-    opacity: 0.35;
-    stroke: #B69B7D;
+    transform: translateX(0);
+    opacity: 0.85;
   }
-  8% {
+  50% {
+    transform: translateX(6px);
     opacity: 1;
-    stroke: #F5D77F;
-    filter: drop-shadow(0 0 4px #D4AF37);
-  }
-  22% {
-    opacity: 0.35;
-    stroke: #B69B7D;
+    filter: drop-shadow(0 0 10px #E5C158);
   }
 }
 
-/* 1단계: STEP 01 -> STEP 02 (0.0s 시작) */
-.flow-arrow-step1 .gold-stream-ball {
-  animation: goldStream 3.0s cubic-bezier(0.4, 0, 0.2, 1) infinite 0.0s;
+.flow-arrow-step1 .gold-bold-arrow {
+  animation: goldBoldPulse 2.4s ease-in-out infinite 0s;
 }
-.flow-arrow-step1 .gold-chev-1 {
-  animation: goldChevFlash 3.0s ease-in-out infinite 0.12s;
+.flow-arrow-step2 .gold-bold-arrow {
+  animation: goldBoldPulse 2.4s ease-in-out infinite 0.8s;
 }
-.flow-arrow-step1 .gold-chev-2 {
-  animation: goldChevFlash 3.0s ease-in-out infinite 0.28s;
-}
-.flow-arrow-step1 .gold-chev-3 {
-  animation: goldChevFlash 3.0s ease-in-out infinite 0.44s;
-}
-
-/* 2단계: STEP 02 -> STEP 03 (1.0s 시작 - 1번 이후 순차 진행) */
-.flow-arrow-step2 .gold-stream-ball {
-  animation: goldStream 3.0s cubic-bezier(0.4, 0, 0.2, 1) infinite 1.0s;
-}
-.flow-arrow-step2 .gold-chev-1 {
-  animation: goldChevFlash 3.0s ease-in-out infinite 1.12s;
-}
-.flow-arrow-step2 .gold-chev-2 {
-  animation: goldChevFlash 3.0s ease-in-out infinite 1.28s;
-}
-.flow-arrow-step2 .gold-chev-3 {
-  animation: goldChevFlash 3.0s ease-in-out infinite 1.44s;
-}
-
-/* 3단계: STEP 03 -> STEP 04 (2.0s 시작 - 2번 이후 순차 진행) */
-.flow-arrow-step3 .gold-stream-ball {
-  animation: goldStream 3.0s cubic-bezier(0.4, 0, 0.2, 1) infinite 2.0s;
-}
-.flow-arrow-step3 .gold-chev-1 {
-  animation: goldChevFlash 3.0s ease-in-out infinite 2.12s;
-}
-.flow-arrow-step3 .gold-chev-2 {
-  animation: goldChevFlash 3.0s ease-in-out infinite 2.28s;
-}
-.flow-arrow-step3 .gold-chev-3 {
-  animation: goldChevFlash 3.0s ease-in-out infinite 2.44s;
+.flow-arrow-step3 .gold-bold-arrow {
+  animation: goldBoldPulse 2.4s ease-in-out infinite 1.6s;
 }
 
 .flow-step-num {
@@ -1784,21 +1725,21 @@ img {
   }
 
   .flow-arrow-divider {
-    height: 32px;
+    height: 52px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2px 0;
+    padding: 6px 0;
   }
 
   .flow-gold-arrow-svg {
     transform: rotate(90deg);
-    width: 36px;
-    height: 16px;
+    width: 46px;
+    height: 38px;
   }
 
   .flow-arrow-divider:hover .flow-gold-arrow-svg {
-    transform: rotate(90deg) scale(1.1);
+    transform: rotate(90deg) scale(1.12);
   }
 
   /* WHY TTLEE 모바일 1열 스택 */

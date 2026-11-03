@@ -223,17 +223,17 @@
       }
 
       .flow-arrow-divider {
-        height: 32px !important;
+        height: 52px !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
-        padding: 2px 0 !important;
+        padding: 6px 0 !important;
       }
 
       .flow-gold-arrow-svg {
         transform: rotate(90deg) !important;
-        width: 36px !important;
-        height: 16px !important;
+        width: 46px !important;
+        height: 38px !important;
       }
 
       /* WHY TTLEE 모바일 1열 스택 (가로 폭발 완전 해결) */
@@ -510,20 +510,20 @@
             <p class="flow-step-desc">투명한 제조사의 차별화된 상품을 현장 발굴합니다.</p>
           </div>
 
-          <!-- 단계 화살표 1: STEP 01 -> 02 (순차 모션 1번) -->
+          <!-- 단계 화살표 1: STEP 01 -> 02 (단일 볼드 골드 화살표) -->
           <div class="flow-arrow-divider flow-arrow-step1" aria-hidden="true">
-            <svg class="flow-gold-arrow-svg" viewBox="0 0 84 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg class="flow-gold-arrow-svg" viewBox="0 0 64 48" fill="none" xmlns="http://www.w3.org/2000/svg">
               <defs>
-                <filter id="goldGlow1" x="-30%" y="-30%" width="160%" height="160%">
-                  <feGaussianBlur stdDeviation="2" result="blur" />
+                <linearGradient id="goldArrowGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#C5A059" />
+                  <stop offset="100%" stop-color="#E5C158" />
+                </linearGradient>
+                <filter id="goldGlow1" x="-25%" y="-25%" width="150%" height="150%">
+                  <feGaussianBlur stdDeviation="3" result="blur" />
                   <feComposite in="SourceGraphic" in2="blur" operator="over" />
                 </filter>
               </defs>
-              <line x1="8" y1="16" x2="72" y2="16" stroke="rgba(182, 155, 125, 0.4)" stroke-width="2.4" stroke-dasharray="4 3" stroke-linecap="round" />
-              <circle cx="10" cy="16" r="4.2" fill="#D4AF37" filter="url(#goldGlow1)" class="gold-stream-ball" />
-              <path d="M 24 9 L 32 16 L 24 23" fill="none" stroke="#B69B7D" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" class="gold-chev gold-chev-1" />
-              <path d="M 42 9 L 50 16 L 42 23" fill="none" stroke="#C5A059" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" class="gold-chev gold-chev-2" />
-              <path d="M 60 9 L 70 16 L 60 23" fill="none" stroke="#D4AF37" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" class="gold-chev gold-chev-3" filter="url(#goldGlow1)" />
+              <path d="M 8 24 H 46 M 30 10 L 46 24 L 30 38" stroke="url(#goldArrowGrad1)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" filter="url(#goldGlow1)" class="gold-bold-arrow" />
             </svg>
           </div>
 
@@ -534,20 +534,20 @@
             <p class="flow-step-desc">제품 공정 확인 및 실 사용을 통해, 검증된 제품을 판별합니다.</p>
           </div>
 
-          <!-- 단계 화살표 2: STEP 02 -> 03 (순차 모션 2번) -->
+          <!-- 단계 화살표 2: STEP 02 -> 03 (단일 볼드 골드 화살표) -->
           <div class="flow-arrow-divider flow-arrow-step2" aria-hidden="true">
-            <svg class="flow-gold-arrow-svg" viewBox="0 0 84 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg class="flow-gold-arrow-svg" viewBox="0 0 64 48" fill="none" xmlns="http://www.w3.org/2000/svg">
               <defs>
-                <filter id="goldGlow2" x="-30%" y="-30%" width="160%" height="160%">
-                  <feGaussianBlur stdDeviation="2" result="blur" />
+                <linearGradient id="goldArrowGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#C5A059" />
+                  <stop offset="100%" stop-color="#E5C158" />
+                </linearGradient>
+                <filter id="goldGlow2" x="-25%" y="-25%" width="150%" height="150%">
+                  <feGaussianBlur stdDeviation="3" result="blur" />
                   <feComposite in="SourceGraphic" in2="blur" operator="over" />
                 </filter>
               </defs>
-              <line x1="8" y1="16" x2="72" y2="16" stroke="rgba(182, 155, 125, 0.4)" stroke-width="2.4" stroke-dasharray="4 3" stroke-linecap="round" />
-              <circle cx="10" cy="16" r="4.2" fill="#D4AF37" filter="url(#goldGlow2)" class="gold-stream-ball" />
-              <path d="M 24 9 L 32 16 L 24 23" fill="none" stroke="#B69B7D" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" class="gold-chev gold-chev-1" />
-              <path d="M 42 9 L 50 16 L 42 23" fill="none" stroke="#C5A059" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" class="gold-chev gold-chev-2" />
-              <path d="M 60 9 L 70 16 L 60 23" fill="none" stroke="#D4AF37" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" class="gold-chev gold-chev-3" filter="url(#goldGlow2)" />
+              <path d="M 8 24 H 46 M 30 10 L 46 24 L 30 38" stroke="url(#goldArrowGrad2)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" filter="url(#goldGlow2)" class="gold-bold-arrow" />
             </svg>
           </div>
 
@@ -558,20 +558,20 @@
             <p class="flow-step-desc">사용자 라이프스타일에 맞춘 공감형 강점 스토리를 구성합니다.</p>
           </div>
 
-          <!-- 단계 화살표 3: STEP 03 -> 04 (순차 모션 3번) -->
+          <!-- 단계 화살표 3: STEP 03 -> 04 (단일 볼드 골드 화살표) -->
           <div class="flow-arrow-divider flow-arrow-step3" aria-hidden="true">
-            <svg class="flow-gold-arrow-svg" viewBox="0 0 84 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg class="flow-gold-arrow-svg" viewBox="0 0 64 48" fill="none" xmlns="http://www.w3.org/2000/svg">
               <defs>
-                <filter id="goldGlow3" x="-30%" y="-30%" width="160%" height="160%">
-                  <feGaussianBlur stdDeviation="2" result="blur" />
+                <linearGradient id="goldArrowGrad3" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#C5A059" />
+                  <stop offset="100%" stop-color="#E5C158" />
+                </linearGradient>
+                <filter id="goldGlow3" x="-25%" y="-25%" width="150%" height="150%">
+                  <feGaussianBlur stdDeviation="3" result="blur" />
                   <feComposite in="SourceGraphic" in2="blur" operator="over" />
                 </filter>
               </defs>
-              <line x1="8" y1="16" x2="72" y2="16" stroke="rgba(182, 155, 125, 0.4)" stroke-width="2.4" stroke-dasharray="4 3" stroke-linecap="round" />
-              <circle cx="10" cy="16" r="4.2" fill="#D4AF37" filter="url(#goldGlow3)" class="gold-stream-ball" />
-              <path d="M 24 9 L 32 16 L 24 23" fill="none" stroke="#B69B7D" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" class="gold-chev gold-chev-1" />
-              <path d="M 42 9 L 50 16 L 42 23" fill="none" stroke="#C5A059" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" class="gold-chev gold-chev-2" />
-              <path d="M 60 9 L 70 16 L 60 23" fill="none" stroke="#D4AF37" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" class="gold-chev gold-chev-3" filter="url(#goldGlow3)" />
+              <path d="M 8 24 H 46 M 30 10 L 46 24 L 30 38" stroke="url(#goldArrowGrad3)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" filter="url(#goldGlow3)" class="gold-bold-arrow" />
             </svg>
           </div>
 
@@ -1026,8 +1026,7 @@
       </div>
 
       <div class="footer-bottom">
-        <p>© TTLEE All Rights Reserved.</p>
-        <p>Trusted by TTLEE Commerce</p>
+        <p>2026 © TTLEE All Rights Reserved</p>
       </div>
     </div>
   </footer>
