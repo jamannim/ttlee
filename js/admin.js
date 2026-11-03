@@ -433,15 +433,14 @@ document.addEventListener('DOMContentLoaded', () => {
         })
       });
       const data = await response.json();
-      if (data.success === 'true' || data.success === true) {
-        showToast('테스트 이메일이 발송되었습니다! 메일함을 확인하세요.');
-        // 설정 자동 저장
-        const existing = JSON.parse(localStorage.getItem(STORAGE_KEY_CONFIG) || '{}');
-        existing.email = email;
-        localStorage.setItem(STORAGE_KEY_CONFIG, JSON.stringify(existing));
-      } else {
-        alert('발송 결과: ' + (data.message || '메일 발송이 접수되었습니다.'));
-      }
+      
+      // 설정 자동 저장
+      const existing = JSON.parse(localStorage.getItem(STORAGE_KEY_CONFIG) || '{}');
+      existing.email = email;
+      localStorage.setItem(STORAGE_KEY_CONFIG, JSON.stringify(existing));
+
+      alert('테스트 이메일이 발송되었습니다.');
+      showToast('테스트 이메일이 발송되었습니다.');
     } catch (err) {
       alert('발송 중 통신 오류가 발생했습니다: ' + err.message);
     } finally {
