@@ -12,73 +12,367 @@
   <!-- 메인 스타일시트 -->
   <link rel="stylesheet" href="css/style.css?v=20261102_03">
 
-  <!-- 거대 공백 완전 제거 및 균형 잡힌 단별 레이아웃 (캐시 무관 즉시 강제 적용) -->
+  <!-- 거대 공백 완전 제거 및 반응형 UI/UX 정합성 보장 (캐시 무관 즉시 강제 적용) -->
   <style id="custom-layout-fix">
-    /* 1. 히어로 및 모든 섹션 강제 100vh / 수직 중앙정렬 해제 (위아래 거대 공백 원천 차단) */
-    .hero-section {
-      min-height: auto !important;
-      display: block !important;
-      padding-top: calc(var(--header-height) + 48px) !important;
-      padding-bottom: 64px !important;
-      box-sizing: border-box !important;
+    /* 0. 전역 가로 스크롤 및 불필요한 스크롤바 원천 차단 */
+    html, body {
+      overflow-x: hidden !important;
+      width: 100% !important;
+      max-width: 100vw !important;
+      position: relative !important;
     }
 
-    .why-section,
-    .about-section,
-    .business-section,
-    .channel-section,
-    .partnership-section {
-      min-height: auto !important;
-      display: block !important;
-      padding-top: 52px !important;
-      padding-bottom: 60px !important;
-      box-sizing: border-box !important;
+    ::-webkit-scrollbar {
+      display: none !important;
+      width: 0 !important;
+      height: 0 !important;
+    }
+    * {
+      scrollbar-width: none !important;
+      -ms-overflow-style: none !important;
     }
 
-    /* 2. 섹션 헤더: GNB 바로 아래 52px에서 단정하게 시작 */
-    .section-header {
-      margin: 0 auto 36px !important;
+    /* 1. 데스크톱 레이아웃 (1025px 이상) */
+    @media (min-width: 1025px) {
+      .hero-section {
+        min-height: auto !important;
+        display: block !important;
+        padding-top: calc(var(--header-height) + 48px) !important;
+        padding-bottom: 64px !important;
+        box-sizing: border-box !important;
+      }
+
+      .why-section,
+      .about-section,
+      .business-section,
+      .channel-section,
+      .partnership-section {
+        min-height: auto !important;
+        display: block !important;
+        padding-top: 52px !important;
+        padding-bottom: 60px !important;
+        box-sizing: border-box !important;
+      }
+
+      .section-header {
+        margin: 0 auto 36px !important;
+      }
+
+      .why-grid {
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 24px !important;
+      }
+
+      .why-card {
+        background-color: var(--color-warm-ivory) !important;
+        border-radius: var(--radius-lg) !important;
+        padding: 40px 28px !important;
+        border: 1px solid var(--color-beige-subtle) !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        min-height: 270px !important;
+        height: 100% !important;
+      }
+
+      .why-card-icon {
+        width: 54px !important;
+        height: 54px !important;
+        margin-bottom: 22px !important;
+      }
+
+      .why-card h3 {
+        font-size: 1.3rem !important;
+        font-weight: 800 !important;
+        color: var(--color-charcoal) !important;
+        margin-bottom: 12px !important;
+        line-height: 1.35 !important;
+      }
+
+      .why-card p {
+        font-size: 1.025rem !important;
+        color: var(--color-charcoal) !important;
+        line-height: 1.65 !important;
+        word-break: keep-all !important;
+        margin-bottom: 18px !important;
+      }
     }
 
-    /* 3. WHY TTLEE 카드: 풍성하고 도톰한 볼륨감 */
-    .why-grid {
-      display: grid !important;
-      grid-template-columns: repeat(4, 1fr) !important;
-      gap: 24px !important;
+    /* 2. 태블릿 레이아웃 (769px ~ 1024px) */
+    @media (max-width: 1024px) and (min-width: 769px) {
+      .why-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 20px !important;
+      }
+      .video-cards-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
     }
 
-    .why-card {
-      background-color: var(--color-warm-ivory) !important;
-      border-radius: var(--radius-lg) !important;
-      padding: 40px 28px !important;
-      border: 1px solid var(--color-beige-subtle) !important;
-      display: flex !important;
-      flex-direction: column !important;
-      justify-content: flex-start !important;
-      min-height: 270px !important;
-      height: 100% !important;
-    }
+    /* 3. 모바일 레이아웃 (768px 이하): 1열 스택 및 가로 넘침 완전 해결 */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 16px !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+      }
 
-    .why-card-icon {
-      width: 54px !important;
-      height: 54px !important;
-      margin-bottom: 22px !important;
-    }
+      .hero-section {
+        padding-top: calc(var(--header-height) + 24px) !important;
+        padding-bottom: 40px !important;
+        display: block !important;
+        min-height: auto !important;
+      }
 
-    .why-card h3 {
-      font-size: 1.3rem !important;
-      font-weight: 800 !important;
-      color: var(--color-charcoal) !important;
-      margin-bottom: 12px !important;
-      line-height: 1.35 !important;
-    }
+      .why-section,
+      .about-section,
+      .business-section,
+      .channel-section,
+      .partnership-section {
+        padding-top: 40px !important;
+        padding-bottom: 44px !important;
+        display: block !important;
+        min-height: auto !important;
+      }
 
-    .why-card p {
-      font-size: 1.025rem !important;
-      color: var(--color-charcoal) !important;
-      line-height: 1.65 !important;
-      word-break: keep-all !important;
-      margin-bottom: 18px !important;
+      .section-header {
+        margin: 0 auto 24px !important;
+      }
+
+      .section-header h2 {
+        font-size: 1.65rem !important;
+        line-height: 1.35 !important;
+        margin-bottom: 8px !important;
+      }
+
+      .section-header p {
+        font-size: 0.95rem !important;
+        line-height: 1.55 !important;
+      }
+
+      /* 모바일 GNB 순백색 일원화 */
+      .nav-menu {
+        background-color: var(--color-pure-white) !important;
+      }
+
+      /* 히어로 모바일 */
+      .hero-title {
+        font-size: 1.95rem !important;
+        line-height: 1.3 !important;
+        margin-bottom: 14px !important;
+      }
+
+      .hero-subtitle {
+        font-size: 0.975rem !important;
+        line-height: 1.5 !important;
+        margin-bottom: 20px !important;
+      }
+
+      .hero-actions {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 10px !important;
+        margin-bottom: 24px !important;
+      }
+
+      .hero-actions .btn {
+        width: 100% !important;
+        justify-content: center !important;
+        padding: 13px 20px !important;
+        font-size: 0.95rem !important;
+      }
+
+      .hero-trust-metrics {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 8px !important;
+        width: 100% !important;
+        padding-top: 18px !important;
+        text-align: center !important;
+      }
+
+      .metric-number {
+        font-size: 1.35rem !important;
+      }
+
+      .metric-label {
+        font-size: 0.75rem !important;
+      }
+
+      /* ABOUT TTLEE 모바일 */
+      .about-card {
+        padding: 24px 16px !important;
+        border-radius: var(--radius-lg) !important;
+      }
+
+      .about-flow-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 8px !important;
+        margin-top: 20px !important;
+        width: 100% !important;
+      }
+
+      .flow-step-item {
+        width: 100% !important;
+        padding: 20px 16px !important;
+        box-sizing: border-box !important;
+      }
+
+      .flow-arrow-divider {
+        height: 32px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 2px 0 !important;
+      }
+
+      .flow-gold-arrow-svg {
+        transform: rotate(90deg) !important;
+        width: 36px !important;
+        height: 16px !important;
+      }
+
+      /* WHY TTLEE 모바일 1열 스택 (가로 폭발 완전 해결) */
+      .why-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 16px !important;
+        width: 100% !important;
+      }
+
+      .why-card {
+        width: 100% !important;
+        min-height: auto !important;
+        padding: 26px 20px !important;
+        box-sizing: border-box !important;
+        display: flex !important;
+        flex-direction: column !important;
+      }
+
+      .why-card-icon {
+        width: 48px !important;
+        height: 48px !important;
+        margin-bottom: 16px !important;
+      }
+
+      .why-card h3 {
+        font-size: 1.2rem !important;
+        margin-bottom: 8px !important;
+      }
+
+      .why-card p {
+        font-size: 0.95rem !important;
+        line-height: 1.55 !important;
+        margin-bottom: 14px !important;
+      }
+
+      /* 비즈니스 플라이휠 모바일 */
+      .flywheel-diagram {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+      }
+
+      .flywheel-center-core {
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+
+      .flywheel-node {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 16px !important;
+        box-sizing: border-box !important;
+      }
+
+      /* 공식 채널 모바일: 가로 스크롤 제거 & 단일 컬럼 세로 스택 */
+      .channel-schedule-bar {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 8px !important;
+        padding: 12px 16px !important;
+        border-radius: var(--radius-lg) !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-bottom: 20px !important;
+        box-sizing: border-box !important;
+      }
+
+      .schedule-item {
+        font-size: 0.85rem !important;
+        gap: 8px !important;
+        text-align: center !important;
+      }
+
+      .channel-platform-tabs {
+        display: flex !important;
+        flex-direction: row !important;
+        width: 100% !important;
+        gap: 8px !important;
+        margin-bottom: 20px !important;
+      }
+
+      .platform-tab-btn {
+        flex: 1 !important;
+        justify-content: center !important;
+        padding: 10px 10px !important;
+        font-size: 0.85rem !important;
+        white-space: nowrap !important;
+      }
+
+      .video-cards-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 16px !important;
+        overflow-x: visible !important;
+        width: 100% !important;
+        padding-bottom: 0 !important;
+      }
+
+      .video-card {
+        min-width: 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+
+      .tiktok-panel {
+        padding: 24px 16px !important;
+        margin-bottom: 20px !important;
+      }
+
+      /* 파트너십 모바일 */
+      .partnership-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 16px !important;
+        width: 100% !important;
+      }
+
+      .partner-card {
+        padding: 26px 20px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+
+      .partnership-cta-area .btn {
+        width: 100% !important;
+        justify-content: center !important;
+      }
+
+      /* 모달 모바일 */
+      .modal-box {
+        padding: 26px 18px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        border-radius: var(--radius-lg) !important;
+        box-sizing: border-box !important;
+      }
     }
 
     .why-tag {

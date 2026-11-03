@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (mobileToggle && navMenu) {
     mobileToggle.addEventListener('click', () => {
       navMenu.classList.toggle('open');
+      mobileToggle.classList.toggle('active');
       const isOpen = navMenu.classList.contains('open');
       mobileToggle.setAttribute('aria-expanded', isOpen);
     });
@@ -32,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     navLinks.forEach(link => {
       link.addEventListener('click', () => {
         navMenu.classList.remove('open');
+        mobileToggle.classList.remove('active');
         mobileToggle.setAttribute('aria-expanded', false);
       });
     });
@@ -130,6 +132,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 마우스 휠 스크롤: 물 흐르듯 자연스럽게 1단씩 글라이딩
   window.addEventListener('wheel', (e) => {
+    // 모바일/태블릿에서는 휠 가로채기 방지 (자연스러운 네이티브 터치 스크롤 보장)
+    if (window.innerWidth <= 1024) return;
+
     // 모달창 오픈 중이거나 폼 입력 중일 때는 휠 인터랙션 제외
     if (document.body.style.overflow === 'hidden') return;
     if (e.target.closest('.modal-overlay') || e.target.closest('form') || e.target.closest('textarea') || e.target.closest('input')) return;
