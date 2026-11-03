@@ -258,74 +258,63 @@
 
   <!-- ==================== 5. 연동 설정 센터 모달 (추천 1, 2위 원클릭 설정) ==================== -->
   <div class="admin-modal-overlay" id="settingsModal">
-    <div class="admin-modal-box" style="max-width: 680px;">
+    <div class="admin-modal-box" style="max-width: 620px;">
       <div class="admin-modal-header">
-        <h3>⚙️ 추천 1, 2위 연동 센터 & 관리자 설정</h3>
+        <h3>⚙️ 연동 간편 설정 & 비밀번호 관리</h3>
         <button type="button" class="modal-close-x" id="closeSettingsModalBtn">&times;</button>
       </div>
 
-      <!-- 추천 1위: 이메일 즉시 수신 (Web3Forms / Formspree) -->
+      <!-- 추천 1위: 이메일 즉시 수신 (초간소화: 이메일 주소만 입력하면 즉시 동작) -->
       <div class="integration-card">
         <div class="integration-card-header">
           <h4>
-            <span style="color: var(--admin-primary);">[추천 1위]</span> 대표님 이메일 즉시 실시간 수신
+            <span style="color: var(--admin-primary);">[추천 1위]</span> 대표님 이메일 즉시 알림 수신
           </h4>
-          <span class="category-badge category-manufacture">무료 플랜 지원</span>
+          <span class="category-badge category-manufacture">이메일만 입력 시 1초 연동</span>
         </div>
-        <p class="integration-desc">
-          고객이 홈페이지에서 문의를 남기면, 즉시 대표님 업무용 이메일로 알림 메일이 도착합니다.<br>
-          <strong>Web3Forms(무료)</strong> Access Key를 입력하면 즉시 활성화됩니다.
+        <p class="integration-desc" style="margin-bottom: 12px;">
+          알림을 받으실 <strong>이메일 주소만 입력</strong>하시면 문의가 들어올 때마다 실시간으로 메일이 도착합니다. (별도 키 발급 불필요)
         </p>
 
-        <div style="margin-bottom: 12px;">
-          <label class="login-label" for="settingEmail">수신 받을 이메일 주소</label>
-          <input type="email" id="settingEmail" class="login-input" placeholder="예: ceo@ttlee.co.kr">
+        <div style="display: flex; gap: 8px;">
+          <input type="email" id="settingEmail" class="login-input" placeholder="수신받을 이메일 주소 (예: ceo@ttlee.co.kr)">
+          <button type="button" class="table-btn" id="testEmailBtn" style="white-space: nowrap; padding: 10px 16px; font-weight: 700;">
+            📩 테스트 발송
+          </button>
         </div>
-
-        <div style="margin-bottom: 14px;">
-          <label class="login-label" for="settingEmailKey">
-            Web3Forms Access Key
-            <a href="https://web3forms.com" target="_blank" style="color: var(--admin-primary); font-size: 0.8rem; text-decoration: underline; margin-left: 6px;">[10초 만에 무료 키 발급받기 ↗]</a>
-          </label>
-          <input type="text" id="settingEmailKey" class="login-input" placeholder="예: a1b2c3d4-e5f6-7890-abcd-1234567890ab">
-        </div>
-
-        <button type="button" class="table-btn" id="testEmailBtn">
-          📩 테스트 알림 메일 발송해보기
-        </button>
       </div>
 
-      <!-- 추천 2위: 구글 스프레드시트 자동 적재 -->
+      <!-- 추천 2위: 구글 스프레드시트 엑셀 자동 연동 (초간소화) -->
       <div class="integration-card">
         <div class="integration-card-header">
           <h4>
-            <span style="color: #2563EB;">[추천 2위]</span> 구글 스프레드시트 엑셀 자동 연동
+            <span style="color: #2563EB;">[추천 2위]</span> 구글 스프레드시트 자동 누적
           </h4>
           <span class="category-badge category-seller">실시간 엑셀 적재</span>
         </div>
-        <p class="integration-desc">
-          문의가 등록되면 구글 스프레드시트의 한 줄로 실시간 자동 저장됩니다.<br>
-          구글 시트 메뉴 [확장 프로그램] → [Apps Script]에 아래 코드를 붙여넣고 [웹 앱 배포 URL]을 등록하세요.
+        <p class="integration-desc" style="margin-bottom: 12px;">
+          구글 시트 배포 URL만 등록하시면 문의가 엑셀 시트에 한 줄씩 실시간 자동 추가됩니다.
         </p>
 
-        <div class="code-snippet-box">
-          <button type="button" class="code-copy-btn" id="copyAppsScriptBtn">코드 복사</button>
+        <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+          <input type="url" id="settingSheetWebhook" class="login-input" placeholder="구글 시트 웹 앱 (Webhook) URL 붙여넣기">
+          <button type="button" class="table-btn" id="testSheetBtn" style="white-space: nowrap; padding: 10px 16px; font-weight: 700;">
+            📊 시트 전송 테스트
+          </button>
+        </div>
+
+        <details style="font-size: 0.825rem; color: var(--admin-text-sub); cursor: pointer; margin-top: 6px;">
+          <summary style="font-weight: 700; color: var(--admin-primary);">▶ 구글 시트 연동 코드 보기 (필요 시 복사)</summary>
+          <div class="code-snippet-box" style="margin-top: 8px;">
+            <button type="button" class="code-copy-btn" id="copyAppsScriptBtn">코드 복사</button>
 <pre><code>function doPost(e) {
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
   var data = JSON.parse(e.postData.contents);
   sheet.appendRow([new Date(), data.category, data.name, data.contact, data.message]);
   return ContentService.createTextOutput(JSON.stringify({result: "success"})).setMimeType(ContentService.MimeType.JSON);
 }</code></pre>
-        </div>
-
-        <div style="margin-bottom: 12px;">
-          <label class="login-label" for="settingSheetWebhook">구글 시트 웹 앱 (Webhook) URL</label>
-          <input type="url" id="settingSheetWebhook" class="login-input" placeholder="https://script.google.com/macros/s/.../exec">
-        </div>
-
-        <button type="button" class="table-btn" id="testSheetBtn">
-          📊 구글 시트 테스트 데이터 전송해보기
-        </button>
+          </div>
+        </details>
       </div>
 
       <!-- 관리자 비밀번호 변경 -->
@@ -333,14 +322,14 @@
         <div class="integration-card-header">
           <h4>🔒 관리자 접속 비밀번호 변경</h4>
         </div>
-        <div style="display: flex; gap: 10px;">
+        <div style="display: flex; gap: 8px;">
           <input type="password" id="newAdminPassword" class="login-input" placeholder="새로운 비밀번호 입력">
-          <button type="button" class="table-btn" id="changePasswordBtn" style="white-space: nowrap;">비밀번호 변경</button>
+          <button type="button" class="table-btn" id="changePasswordBtn" style="white-space: nowrap; padding: 10px 16px; font-weight: 700;">비밀번호 변경</button>
         </div>
       </div>
 
       <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 16px;">
-        <button type="button" class="btn-header btn-primary-action" id="saveSettingsBtn">연동 설정 저장 완료</button>
+        <button type="button" class="btn-header btn-primary-action" id="saveSettingsBtn" style="padding: 12px 24px;">설정 저장 완료</button>
       </div>
     </div>
   </div>

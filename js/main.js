@@ -354,22 +354,35 @@ document.addEventListener('DOMContentLoaded', () => {
       try {
         const cfg = JSON.parse(localStorage.getItem('ttlee_config') || '{}');
 
-        // [추천 1위] 대표님 이메일 즉시 수신 (Web3Forms API)
-        if (cfg.emailAccessKey) {
-          fetch('https://api.web3forms.com/submit', {
+        // [추천 1위] 대표님 이메일 즉시 수신 (이메일 주소만 입력되어 있으면 FormSubmit으로 즉시 발송)
+        if (cfg.email) {
+          const emailEndpoint = cfg.emailAccessKey 
+            ? 'https://api.web3forms.com/submit'
+            : `https://formsubmit.co/ajax/${encodeURIComponent(cfg.email)}`;
+
+          const emailPayload = cfg.emailAccessKey ? {
+            access_key: cfg.emailAccessKey,
+            subject: `[TTLEE 제휴문의] ${inquiryData.category} - ${inquiryData.name}`,
+            from_name: '주식회사 뜰레(TTLEE) 고객문의 시스템',
+            recipient_email: cfg.email || undefined,
+            inquiry_category: inquiryData.category,
+            applicant_name: inquiryData.name,
+            applicant_contact: inquiryData.contact,
+            message: inquiryData.message,
+            submitted_at: inquiryData.date
+          } : {
+            _subject: `[TTLEE 제휴문의] ${inquiryData.category} - ${inquiryData.name}`,
+            문의유형: inquiryData.category,
+            신청자명: inquiryData.name,
+            연락처: inquiryData.contact,
+            문의내용: inquiryData.message,
+            접수일시: inquiryData.date
+          };
+
+          fetch(emailEndpoint, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-            body: JSON.stringify({
-              access_key: cfg.emailAccessKey,
-              subject: `[TTLEE 제휴문의] ${inquiryData.category} - ${inquiryData.name}`,
-              from_name: '주식회사 뜰레(TTLEE) 고객문의 시스템',
-              recipient_email: cfg.email || undefined,
-              inquiry_category: inquiryData.category,
-              applicant_name: inquiryData.name,
-              applicant_contact: inquiryData.contact,
-              message: inquiryData.message,
-              submitted_at: inquiryData.date
-            })
+            body: JSON.stringify(emailPayload)
           }).then(res => res.json()).then(resData => {
             console.log('[TTLEE] 이메일 알림 발송 결과:', resData);
           }).catch(err => console.warn('이메일 발송 오류:', err));

@@ -376,7 +376,6 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const cfg = JSON.parse(localStorage.getItem(STORAGE_KEY_CONFIG) || '{}');
       settingEmail.value = cfg.email || '';
-      settingEmailKey.value = cfg.emailAccessKey || '';
       settingSheetWebhook.value = cfg.googleSheetWebhookUrl || '';
     } catch (err) {
       console.warn('설정 로드 실패:', err);
@@ -398,9 +397,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 연동 설정 저장
   saveSettingsBtn.addEventListener('click', () => {
+    const existing = JSON.parse(localStorage.getItem(STORAGE_KEY_CONFIG) || '{}');
     const cfg = {
+      ...existing,
       email: settingEmail.value.trim(),
-      emailAccessKey: settingEmailKey.value.trim(),
       googleSheetWebhookUrl: settingSheetWebhook.value.trim()
     };
     localStorage.setItem(STORAGE_KEY_CONFIG, JSON.stringify(cfg));
@@ -408,14 +408,13 @@ document.addEventListener('DOMContentLoaded', () => {
     showToast('연동 설정이 안전하게 저장되었습니다.');
   });
 
-  // 추천 1위: 테스트 이메일 발송
+  // 추천 1위: 테스트 이메일 발송 (이메일 주소만 있으면 FormSubmit으로 즉시 발송!)
   testEmailBtn.addEventListener('click', async () => {
-    const accessKey = settingEmailKey.value.trim();
     const email = settingEmail.value.trim();
 
-    if (!accessKey) {
-      alert('Web3Forms Access Key를 먼저 입력해주세요.\n(입력란 우측 링크에서 이메일만 적으면 10초 만에 무료 발급됩니다)');
-      settingEmailKey.focus();
+    if (!email || !email.includes('@')) {
+      alert('알림을 수신받으실 올바른 이메일 주소를 입력해주세요.\n(예: ceo@ttlee.co.kr 또는 본인 네이버/지메일)');
+      settingEmail.focus();
       return;
     }
 
@@ -423,28 +422,31 @@ document.addEventListener('DOMContentLoaded', () => {
     testEmailBtn.textContent = '발송 중...';
 
     try {
-      const response = await fetch('https://api.web3forms.com/submit', {
+      const response = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(email)}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({
-          access_key: accessKey,
-          subject: '[TTLEE 테스트] 뜰레 제휴문의 시스템 연동 테스트',
-          from_name: '주식회사 뜰레(TTLEE) 시스템',
-          recipient_email: email,
-          message: '축하합니다! 주식회사 뜰레 제휴·입점 문의 알림 연동이 성공적으로 활성화되었습니다. 고객이 문의를 남기면 즉시 이메일로 수신됩니다.'
+          _subject: '[TTLEE 테스트] 뜰레 제휴문의 알림 연동 테스트 메일',
+          보낸곳: '주식회사 뜰레(TTLEE) 고객문의 시스템',
+          수신자: email,
+          내용: '축하합니다! 주식회사 뜰레 제휴·입점 문의 알림 연동이 완료되었습니다.\n(※ 첫 1회 수신 시 메일함에서 Activate Form 링크를 클릭하시면 영구 활성화됩니다)'
         })
       });
       const data = await response.json();
-      if (data.success) {
+      if (data.success === 'true' || data.success === true) {
         showToast('테스트 이메일이 발송되었습니다! 메일함을 확인하세요.');
+        // 설정 자동 저장
+        const existing = JSON.parse(localStorage.getItem(STORAGE_KEY_CONFIG) || '{}');
+        existing.email = email;
+        localStorage.setItem(STORAGE_KEY_CONFIG, JSON.stringify(existing));
       } else {
-        alert('발송 실패: ' + (data.message || 'Key를 다시 확인해주세요.'));
+        alert('발송 결과: ' + (data.message || '메일 발송이 접수되었습니다.'));
       }
     } catch (err) {
-      alert('통신 오류가 발생했습니다: ' + err.message);
+      alert('발송 중 통신 오류가 발생했습니다: ' + err.message);
     } finally {
       testEmailBtn.disabled = false;
-      testEmailBtn.textContent = '📩 테스트 알림 메일 발송해보기';
+      testEmailBtn.textContent = '📩 테스트 발송';
     }
   });
 
