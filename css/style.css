@@ -123,7 +123,7 @@ img {
 
 .section-badge.on-dark {
   background-color: rgba(255, 255, 255, 0.12);
-  color: #8DE0BD;
+  color: var(--color-live-red);
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
@@ -148,8 +148,10 @@ img {
   line-height: 1.6;
 }
 
+.highlight-red,
+.highlight-brand,
 .highlight-green {
-  color: var(--color-starbucks-green);
+  color: var(--color-live-red);
 }
 
 /* 4. 버튼 규격 컴포넌트 (인터랙티브 액션: 풀 라운딩 알약형 + 입체 피드백) */
@@ -194,12 +196,12 @@ img {
   background-color: var(--color-starbucks-green);
   color: var(--color-pure-white);
   border: 1.5px solid transparent;
-  box-shadow: 0 4px 14px rgba(0, 112, 74, 0.28);
+  box-shadow: 0 4px 14px rgba(242, 70, 58, 0.35);
 }
 
 .btn-primary:hover {
   background-color: var(--color-starbucks-green-hover);
-  box-shadow: 0 8px 24px rgba(0, 112, 74, 0.38);
+  box-shadow: 0 8px 24px rgba(242, 70, 58, 0.5);
 }
 
 .btn-secondary {
@@ -323,7 +325,7 @@ img {
 
 .nav-link:hover::after {
   transform: scaleX(0.5);
-  background-color: rgba(0, 112, 74, 0.4);
+  background-color: rgba(242, 70, 58, 0.4);
 }
 
 /* 현재 사용자가 위치한 메뉴 활성화 (Active GNB Indicator) */
@@ -335,7 +337,7 @@ img {
 .nav-link.active::after {
   transform: scaleX(1);
   background-color: var(--color-starbucks-green);
-  box-shadow: 0 2px 6px rgba(0, 112, 74, 0.35);
+  box-shadow: 0 2px 6px rgba(242, 70, 58, 0.35);
 }
 
 .mobile-toggle {
@@ -461,7 +463,7 @@ img {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.02) 45%, rgba(19, 37, 32, 0.75) 100%);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.02) 45%, rgba(22, 23, 28, 0.8) 100%);
 }
 
 .hero-visual-inner {
@@ -496,7 +498,7 @@ img {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  background: rgba(19, 37, 32, 0.9);
+  background: rgba(22, 23, 28, 0.92);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.16);
@@ -712,7 +714,7 @@ img {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: linear-gradient(135deg, #1E3932 0%, #132520 100%);
+  background: linear-gradient(135deg, #16171C 0%, #24262E 100%);
   color: var(--color-pure-white);
   display: flex;
   flex-direction: column;
@@ -720,21 +722,21 @@ img {
   justify-content: center;
   text-align: center;
   padding: 18px;
-  box-shadow: 0 14px 34px rgba(19, 37, 32, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.25);
-  border: 3px solid rgba(182, 155, 125, 0.45);
+  box-shadow: 0 14px 34px rgba(22, 23, 28, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+  border: 3px solid rgba(242, 70, 58, 0.45);
   transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
 .flywheel-diagram:hover .core-inner {
   transform: scale(1.03);
-  box-shadow: 0 18px 42px rgba(0, 112, 74, 0.32), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 18px 42px rgba(242, 70, 58, 0.32), inset 0 1px 1px rgba(255, 255, 255, 0.3);
 }
 
 .core-tag {
   font-size: 0.8125rem;
   font-weight: 800;
   letter-spacing: 0.12em;
-  color: #8DE0BD;
+  color: #F2463A;
   margin-bottom: 4px;
 }
 
@@ -771,7 +773,7 @@ img {
 
 .flywheel-node:hover {
   transform: translateY(-4px);
-  box-shadow: 0 18px 36px rgba(0, 112, 74, 0.15);
+  box-shadow: 0 18px 36px rgba(242, 70, 58, 0.15);
   border-color: var(--color-starbucks-green);
 }
 
@@ -852,7 +854,7 @@ img {
 
 .why-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(74, 222, 128, 0.6);
+  border-color: rgba(242, 70, 58, 0.55);
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
 }
 
@@ -882,13 +884,13 @@ img {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(180deg, rgba(6, 15, 11, 0.46) 0%, rgba(3, 8, 6, 0.72) 100%);
+  background: linear-gradient(180deg, rgba(22, 23, 28, 0.46) 0%, rgba(14, 15, 18, 0.75) 100%);
   transition: background 0.3s ease;
   z-index: 2;
 }
 
 .why-card:hover .why-card-overlay {
-  background: linear-gradient(180deg, rgba(6, 15, 11, 0.32) 0%, rgba(3, 8, 6, 0.60) 100%);
+  background: linear-gradient(180deg, rgba(22, 23, 28, 0.32) 0%, rgba(14, 15, 18, 0.62) 100%);
 }
 
 .why-card-content {
@@ -912,10 +914,10 @@ img {
   width: 36px;
   height: 36px;
   border-radius: 8px;
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(22, 23, 28, 0.65);
   backdrop-filter: blur(8px);
-  color: #4ADE80;
-  border: 1px solid rgba(74, 222, 128, 0.4);
+  color: #F2463A;
+  border: 1px solid rgba(242, 70, 58, 0.45);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -928,7 +930,7 @@ img {
   display: block;
   font-size: 0.72rem;
   font-weight: 800;
-  color: #6EE7B7;
+  color: #FF8F87;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   margin-bottom: 2px;
@@ -961,7 +963,7 @@ img {
 /* 10. SECTION 05: TTLEE ORIGINAL CHANNEL (박대장이 쏜다!) */
 .channel-section {
   padding: 72px 0;
-  background: linear-gradient(160deg, #1E3932 0%, #132520 100%);
+  background: linear-gradient(160deg, #16171C 0%, #0E0F12 100%);
   color: var(--color-pure-white);
   position: relative;
   overflow: hidden;
@@ -1093,7 +1095,7 @@ img {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, rgba(19, 37, 32, 0.15) 0%, rgba(19, 37, 32, 0.65) 100%);
+  background: linear-gradient(180deg, rgba(22, 23, 28, 0.18) 0%, rgba(22, 23, 28, 0.75) 100%);
   z-index: 1;
 }
 
@@ -1113,7 +1115,7 @@ img {
   width: 52px;
   height: 52px;
   border-radius: 50%;
-  background-color: rgba(0, 112, 74, 0.88);
+  background-color: rgba(242, 70, 58, 0.92);
   backdrop-filter: blur(4px);
   color: #fff;
   display: flex;
@@ -1124,7 +1126,7 @@ img {
 
 .video-card:hover .play-button-overlay {
   transform: scale(1.12);
-  background-color: #00875a;
+  background-color: var(--color-live-red-hover);
 }
 
 .video-info {
@@ -1138,7 +1140,7 @@ img {
 .video-tag {
   font-size: 0.78rem;
   font-weight: 700;
-  color: #8DE0BD;
+  color: var(--color-live-red);
   text-transform: uppercase;
   margin-bottom: 4px;
 }
@@ -1341,7 +1343,7 @@ img {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(19, 37, 32, 0.75);
+  background-color: rgba(22, 23, 28, 0.85);
   backdrop-filter: blur(6px);
   display: flex;
   align-items: center;
@@ -1435,7 +1437,7 @@ img {
   outline: none;
   border-color: var(--color-starbucks-green);
   background-color: var(--color-pure-white);
-  box-shadow: 0 0 0 3px rgba(0, 112, 74, 0.12);
+  box-shadow: 0 0 0 3px rgba(242, 70, 58, 0.2);
 }
 
 /* 토스트 메시지 */
@@ -1752,7 +1754,7 @@ img {
     align-items: center;
     justify-content: center;
     box-shadow: var(--shadow-subtle);
-    border: 1px solid rgba(0, 112, 74, 0.2);
+    border: 1px solid rgba(242, 70, 58, 0.25);
     z-index: 10;
   }
 
