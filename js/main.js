@@ -39,58 +39,95 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 2-1. 유체역학적 1단 이동 글라이더 (Liquid Step Gliding Engine)
+  // 2-1. 고성능 무결점 1단 이동 글라이더 (High-Performance Smooth Gliding Engine)
   const stepSections = [
     { id: 'hero', el: document.getElementById('hero'), gnb: null },
     { id: 'about', el: document.getElementById('about'), gnb: 'about' },
     { id: 'business', el: document.getElementById('business'), gnb: 'business' },
     { id: 'why', el: document.getElementById('why'), gnb: 'why' },
     { id: 'channel', el: document.getElementById('channel'), gnb: 'partnership' },
-    { id: 'partnership', el: document.getElementById('partnership'), gnb: 'partnership' }
+    { id: 'partnership', el: document.getElementById('partnership'), gnb: 'partnership' },
+    { id: 'footer', el: document.getElementById('footer'), gnb: 'partnership' }
   ];
 
   let isGliding = false;
   let glideRafId = null;
+  let safetyTimer = null;
   let lastWheelTime = 0;
-  const GLIDE_DURATION = 900; // 물 흐르듯 유려한 900ms 글라이딩
-  const WHEEL_COOLDOWN = 800; // 연속 스크롤 시 부드러운 전환 대기 시간
+  let currentSectionIndex = 0;
+  const GLIDE_DURATION = 500; // 즉각적이고 매끄러운 500ms (지연 체감 완전 제거)
+  const WHEEL_COOLDOWN = 450; // 연속 휠 입력 간 최적 쿨다운
 
-  // 물 흐르듯 자연스러운 유선형 완화 곡선 (easeInOutCubic: 부드러운 출발 -> 유려한 활주 -> 깃털 같은 부드러운 착지)
-  const easeInOutCubic = (t) => {
-    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  // 레이아웃 스래싱(강제 리플로우) 방지용 헤더 높이 캐싱
+  let cachedHeaderHeight = document.querySelector('.header')?.offsetHeight || 76;
+  window.addEventListener('resize', () => {
+    cachedHeaderHeight = document.querySelector('.header')?.offsetHeight || 76;
+  }, { passive: true });
+
+  // easeOutCubic: 즉각적인 반응성 + 부드러운 감속으로 끊김 없는 착지 보장
+  const easeOutCubic = (t) => {
+    return 1 - Math.pow(1 - t, 3);
   };
 
   const getSectionTargetTop = (targetEl, index) => {
     if (!targetEl || index === 0) return 0;
-    const headerHeight = document.querySelector('.header')?.offsetHeight || 76;
-    return Math.max(0, targetEl.getBoundingClientRect().top + window.pageYOffset - headerHeight + 2);
+    if (targetEl.id === 'footer') {
+      return Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+    }
+    const rect = targetEl.getBoundingClientRect();
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    return Math.max(0, Math.round(rect.top + scrollTop - cachedHeaderHeight + 2));
   };
 
   const getActiveStepIndex = () => {
-    const headerHeight = document.querySelector('.header')?.offsetHeight || 76;
-    const currentScroll = window.scrollY + headerHeight + 60;
-    for (let i = stepSections.length - 1; i >= 0; i--) {
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+    const scrollBottom = currentScroll + window.innerHeight;
+    const docHeight = document.documentElement.scrollHeight;
+
+    // 문서 최하단(푸터 영역) 도달 시
+    if (docHeight - scrollBottom < 40) {
+      return stepSections.length - 1;
+    }
+
+    for (let i = stepSections.length - 2; i >= 0; i--) {
       const sec = stepSections[i].el;
-      if (sec && currentScroll >= sec.offsetTop) {
-        return i;
+      if (sec) {
+        const top = getSectionTargetTop(sec, i);
+        if (currentScroll >= top - 70) {
+          return i;
+        }
       }
     }
     return 0;
   };
 
-  // 물 흐르듯 실키하게 목표 단으로 이동하는 글라이딩 함수
+  // 끊김 없는 유체 글라이딩 함수
   const glideToSection = (targetIndex) => {
     if (targetIndex < 0 || targetIndex >= stepSections.length) return;
     const targetItem = stepSections[targetIndex];
     if (!targetItem.el) return;
 
-    if (glideRafId) cancelAnimationFrame(glideRafId);
+    if (glideRafId) {
+      cancelAnimationFrame(glideRafId);
+      glideRafId = null;
+    }
+    if (safetyTimer) {
+      clearTimeout(safetyTimer);
+      safetyTimer = null;
+    }
 
     const startY = window.pageYOffset || document.documentElement.scrollTop;
     const endY = getSectionTargetTop(targetItem.el, targetIndex);
     const distance = endY - startY;
 
-    if (Math.abs(distance) < 2) return;
+    currentSectionIndex = targetIndex;
+
+    // 미세 이동(2px 이하) 시 즉시 위치 보정 및 잠금 해제
+    if (Math.abs(distance) < 2) {
+      isGliding = false;
+      updateActiveMenu();
+      return;
+    }
 
     isGliding = true;
     const startTime = performance.now();
@@ -98,9 +135,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const stepFrame = (now) => {
       const elapsed = now - startTime;
       const progress = Math.min(elapsed / GLIDE_DURATION, 1);
-      const easedT = easeInOutCubic(progress);
+      const easedT = easeOutCubic(progress);
 
-      window.scrollTo(0, startY + distance * easedT);
+      window.scrollTo(0, Math.round(startY + distance * easedT));
 
       if (progress < 1) {
         glideRafId = requestAnimationFrame(stepFrame);
@@ -113,9 +150,19 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     glideRafId = requestAnimationFrame(stepFrame);
+
+    // 탭 전환 등 백그라운드 환경에서도 휠이 영구 잠기지 않도록 보호하는 안전 타이머
+    safetyTimer = setTimeout(() => {
+      if (isGliding) {
+        window.scrollTo(0, endY);
+        isGliding = false;
+        glideRafId = null;
+        updateActiveMenu();
+      }
+    }, GLIDE_DURATION + 150);
   };
 
-  // GNB 메뉴 클릭 시 물 흐르듯 자연스러운 글라이딩 이동
+  // GNB 메뉴 클릭 시 글라이딩 이동
   navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
       const href = link.getAttribute('href');
@@ -130,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 마우스 휠 스크롤: 물 흐르듯 자연스럽게 1단씩 글라이딩
+  // 마우스 휠 스크롤: 1단씩 즉각적이고 부드러운 글라이딩
   window.addEventListener('wheel', (e) => {
     // 모바일/태블릿에서는 휠 가로채기 방지 (자연스러운 네이티브 터치 스크롤 보장)
     if (window.innerWidth <= 1024) return;
@@ -139,28 +186,30 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.body.style.overflow === 'hidden') return;
     if (e.target.closest('.modal-overlay') || e.target.closest('form') || e.target.closest('textarea') || e.target.closest('input')) return;
 
-    // 미세 떨림 무시
-    if (Math.abs(e.deltaY) < 18) return;
+    // 트랙패드 및 미세 진동 노이즈 무시
+    if (Math.abs(e.deltaY) < 14) return;
 
     const now = performance.now();
 
-    // 글라이딩 진행 중이거나 쿨다운 중일 때 휠 충돌 방지
+    // 글라이딩 진행 중이거나 쿨다운 중일 때 휠 충돌 및 이중 스크롤 원천 차단
     if (isGliding || (now - lastWheelTime < WHEEL_COOLDOWN)) {
       e.preventDefault();
       return;
     }
 
-    const currentIndex = getActiveStepIndex();
+    const currentIndex = (currentSectionIndex >= 0 && currentSectionIndex < stepSections.length) 
+      ? currentSectionIndex 
+      : getActiveStepIndex();
 
     if (e.deltaY > 0) {
-      // 아래로 스크롤: 다음 단으로 물 흐르듯 이동
+      // 아래로 스크롤: 다음 단 이동
       if (currentIndex < stepSections.length - 1) {
         e.preventDefault();
         lastWheelTime = now;
         glideToSection(currentIndex + 1);
       }
     } else if (e.deltaY < 0) {
-      // 위로 스크롤: 이전 단으로 물 흐르듯 이동
+      // 위로 스크롤: 이전 단 이동
       if (currentIndex > 0) {
         e.preventDefault();
         lastWheelTime = now;
@@ -169,15 +218,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }, { passive: false });
 
-  // 키보드 방향키(PageDown/PageUp/ArrowDown/ArrowUp)로도 유려한 글라이딩 지원
+  // 키보드 방향키(PageDown/PageUp/ArrowDown/ArrowUp) 연동
   window.addEventListener('keydown', (e) => {
     if (document.body.style.overflow === 'hidden') return;
     if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName)) return;
 
     const now = performance.now();
-    if (isGliding || (now - lastWheelTime < 400)) return;
+    if (isGliding || (now - lastWheelTime < 350)) return;
 
-    const currentIndex = getActiveStepIndex();
+    const currentIndex = (currentSectionIndex >= 0 && currentSectionIndex < stepSections.length)
+      ? currentSectionIndex
+      : getActiveStepIndex();
+
     if (e.key === 'ArrowDown' || e.key === 'PageDown') {
       if (currentIndex < stepSections.length - 1) {
         e.preventDefault();
@@ -206,8 +258,9 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const updateActiveMenu = () => {
-    const currentIndex = getActiveStepIndex();
-    const currentSection = stepSections[currentIndex];
+    if (isGliding) return; // 글라이딩 애니메이션 진행 중에는 강제 리플로우(스래싱) 방지
+    currentSectionIndex = getActiveStepIndex();
+    const currentSection = stepSections[currentSectionIndex];
     setActiveNavLink(currentSection ? currentSection.gnb : null);
   };
 
