@@ -3,17 +3,17 @@
    ========================================================================== */
 
 :root {
-  --admin-bg: #F4F6F5;
+  --admin-bg: #F7F3EC;
   --admin-card-bg: #FFFFFF;
-  --admin-primary: #00704A;
-  --admin-primary-hover: #005638;
-  --admin-primary-light: rgba(0, 112, 74, 0.08);
-  --admin-dark: #1E3932;
-  --admin-darker: #132520;
-  --admin-text-main: #2C3531;
-  --admin-text-sub: #5E6963;
-  --admin-border: #E2E8E5;
-  --admin-gold: #C5A059;
+  --admin-primary: #F2463A;
+  --admin-primary-hover: #D8362B;
+  --admin-primary-light: rgba(242, 70, 58, 0.08);
+  --admin-dark: #16171C;
+  --admin-darker: #0E0F12;
+  --admin-text-main: #16171C;
+  --admin-text-sub: #5E6270;
+  --admin-border: #E8E2D7;
+  --admin-gold: #F2463A;
   
   --status-new: #EF4444;
   --status-new-bg: rgba(239, 68, 68, 0.1);
@@ -23,9 +23,9 @@
   --status-done-bg: rgba(16, 185, 129, 0.12);
 
   --font-family-base: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --shadow-sm: 0 2px 8px rgba(30, 57, 50, 0.05);
-  --shadow-md: 0 6px 20px rgba(30, 57, 50, 0.08);
-  --shadow-lg: 0 14px 34px rgba(30, 57, 50, 0.14);
+  --shadow-sm: 0 2px 8px rgba(22, 23, 28, 0.05);
+  --shadow-md: 0 6px 20px rgba(22, 23, 28, 0.08);
+  --shadow-lg: 0 14px 34px rgba(22, 23, 28, 0.14);
 }
 
 *, *::before, *::after {
@@ -50,7 +50,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #1E3932 0%, #132520 100%);
+  background: linear-gradient(135deg, #16171C 0%, #0E0F12 100%);
   display: flex;
   align-items: center;
   justify-content: center;
