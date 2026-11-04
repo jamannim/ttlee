@@ -1310,6 +1310,16 @@ img {
   gap: 16px;
 }
 
+.footer-social-btn:hover {
+  transform: translateY(-2px) scale(1.08) !important;
+  background: rgba(255, 255, 255, 0.18) !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.footer-social-btn:active {
+  transform: translateY(0) scale(0.96) !important;
+}
+
 .footer-bottom {
   display: flex;
   justify-content: space-between;
