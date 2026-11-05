@@ -1318,6 +1318,30 @@ img {
   gap: 16px;
 }
 
+.biz-info-link {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 6px;
+  padding: 1px 7px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--color-cream);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  text-decoration: none;
+  vertical-align: middle;
+  transition: all 0.2s ease;
+  line-height: 1.4;
+}
+
+.biz-info-link:hover {
+  background: var(--color-live-red);
+  border-color: var(--color-live-red);
+  color: var(--color-pure-white);
+  transform: translateY(-1px);
+}
+
 .footer-social-btn:hover {
   transform: translateY(-2px) scale(1.08) !important;
   background: rgba(255, 255, 255, 0.18) !important;
