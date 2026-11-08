@@ -418,7 +418,7 @@ body {
   background-color: #F8FAFA;
 }
 
-/* 상태 및 카테고리 배지 */
+/* 상태 및 카테고리 배지 (MD_RULES 비버튼 소프트 사각형 규격 100% 준수) */
 .category-badge {
   display: inline-block;
   padding: 4px 10px;
@@ -426,6 +426,8 @@ body {
   font-size: 0.8125rem;
   font-weight: 700;
   white-space: nowrap;
+  cursor: default !important;
+  user-select: none;
 }
 
 .category-manufacture {
@@ -448,10 +450,12 @@ body {
   align-items: center;
   gap: 5px;
   padding: 4px 10px;
-  border-radius: 20px;
+  border-radius: 6px;
   font-size: 0.8125rem;
   font-weight: 700;
   white-space: nowrap;
+  cursor: default !important;
+  user-select: none;
 }
 
 .status-badge::before {

@@ -373,18 +373,59 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  // 입력값 위변조 및 악성 스크립트 방어용 정제 함수
+  const sanitizeText = (str) => {
+    if (!str) return '';
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#x27;')
+      .replace(/\//g, '&#x2F;')
+      .trim();
+  };
+
   if (inquiryForm) {
-    inquiryForm.addEventListener('submit', (e) => {
+    inquiryForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
+      const submitBtn = inquiryForm.querySelector('button[type="submit"]');
       const categorySelect = document.getElementById('inquiryCategory');
       const categoryText = categorySelect ? categorySelect.options[categorySelect.selectedIndex].text : '';
-      const name = document.getElementById('inquiryName')?.value || '';
-      const contact = document.getElementById('inquiryContact')?.value || '';
-      const message = document.getElementById('inquiryMessage')?.value || '';
+      const rawName = document.getElementById('inquiryName')?.value || '';
+      const rawContact = document.getElementById('inquiryContact')?.value || '';
+      const rawMessage = document.getElementById('inquiryMessage')?.value || '';
+
+      const name = sanitizeText(rawName).slice(0, 50);
+      const contact = sanitizeText(rawContact).slice(0, 50);
+      const message = sanitizeText(rawMessage).slice(0, 2000);
+
+      // 필수 유효성 검증
+      if (!name || name.length < 2) {
+        showToast('회사명 또는 신청자명을 2자 이상 입력해주세요.');
+        document.getElementById('inquiryName')?.focus();
+        return;
+      }
+      if (!contact || contact.length < 4) {
+        showToast('정확한 연락처(전화번호 또는 이메일)를 입력해주세요.');
+        document.getElementById('inquiryContact')?.focus();
+        return;
+      }
+      if (!message || message.length < 5) {
+        showToast('문의 및 제안 내용을 5자 이상 상세히 입력해주세요.');
+        document.getElementById('inquiryMessage')?.focus();
+        return;
+      }
+
+      // 중복 제출 방지 (버튼 비활성화)
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = '문의 접수 처리 중...';
+      }
 
       const inquiryData = {
-        id: 'inq_' + Date.now(),
+        id: 'inq_' + Date.now() + '_' + Math.random().toString(36).substring(2, 7),
         date: new Date().toLocaleString('ko-KR'),
         category: categoryText,
         name,
@@ -398,7 +439,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const existing = JSON.parse(localStorage.getItem('ttlee_inquiries') || '[]');
         existing.unshift(inquiryData);
         localStorage.setItem('ttlee_inquiries', JSON.stringify(existing));
-        console.info('[TTLEE] 새로운 제휴 문의가 관리자 시스템에 저장되었습니다:', inquiryData);
+        console.info('[TTLEE] 새로운 제휴 문의가 안전하게 저장되었습니다:', inquiryData.id);
       } catch (err) {
         console.warn('localStorage 저장 실패:', err);
       }
@@ -409,7 +450,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const targetEmail = cfg.email || 'jamannim@gmail.com';
         const targetSheetWebhookUrl = cfg.googleSheetWebhookUrl || 'https://script.google.com/macros/s/AKfycbyKK4tk5G8qa8Va8WJHXE_KUfEITCk8O-dsVwgtXVnd1jrwskoxpdATzh6uhz447FTWjw/exec';
 
-        // [추천 1위] 대표님 이메일 즉시 수신 (이메일 주소만 입력되어 있으면 FormSubmit으로 즉시 발송)
+        // [추천 1위] 대표님 이메일 즉시 수신 (스팸 봇 방지 허니팟 포함)
         if (targetEmail) {
           const emailEndpoint = cfg.emailAccessKey 
             ? 'https://api.web3forms.com/submit'
@@ -427,6 +468,7 @@ document.addEventListener('DOMContentLoaded', () => {
             submitted_at: inquiryData.date
           } : {
             _subject: `[TTLEE 제휴문의] ${inquiryData.category} - ${inquiryData.name}`,
+            _honey: '',
             문의유형: inquiryData.category,
             신청자명: inquiryData.name,
             연락처: inquiryData.contact,
@@ -440,7 +482,7 @@ document.addEventListener('DOMContentLoaded', () => {
             body: JSON.stringify(emailPayload)
           }).then(res => res.json()).then(resData => {
             console.log('[TTLEE] 이메일 알림 발송 결과:', resData);
-          }).catch(err => console.warn('이메일 발송 오류:', err));
+          }).catch(err => console.warn('이메일 발송 비동기 통신:', err));
         }
 
         // [추천 2위] 구글 스프레드시트 Webhook 실시간 추가
@@ -469,11 +511,16 @@ document.addEventListener('DOMContentLoaded', () => {
             headers: { 'Content-Type': 'text/plain;charset=utf-8' },
             body: JSON.stringify(sheetPayload)
           }).then(() => {
-            console.log('[TTLEE] 구글 시트 데이터 전송 완료');
-          }).catch(err => console.warn('구글 시트 전송 오류:', err));
+            console.log('[TTLEE] 구글 시트 데이터 전송 요청 완료');
+          }).catch(err => console.warn('구글 시트 전송 통신:', err));
         }
       } catch (cfgErr) {
-        console.warn('연동 설정 처리 중 예외 발생:', cfgErr);
+        console.warn('연동 설정 발송 중 예외:', cfgErr);
+      }
+
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = '문의 신청하기';
       }
 
       closeInquiryModal();
@@ -482,11 +529,88 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ESC 키 누르면 모달 닫기
+  // 7. 이용약관 및 개인정보처리방침 모달 제어
+  const policyModal = document.getElementById('policyModal');
+  const policyCloseBtn = document.getElementById('policyCloseBtn');
+  const policyConfirmBtn = document.getElementById('policyConfirmBtn');
+  const openTermsBtn = document.getElementById('openTermsBtn');
+  const openPrivacyBtn = document.getElementById('openPrivacyBtn');
+  const tabTermsBtn = document.getElementById('tabTermsBtn');
+  const tabPrivacyBtn = document.getElementById('tabPrivacyBtn');
+  const termsPanel = document.getElementById('termsPanel');
+  const privacyPanel = document.getElementById('privacyPanel');
+
+  const switchPolicyTab = (targetTab) => {
+    if (targetTab === 'terms') {
+      if (tabTermsBtn) tabTermsBtn.classList.add('active');
+      if (tabPrivacyBtn) tabPrivacyBtn.classList.remove('active');
+      if (termsPanel) termsPanel.classList.add('active');
+      if (privacyPanel) privacyPanel.classList.remove('active');
+    } else if (targetTab === 'privacy') {
+      if (tabTermsBtn) tabTermsBtn.classList.remove('active');
+      if (tabPrivacyBtn) tabPrivacyBtn.classList.add('active');
+      if (termsPanel) termsPanel.classList.remove('active');
+      if (privacyPanel) privacyPanel.classList.add('active');
+    }
+  };
+
+  const openPolicyModal = (initialTab = 'terms') => {
+    switchPolicyTab(initialTab);
+    if (policyModal) {
+      policyModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+  };
+
+  const closePolicyModal = () => {
+    if (policyModal) {
+      policyModal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  };
+
+  if (openTermsBtn) {
+    openTermsBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openPolicyModal('terms');
+    });
+  }
+
+  if (openPrivacyBtn) {
+    openPrivacyBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openPolicyModal('privacy');
+    });
+  }
+
+  if (tabTermsBtn) {
+    tabTermsBtn.addEventListener('click', () => switchPolicyTab('terms'));
+  }
+
+  if (tabPrivacyBtn) {
+    tabPrivacyBtn.addEventListener('click', () => switchPolicyTab('privacy'));
+  }
+
+  if (policyCloseBtn) {
+    policyCloseBtn.addEventListener('click', closePolicyModal);
+  }
+
+  if (policyConfirmBtn) {
+    policyConfirmBtn.addEventListener('click', closePolicyModal);
+  }
+
+  if (policyModal) {
+    policyModal.addEventListener('click', (e) => {
+      if (e.target === policyModal) closePolicyModal();
+    });
+  }
+
+  // ESC 키 누르면 모든 모달 닫기
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       closeVideoModal();
       closeInquiryModal();
+      closePolicyModal();
     }
   });
 });
