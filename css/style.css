@@ -1150,6 +1150,28 @@ img {
   color: #00F2EA;
 }
 
+.instagram-play-btn {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FFD600 0%, #FF7A00 25%, #FF0069 60%, #D300C5 100%);
+  box-shadow: 0 4px 14px rgba(211, 0, 197, 0.45), 0 2px 8px rgba(255, 122, 0, 0.35);
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+.video-card:hover .instagram-play-btn {
+  transform: scale(1.15);
+  box-shadow: 0 8px 24px rgba(211, 0, 197, 0.65), 0 4px 14px rgba(255, 122, 0, 0.5);
+}
+
+.instagram-panel .video-tag {
+  color: #FF0069;
+}
+
 .video-info {
   padding: 14px 16px 16px;
   display: flex;
@@ -1193,8 +1215,9 @@ img {
   flex-wrap: wrap;
 }
 
-/* 틱톡 패널 안내 스타일 */
-.tiktok-panel {
+/* 틱톡 & 인스타그램 패널 안내 스타일 */
+.tiktok-panel,
+.instagram-panel {
   display: none;
   background-color: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -1203,7 +1226,8 @@ img {
   margin: 0 auto 28px;
 }
 
-.tiktok-panel.active {
+.tiktok-panel.active,
+.instagram-panel.active {
   display: block;
 }
 
@@ -1928,7 +1952,8 @@ img {
     box-sizing: border-box;
   }
 
-  .tiktok-panel {
+  .tiktok-panel,
+  .instagram-panel {
     padding: 24px 16px;
     margin-bottom: 20px;
   }

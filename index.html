@@ -38,7 +38,7 @@
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
   
   <!-- 메인 스타일시트 -->
-  <link rel="stylesheet" href="css/style.css?v=20261110_01">
+  <link rel="stylesheet" href="css/style.css?v=20261110_02">
 
   <!-- 거대 공백 완전 제거 및 반응형 UI/UX 정합성 보장 (캐시 무관 즉시 강제 적용) -->
   <style id="custom-layout-fix">
@@ -298,6 +298,41 @@
 
       .tiktok-panel .video-tag {
         color: #00F2EA !important;
+      }
+
+      .instagram-panel {
+        display: none;
+        background-color: rgba(255, 255, 255, 0.04) !important;
+        border: 1px solid rgba(255, 255, 255, 0.12) !important;
+        border-radius: var(--radius-lg) !important;
+        padding: 36px !important;
+        margin: 0 auto 28px !important;
+      }
+
+      .instagram-panel.active {
+        display: block !important;
+      }
+
+      .instagram-play-btn {
+        width: 52px !important;
+        height: 52px !important;
+        border-radius: 50% !important;
+        background: linear-gradient(135deg, #FFD600 0%, #FF7A00 25%, #FF0069 60%, #D300C5 100%) !important;
+        box-shadow: 0 4px 14px rgba(211, 0, 197, 0.45), 0 2px 8px rgba(255, 122, 0, 0.35) !important;
+        border: 1.5px solid rgba(255, 255, 255, 0.6) !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease !important;
+      }
+
+      .video-card:hover .instagram-play-btn {
+        transform: scale(1.15) !important;
+        box-shadow: 0 8px 24px rgba(211, 0, 197, 0.65), 0 4px 14px rgba(255, 122, 0, 0.5) !important;
+      }
+
+      .instagram-panel .video-tag {
+        color: #FF0069 !important;
       }
 
     /* 2. 태블릿 레이아웃 (769px ~ 1024px) */
@@ -591,7 +626,8 @@
         padding: 12px 14px 14px !important;
       }
 
-      .tiktok-panel {
+      .tiktok-panel,
+      .instagram-panel {
         padding: 24px 16px !important;
         margin-bottom: 20px !important;
       }
@@ -1056,6 +1092,23 @@
           </svg>
           TikTok
         </button>
+        <button type="button" class="platform-tab-btn" data-tab="instagram">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="flex-shrink: 0; display: inline-block; vertical-align: middle;">
+            <defs>
+              <radialGradient id="instaRadialTab" cx="30%" cy="105%" r="105%">
+                <stop offset="0%" stop-color="#FFD600"/>
+                <stop offset="10%" stop-color="#FF7A00"/>
+                <stop offset="50%" stop-color="#FF0069"/>
+                <stop offset="100%" stop-color="#D300C5"/>
+              </radialGradient>
+            </defs>
+            <rect x="2" y="2" width="20" height="20" rx="5.5" fill="url(#instaRadialTab)"/>
+            <circle cx="12" cy="12" r="4.3" stroke="#FFFFFF" stroke-width="1.8" fill="none"/>
+            <circle cx="17.2" cy="6.8" r="1.3" fill="#FFFFFF"/>
+            <rect x="4.2" y="4.2" width="15.6" height="15.6" rx="4.2" stroke="#FFFFFF" stroke-width="1.6" fill="none"/>
+          </svg>
+          Instagram
+        </button>
       </div>
 
       <!-- YouTube 영상 패널 -->
@@ -1122,7 +1175,7 @@
 
       <!-- TikTok 패널 안내 -->
       <div class="tiktok-panel">
-        <div class="video-cards-grid" >
+        <div class="video-cards-grid">
           <a href="https://www.tiktok.com/@parkboss_1" target="_blank" rel="noopener noreferrer" class="video-card">
             <div class="video-thumb-wrapper">
               <img src="https://i.ytimg.com/vi/fpg_5F1o5EU/hqdefault.jpg" alt="구독자 100명도 안 되는데 내 광고가 보트에 붙었다 틱톡 클립 썸네일" class="video-thumb-img">
@@ -1180,6 +1233,65 @@
             <div class="video-info">
               <span class="video-tag">TikTok 클립</span>
               <h4 class="video-title">집들이 선물로 휴지? 팔아보겠다고 공장까지 습격한 썰</h4>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Instagram 패널 안내 -->
+      <div class="instagram-panel">
+        <div class="video-cards-grid">
+          <a href="https://www.instagram.com/parkboss0613/" target="_blank" rel="noopener noreferrer" class="video-card">
+            <div class="video-thumb-wrapper">
+              <img src="https://i.ytimg.com/vi/vKa_FIjsG_s/hqdefault.jpg" alt="인스타그램 릴스 썸네일" class="video-thumb-img">
+              <div class="video-thumb-overlay"></div>
+              <div class="video-thumb-inner">
+                <div class="play-button-overlay instagram-play-btn">
+                  <svg width="22" height="22" viewBox="0 0 24 24" style="display: block; margin-left: 2px;">
+                    <polygon points="5 3 19 12 5 21 5 3" fill="#FFFFFF"></polygon>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="video-info">
+              <span class="video-tag">Instagram 릴스</span>
+              <h4 class="video-title">박대장의 생생한 현장 라이브 &amp; 제품 검증 숏폼 스토리</h4>
+            </div>
+          </a>
+
+          <a href="https://www.instagram.com/parkboss0613/" target="_blank" rel="noopener noreferrer" class="video-card">
+            <div class="video-thumb-wrapper">
+              <img src="https://i.ytimg.com/vi/yXSRiUFwW_A/hqdefault.jpg" alt="인스타그램 비하인드 스토리 썸네일" class="video-thumb-img">
+              <div class="video-thumb-overlay"></div>
+              <div class="video-thumb-inner">
+                <div class="play-button-overlay instagram-play-btn">
+                  <svg width="22" height="22" viewBox="0 0 24 24" style="display: block; margin-left: 2px;">
+                    <polygon points="5 3 19 12 5 21 5 3" fill="#FFFFFF"></polygon>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="video-info">
+              <span class="video-tag">Instagram 릴스</span>
+              <h4 class="video-title">비하인드 토크와 제조사 대표님 미팅 현장 실시간 공유</h4>
+            </div>
+          </a>
+
+          <a href="https://www.instagram.com/parkboss0613/" target="_blank" rel="noopener noreferrer" class="video-card">
+            <div class="video-thumb-wrapper">
+              <img src="https://i.ytimg.com/vi/SAU11RngJfA/hqdefault.jpg" alt="인스타그램 피드 썸네일" class="video-thumb-img">
+              <div class="video-thumb-overlay"></div>
+              <div class="video-thumb-inner">
+                <div class="play-button-overlay instagram-play-btn">
+                  <svg width="22" height="22" viewBox="0 0 24 24" style="display: block; margin-left: 2px;">
+                    <polygon points="5 3 19 12 5 21 5 3" fill="#FFFFFF"></polygon>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="video-info">
+              <span class="video-tag">Instagram 피드</span>
+              <h4 class="video-title">협력 셀러 성장 스토리 및 공구 일정 한눈에 확인하기</h4>
             </div>
           </a>
         </div>
@@ -1260,7 +1372,7 @@
               </a>
 
               <!-- 인스타그램 (로고 이미지 링크) -->
-              <a href="https://www.instagram.com/seyon11200613" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Instagram (@seyon11200613)" aria-label="Instagram 공식 채널" style="display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: rgba(255, 255, 255, 0.08); transition: transform 0.2s ease, background 0.2s ease;">
+              <a href="https://www.instagram.com/parkboss0613/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Instagram (@parkboss0613)" aria-label="Instagram 공식 채널" style="display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: rgba(255, 255, 255, 0.08); transition: transform 0.2s ease, background 0.2s ease;">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" style="display: block;">
                   <defs>
                     <radialGradient id="instaRadialFooter" cx="30%" cy="105%" r="105%">
@@ -1674,6 +1786,6 @@
   <div class="toast-notice" id="toastNotice"></div>
 
   <!-- 메인 스크립트 -->
-  <script src="js/main.js?v=20261108_01"></script>
+  <script src="js/main.js?v=20261110_02"></script>
 </body>
 </html>

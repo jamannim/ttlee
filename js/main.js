@@ -267,10 +267,11 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', updateActiveMenu, { passive: true });
   updateActiveMenu();
 
-  // 3. 채널 탭 전환 (YouTube vs TikTok)
+  // 3. 채널 탭 전환 (YouTube vs TikTok vs Instagram)
   const tabButtons = document.querySelectorAll('.platform-tab-btn');
   const youtubePanel = document.querySelector('.youtube-panel');
   const tiktokPanel = document.querySelector('.tiktok-panel');
+  const instagramPanel = document.querySelector('.instagram-panel');
 
   tabButtons.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -279,11 +280,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const target = btn.dataset.tab;
       if (target === 'youtube') {
-        youtubePanel.classList.remove('hidden');
-        tiktokPanel.classList.remove('active');
+        if (youtubePanel) youtubePanel.classList.remove('hidden');
+        if (tiktokPanel) tiktokPanel.classList.remove('active');
+        if (instagramPanel) instagramPanel.classList.remove('active');
       } else if (target === 'tiktok') {
-        youtubePanel.classList.add('hidden');
-        tiktokPanel.classList.add('active');
+        if (youtubePanel) youtubePanel.classList.add('hidden');
+        if (tiktokPanel) tiktokPanel.classList.add('active');
+        if (instagramPanel) instagramPanel.classList.remove('active');
+      } else if (target === 'instagram') {
+        if (youtubePanel) youtubePanel.classList.add('hidden');
+        if (tiktokPanel) tiktokPanel.classList.remove('active');
+        if (instagramPanel) instagramPanel.classList.add('active');
       }
     });
   });
