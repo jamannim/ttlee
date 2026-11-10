@@ -1245,7 +1245,7 @@ img {
   grid-template-columns: 1fr 48px 1fr 48px 1fr;
   align-items: stretch;
   gap: 12px;
-  margin-bottom: 32px;
+  margin-bottom: 40px;
 }
 
 .partner-card {
@@ -1271,7 +1271,7 @@ img {
 .partner-card-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin-bottom: 16px;
 }
 
@@ -1290,16 +1290,6 @@ img {
 .partner-card:hover .partner-card-icon {
   background: var(--color-starbucks-green);
   color: #FFFFFF;
-}
-
-.partner-step-badge {
-  font-size: 0.75rem;
-  font-weight: 800;
-  color: var(--color-gold-deep);
-  background: rgba(197, 160, 89, 0.12);
-  padding: 4px 8px;
-  border-radius: 6px;
-  letter-spacing: 0.05em;
 }
 
 .partner-target-badge {
@@ -1343,7 +1333,6 @@ img {
 /* + 시너지 연결 커넥터 */
 .partner-plus-divider {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   align-self: center;
@@ -1369,75 +1358,6 @@ img {
   transform: scale(1.15) rotate(90deg);
   background: var(--color-starbucks-green);
   color: #FFFFFF;
-}
-
-.partner-plus-label {
-  font-size: 0.65rem;
-  font-weight: 800;
-  color: var(--color-gold-deep);
-  margin-top: 6px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-/* 3대 파트너십 상호 연결 시너지 배너 */
-.partnership-synergy-banner {
-  background: linear-gradient(135deg, rgba(0, 98, 65, 0.06) 0%, rgba(197, 160, 89, 0.08) 100%);
-  border: 1px solid rgba(0, 98, 65, 0.18);
-  border-radius: var(--radius-lg);
-  padding: 24px 28px;
-  text-align: center;
-  margin: 0 auto 36px;
-  max-width: 920px;
-}
-
-.synergy-flow-equation {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-bottom: 8px;
-}
-
-.eq-item {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--color-charcoal);
-  background: #FFFFFF;
-  padding: 6px 14px;
-  border-radius: var(--radius-full);
-  border: 1px solid var(--color-border);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
-}
-
-.eq-plus {
-  font-size: 1.15rem;
-  font-weight: 800;
-  color: var(--color-starbucks-green);
-}
-
-.eq-equal {
-  font-size: 1.25rem;
-  font-weight: 800;
-  color: var(--color-gold-deep);
-}
-
-.eq-result {
-  font-size: 1.05rem;
-  font-weight: 800;
-  color: var(--color-starbucks-green);
-  background: #FFFFFF;
-  padding: 6px 16px;
-  border-radius: var(--radius-full);
-  border: 1.5px solid var(--color-starbucks-green);
-  box-shadow: 0 2px 8px rgba(0, 98, 65, 0.12);
-}
-
-.synergy-subtext {
-  font-size: 0.925rem;
-  color: var(--color-secondary);
-  margin: 0;
 }
 
 .partnership-cta-wrapper {
@@ -2120,42 +2040,13 @@ img {
   }
 
   .partner-plus-divider {
-    margin: 4px 0;
-    flex-direction: row;
-    gap: 8px;
-  }
-
-  .partner-plus-label {
-    margin-top: 0;
+    margin: 6px 0;
   }
 
   .partner-card {
     padding: 24px 20px;
     width: 100%;
     box-sizing: border-box;
-  }
-
-  .partnership-synergy-banner {
-    padding: 20px 16px;
-    margin-bottom: 28px;
-  }
-
-  .synergy-flow-equation {
-    gap: 6px;
-  }
-
-  .eq-item, .eq-result {
-    font-size: 0.85rem;
-    padding: 5px 10px;
-  }
-
-  .eq-plus, .eq-equal {
-    font-size: 1rem;
-  }
-
-  .synergy-subtext {
-    font-size: 0.85rem;
-    line-height: 1.5;
   }
 
   .partnership-cta-wrapper .btn {
