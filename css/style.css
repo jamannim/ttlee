@@ -1215,15 +1215,10 @@ img {
   flex-wrap: wrap;
 }
 
-/* 틱톡 & 인스타그램 패널 안내 스타일 */
+/* 틱톡 & 인스타그램 패널 스타일 (유튜브 패널과 동일하게 외곽 박스 제거) */
 .tiktok-panel,
 .instagram-panel {
   display: none;
-  background-color: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: var(--radius-lg);
-  padding: 36px;
-  margin: 0 auto 28px;
 }
 
 .tiktok-panel.active,
@@ -2115,11 +2110,6 @@ img {
     box-sizing: border-box;
   }
 
-  .tiktok-panel,
-  .instagram-panel {
-    padding: 24px 16px;
-    margin-bottom: 20px;
-  }
 
   /* 파트너십 모바일 */
   .partnership-grid {
