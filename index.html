@@ -38,7 +38,7 @@
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
   
   <!-- 메인 스타일시트 -->
-  <link rel="stylesheet" href="css/style.css?v=20261110_02">
+  <link rel="stylesheet" href="css/style.css?v=20261110_03">
 
   <!-- 거대 공백 완전 제거 및 반응형 UI/UX 정합성 보장 (캐시 무관 즉시 강제 적용) -->
   <style id="custom-layout-fix">
@@ -335,6 +335,201 @@
         color: #FF0069 !important;
       }
 
+      /* 파트너십 상호 연결 (+) 그리드 및 시너지 배너 */
+      .partnership-grid {
+        display: grid !important;
+        grid-template-columns: 1fr 48px 1fr 48px 1fr !important;
+        align-items: stretch !important;
+        gap: 12px !important;
+        margin-bottom: 32px !important;
+      }
+
+      .partner-card {
+        padding: 36px 26px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        position: relative !important;
+        z-index: 1 !important;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease !important;
+      }
+
+      .partner-card:hover {
+        transform: translateY(-5px) !important;
+        box-shadow: 0 16px 32px rgba(0, 98, 65, 0.12) !important;
+        border-color: var(--color-starbucks-green) !important;
+      }
+
+      .partner-card-header {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        margin-bottom: 16px !important;
+      }
+
+      .partner-card-icon {
+        width: 44px !important;
+        height: 44px !important;
+        border-radius: 12px !important;
+        background: var(--color-starbucks-green-light) !important;
+        color: var(--color-starbucks-green) !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        transition: var(--transition-smooth) !important;
+      }
+
+      .partner-card:hover .partner-card-icon {
+        background: var(--color-starbucks-green) !important;
+        color: #FFFFFF !important;
+      }
+
+      .partner-step-badge {
+        font-size: 0.75rem !important;
+        font-weight: 800 !important;
+        color: var(--color-gold-deep) !important;
+        background: rgba(197, 160, 89, 0.12) !important;
+        padding: 4px 8px !important;
+        border-radius: 6px !important;
+        letter-spacing: 0.05em !important;
+      }
+
+      .partner-target-badge {
+        font-size: 0.825rem !important;
+        font-weight: 700 !important;
+        color: var(--color-starbucks-green) !important;
+        background-color: var(--color-starbucks-green-light) !important;
+        padding: 4px 10px !important;
+        border-radius: 6px !important;
+        align-self: flex-start !important;
+        margin-bottom: 12px !important;
+        cursor: default !important;
+        user-select: none !important;
+      }
+
+      .partner-card h3 {
+        font-size: 1.25rem !important;
+        font-weight: 700 !important;
+        color: var(--color-charcoal) !important;
+        margin-bottom: 10px !important;
+        line-height: 1.4 !important;
+      }
+
+      .partner-card p {
+        font-size: 0.95rem !important;
+        color: var(--color-secondary) !important;
+        line-height: 1.6 !important;
+        margin-bottom: 16px !important;
+        flex-grow: 1 !important;
+      }
+
+      .partner-benefit-tag {
+        font-size: 0.8rem !important;
+        font-weight: 600 !important;
+        color: var(--color-gold-deep) !important;
+        padding-top: 12px !important;
+        border-top: 1px dashed var(--color-border) !important;
+        margin-top: auto !important;
+      }
+
+      .partner-plus-divider {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        align-self: center !important;
+        position: relative !important;
+        z-index: 2 !important;
+      }
+
+      .partner-plus-circle {
+        width: 44px !important;
+        height: 44px !important;
+        border-radius: 50% !important;
+        background: #FFFFFF !important;
+        border: 2px solid var(--color-starbucks-green) !important;
+        color: var(--color-starbucks-green) !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        box-shadow: 0 4px 14px rgba(0, 98, 65, 0.15) !important;
+        transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease !important;
+      }
+
+      .partner-plus-divider:hover .partner-plus-circle {
+        transform: scale(1.15) rotate(90deg) !important;
+        background: var(--color-starbucks-green) !important;
+        color: #FFFFFF !important;
+      }
+
+      .partner-plus-label {
+        font-size: 0.65rem !important;
+        font-weight: 800 !important;
+        color: var(--color-gold-deep) !important;
+        margin-top: 6px !important;
+        letter-spacing: 0.08em !important;
+        text-transform: uppercase !important;
+      }
+
+      .partnership-synergy-banner {
+        background: linear-gradient(135deg, rgba(0, 98, 65, 0.06) 0%, rgba(197, 160, 89, 0.08) 100%) !important;
+        border: 1px solid rgba(0, 98, 65, 0.18) !important;
+        border-radius: var(--radius-lg) !important;
+        padding: 24px 28px !important;
+        text-align: center !important;
+        margin: 0 auto 36px !important;
+        max-width: 920px !important;
+      }
+
+      .synergy-flow-equation {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 12px !important;
+        flex-wrap: wrap !important;
+        margin-bottom: 8px !important;
+      }
+
+      .eq-item {
+        font-size: 1rem !important;
+        font-weight: 700 !important;
+        color: var(--color-charcoal) !important;
+        background: #FFFFFF !important;
+        padding: 6px 14px !important;
+        border-radius: var(--radius-full) !important;
+        border: 1px solid var(--color-border) !important;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04) !important;
+      }
+
+      .eq-plus {
+        font-size: 1.15rem !important;
+        font-weight: 800 !important;
+        color: var(--color-starbucks-green) !important;
+      }
+
+      .eq-equal {
+        font-size: 1.25rem !important;
+        font-weight: 800 !important;
+        color: var(--color-gold-deep) !important;
+      }
+
+      .eq-result {
+        font-size: 1.05rem !important;
+        font-weight: 800 !important;
+        color: var(--color-starbucks-green) !important;
+        background: #FFFFFF !important;
+        padding: 6px 16px !important;
+        border-radius: var(--radius-full) !important;
+        border: 1.5px solid var(--color-starbucks-green) !important;
+        box-shadow: 0 2px 8px rgba(0, 98, 65, 0.12) !important;
+      }
+
+      .synergy-subtext {
+        font-size: 0.925rem !important;
+        color: var(--color-secondary) !important;
+        margin: 0 !important;
+      }
+
     /* 2. 태블릿 레이아웃 (769px ~ 1024px) */
     @media (max-width: 1024px) and (min-width: 769px) {
       .about-flow-grid {
@@ -348,6 +543,21 @@
       }
       .video-cards-grid {
         grid-template-columns: repeat(2, 1fr) !important;
+      }
+      .partnership-grid {
+        grid-template-columns: 1fr 36px 1fr 36px 1fr !important;
+        gap: 8px !important;
+      }
+      .partner-card {
+        padding: 28px 16px !important;
+      }
+      .partner-plus-circle {
+        width: 36px !important;
+        height: 36px !important;
+      }
+      .partner-plus-circle svg {
+        width: 16px !important;
+        height: 16px !important;
       }
     }
 
@@ -636,22 +846,55 @@
       .partnership-grid {
         display: flex !important;
         flex-direction: column !important;
-        gap: 16px !important;
+        gap: 12px !important;
         width: 100% !important;
       }
 
+      .partner-plus-divider {
+        margin: 4px 0 !important;
+        flex-direction: row !important;
+        gap: 8px !important;
+      }
+
+      .partner-plus-label {
+        margin-top: 0 !important;
+      }
+
       .partner-card {
-        padding: 26px 20px !important;
+        padding: 24px 20px !important;
         width: 100% !important;
         box-sizing: border-box !important;
       }
 
       .partner-card p {
-        font-size: 1rem !important;
-        line-height: 1.65 !important;
+        font-size: 0.95rem !important;
+        line-height: 1.6 !important;
       }
 
-      .partnership-cta-area .btn {
+      .partnership-synergy-banner {
+        padding: 20px 16px !important;
+        margin-bottom: 28px !important;
+      }
+
+      .synergy-flow-equation {
+        gap: 6px !important;
+      }
+
+      .eq-item, .eq-result {
+        font-size: 0.85rem !important;
+        padding: 5px 10px !important;
+      }
+
+      .eq-plus, .eq-equal {
+        font-size: 1rem !important;
+      }
+
+      .synergy-subtext {
+        font-size: 0.85rem !important;
+        line-height: 1.5 !important;
+      }
+
+      .partnership-cta-wrapper .btn {
         width: 100% !important;
         justify-content: center !important;
       }
@@ -1310,24 +1553,93 @@
       <div class="partnership-grid">
         <!-- 1. 상품 제조사·브랜드 -->
         <div class="partner-card">
+          <div class="partner-card-header">
+            <div class="partner-card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+              </svg>
+            </div>
+            <span class="partner-step-badge">PARTNER 01</span>
+          </div>
           <span class="partner-target-badge">제조사 · 브랜드</span>
           <h3>상품 입점 및 공동구매</h3>
           <p>직접 검증과 공감형 콘텐츠 기반 라이브커머스·공구 판로 확대</p>
+          <div class="partner-benefit-tag">#검증상품공급 #판로확대</div>
+        </div>
+
+        <!-- + 시너지 연결 커넥터 1 -->
+        <div class="partner-plus-divider" aria-hidden="true">
+          <div class="partner-plus-circle">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </div>
+          <span class="partner-plus-label">SYNERGY</span>
         </div>
 
         <!-- 2. 예비 인플루언서·셀러 -->
         <div class="partner-card">
+          <div class="partner-card-header">
+            <div class="partner-card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </div>
+            <span class="partner-step-badge">PARTNER 02</span>
+          </div>
           <span class="partner-target-badge">예비 인플루언서 · 셀러</span>
           <h3>셀러 성장 프로그램</h3>
           <p>실전 판매 노하우 공유 및 검증 상품 공급을 통한 셀러 자립 지원</p>
+          <div class="partner-benefit-tag">#실전판매역량 #팬덤구축</div>
+        </div>
+
+        <!-- + 시너지 연결 커넥터 2 -->
+        <div class="partner-plus-divider" aria-hidden="true">
+          <div class="partner-plus-circle">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </div>
+          <span class="partner-plus-label">SYNERGY</span>
         </div>
 
         <!-- 3. 기업·브랜드 파트너 -->
         <div class="partner-card">
+          <div class="partner-card-header">
+            <div class="partner-card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+              </svg>
+            </div>
+            <span class="partner-step-badge">PARTNER 03</span>
+          </div>
           <span class="partner-target-badge">기업 · 브랜드 파트너</span>
           <h3>콘텐츠 및 라이브 제작</h3>
           <p>브랜드 맞춤 기획 영상 제작 및 전문 라이브커머스 방송 총괄 대행</p>
+          <div class="partner-benefit-tag">#영상기획 #라이브총괄대행</div>
         </div>
+      </div>
+
+      <!-- 3가지 파트너십 상호 연결 시너지 배너 -->
+      <div class="partnership-synergy-banner">
+        <div class="synergy-flow-equation">
+          <span class="eq-item">우수 제조 상품</span>
+          <span class="eq-plus">+</span>
+          <span class="eq-item">실전 육성 셀러</span>
+          <span class="eq-plus">+</span>
+          <span class="eq-item">전문 미디어 기획</span>
+          <span class="eq-equal">=</span>
+          <span class="eq-result">선순환 동반성장 생태계</span>
+        </div>
+        <p class="synergy-subtext">3대 파트너십의 유기적 결합으로 어떤 파트너든 뜰레와 함께 성공적인 커머스 시너지를 창출합니다.</p>
       </div>
 
       <!-- 3가지 내용 설명 후 단일 일원화된 통합 문의 CTA 버튼 -->
@@ -1786,6 +2098,6 @@
   <div class="toast-notice" id="toastNotice"></div>
 
   <!-- 메인 스크립트 -->
-  <script src="js/main.js?v=20261110_02"></script>
+  <script src="js/main.js?v=20261110_03"></script>
 </body>
 </html>

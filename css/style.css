@@ -1247,58 +1247,206 @@ img {
 
 .partnership-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
+  grid-template-columns: 1fr 48px 1fr 48px 1fr;
+  align-items: stretch;
+  gap: 12px;
+  margin-bottom: 32px;
 }
 
 .partner-card {
   background-color: var(--color-pure-white);
   border-radius: var(--radius-lg);
-  padding: 40px 32px;
+  padding: 36px 28px;
   border: 1px solid var(--color-border);
   box-shadow: var(--shadow-subtle);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   transition: var(--transition-smooth);
+  position: relative;
+  z-index: 1;
 }
 
 .partner-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-card);
+  transform: translateY(-5px);
+  box-shadow: 0 16px 32px rgba(0, 98, 65, 0.12);
   border-color: var(--color-starbucks-green);
 }
 
+.partner-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.partner-card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--color-starbucks-green-light);
+  color: var(--color-starbucks-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth);
+}
+
+.partner-card:hover .partner-card-icon {
+  background: var(--color-starbucks-green);
+  color: #FFFFFF;
+}
+
+.partner-step-badge {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--color-gold-deep);
+  background: rgba(197, 160, 89, 0.12);
+  padding: 4px 8px;
+  border-radius: 6px;
+  letter-spacing: 0.05em;
+}
+
 .partner-target-badge {
-  font-size: 0.875rem;
+  font-size: 0.825rem;
   font-weight: 700;
   color: var(--color-starbucks-green);
   background-color: var(--color-starbucks-green-light);
-  padding: 5px 12px;
+  padding: 4px 10px;
   border-radius: 6px; /* MD_RULES 비버튼 소프트 사각형 규격 준수 */
   align-self: flex-start;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
   cursor: default !important;
   user-select: none;
 }
 
 .partner-card h3 {
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: var(--color-charcoal);
-  margin-bottom: 12px;
+  margin-bottom: 10px;
+  line-height: 1.4;
 }
 
 .partner-card p {
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: var(--color-secondary);
-  line-height: 1.65;
-  margin-bottom: 0;
+  line-height: 1.6;
+  margin-bottom: 16px;
+  flex-grow: 1;
+}
+
+.partner-benefit-tag {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-gold-deep);
+  padding-top: 12px;
+  border-top: 1px dashed var(--color-border);
+  margin-top: auto;
+}
+
+/* + 시너지 연결 커넥터 */
+.partner-plus-divider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  position: relative;
+  z-index: 2;
+}
+
+.partner-plus-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 2px solid var(--color-starbucks-green);
+  color: var(--color-starbucks-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(0, 98, 65, 0.15);
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.partner-plus-divider:hover .partner-plus-circle {
+  transform: scale(1.15) rotate(90deg);
+  background: var(--color-starbucks-green);
+  color: #FFFFFF;
+}
+
+.partner-plus-label {
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: var(--color-gold-deep);
+  margin-top: 6px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* 3대 파트너십 상호 연결 시너지 배너 */
+.partnership-synergy-banner {
+  background: linear-gradient(135deg, rgba(0, 98, 65, 0.06) 0%, rgba(197, 160, 89, 0.08) 100%);
+  border: 1px solid rgba(0, 98, 65, 0.18);
+  border-radius: var(--radius-lg);
+  padding: 24px 28px;
+  text-align: center;
+  margin: 0 auto 36px;
+  max-width: 920px;
+}
+
+.synergy-flow-equation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.eq-item {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-charcoal);
+  background: #FFFFFF;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.eq-plus {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--color-starbucks-green);
+}
+
+.eq-equal {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--color-gold-deep);
+}
+
+.eq-result {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--color-starbucks-green);
+  background: #FFFFFF;
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--color-starbucks-green);
+  box-shadow: 0 2px 8px rgba(0, 98, 65, 0.12);
+}
+
+.synergy-subtext {
+  font-size: 0.925rem;
+  color: var(--color-secondary);
+  margin: 0;
 }
 
 .partnership-cta-wrapper {
   text-align: center;
-  margin-top: 48px;
 }
 
 /* 12. SECTION 07: FOOTER */
@@ -1563,7 +1711,22 @@ img {
   }
 
   .partnership-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 36px 1fr 36px 1fr;
+    gap: 8px;
+  }
+
+  .partner-card {
+    padding: 28px 16px;
+  }
+
+  .partner-plus-circle {
+    width: 36px;
+    height: 36px;
+  }
+
+  .partner-plus-circle svg {
+    width: 16px;
+    height: 16px;
   }
 
   /* 태블릿 플라이휠 다이어그램 크기 최적화 */
@@ -1962,22 +2125,50 @@ img {
   .partnership-grid {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 12px;
     width: 100%;
   }
 
+  .partner-plus-divider {
+    margin: 4px 0;
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  .partner-plus-label {
+    margin-top: 0;
+  }
+
   .partner-card {
-    padding: 26px 20px;
+    padding: 24px 20px;
     width: 100%;
     box-sizing: border-box;
   }
 
-  .partner-card p {
-    font-size: 1rem;
-    line-height: 1.65;
+  .partnership-synergy-banner {
+    padding: 20px 16px;
+    margin-bottom: 28px;
   }
 
-  .partnership-cta-area .btn {
+  .synergy-flow-equation {
+    gap: 6px;
+  }
+
+  .eq-item, .eq-result {
+    font-size: 0.85rem;
+    padding: 5px 10px;
+  }
+
+  .eq-plus, .eq-equal {
+    font-size: 1rem;
+  }
+
+  .synergy-subtext {
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  .partnership-cta-wrapper .btn {
     width: 100%;
     justify-content: center;
   }
