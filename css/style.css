@@ -2090,6 +2090,7 @@ img {
 }
 
 .footer-policy-btn {
+  display: inline-block;
   background: none;
   border: none;
   color: rgba(255, 255, 255, 0.75);

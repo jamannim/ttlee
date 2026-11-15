@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>회사소개서 | 주식회사 뜰레(TTLEE)</title>
+  
+  <!-- SEO & 메타 정보 -->
+  <meta name="description" content="주식회사 뜰레(TTLEE) 공식 회사소개서 - 좋은 상품을 직접 발굴하고, 진짜 경험을 나누는 미디어 커머스 기업 뜰레의 비전과 5단계 원스톱 비즈니스 모델을 소개합니다.">
+  <meta name="keywords" content="주식회사 뜰레, 뜰레, TTLee, 회사소개서, 미디어커머스, 라이브커머스, 상품검증, 공동구매, 박세연, 박대장이쏜다">
+  <meta name="author" content="주식회사 뜰레">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.ttlee.co.kr/deck">
+
+  <!-- OpenGraph (SNS 공유) -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="주식회사 뜰레(TTLEE)">
+  <meta property="og:title" content="주식회사 뜰레(TTLEE) - 회사소개서">
+  <meta property="og:description" content="좋은 상품을 직접 발굴하고, 진짜 경험을 나누다. 주식회사 뜰레의 비즈니스 소개서를 확인해 보세요.">
+  <meta property="og:url" content="https://www.ttlee.co.kr/deck">
+  <meta property="og:image" content="https://www.ttlee.co.kr/images/deck/slide_01.png">
+  <meta property="og:image:width" content="1920">
+  <meta property="og:image:height" content="1080">
+  <meta property="og:image:alt" content="주식회사 뜰레 회사소개서 표지">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="주식회사 뜰레(TTLEE) - 회사소개서">
+  <meta name="twitter:description" content="좋은 상품을 직접 발굴하고, 진짜 경험을 나누다. 주식회사 뜰레 공식 소개서">
+  <meta name="twitter:image" content="https://www.ttlee.co.kr/images/deck/slide_01.png">
+
+  <!-- 파비콘 -->
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="images/app-icon.png">
+
+  <!-- 웹폰트 (Pretendard) -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+
+  <style>
+    /* ==========================================================================
+       CSS Variables & Reset
+       ========================================================================== */
+    :root {
+      --color-brand-green: #006241;
+      --color-brand-green-hover: #004d33;
+      --color-brand-orange: #f97316;
+      --color-dark-bg: #0b0f19;
+      --color-dark-surface: #151c2c;
+      --color-dark-border: rgba(255, 255, 255, 0.12);
+      --color-text-main: #f8fafc;
+      --color-text-muted: #94a3b8;
+      --header-height: 64px;
+      --radius-pill: 9999px;
+      --radius-badge: 6px;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
+      --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.45);
+      --font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: var(--color-dark-bg);
+      color: var(--color-text-main);
+      font-family: var(--font-family);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ==========================================================================
+       Header & Navigation Bar
+       ========================================================================== */
+    .deck-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--header-height);
+      background: rgba(15, 23, 42, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--color-dark-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      z-index: 1000;
+    }
+
+    .deck-brand-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .deck-brand-link {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .deck-brand-logo {
+      height: 28px;
+      width: auto;
+      display: block;
+    }
+
+    /* MD_RULES: 비버튼(단순 상태 배지) - 소프트 사각형(border-radius: 6px), cursor: default */
+    .deck-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 8px;
+      background: rgba(0, 98, 65, 0.22);
+      border: 1px solid rgba(0, 98, 65, 0.4);
+      color: #34d399;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border-radius: var(--radius-badge);
+      cursor: default !important;
+      user-select: none;
+    }
+
+    .deck-badge::before {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: #34d399;
+    }
+
+    /* 중앙: 뷰 모드 탭 (알약 형태 버튼) */
+    .deck-view-tabs {
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 3px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--color-dark-border);
+    }
+
+    .view-tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--color-text-muted);
+      font-family: inherit;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      cursor: pointer !important;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .view-tab-btn:hover {
+      color: var(--color-text-main);
+      transform: translateY(-1px);
+    }
+
+    .view-tab-btn.active {
+      background: var(--color-brand-green);
+      color: #ffffff;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(0, 98, 65, 0.35);
+    }
+
+    /* 우측: 액션 버튼 그룹 (MD_RULES: 풀 라운딩 알약 형태) */
+    .deck-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 7px 16px;
+      font-family: inherit;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      border-radius: var(--radius-pill);
+      text-decoration: none;
+      cursor: pointer !important;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-pill:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-pill:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    .btn-pill-primary {
+      background-color: var(--color-brand-green);
+      color: #ffffff;
+      border: 1px solid var(--color-brand-green);
+      box-shadow: 0 2px 10px rgba(0, 98, 65, 0.35);
+    }
+
+    .btn-pill-primary:hover {
+      background-color: var(--color-brand-green-hover);
+      box-shadow: 0 4px 14px rgba(0, 98, 65, 0.5);
+    }
+
+    .btn-pill-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--color-text-main);
+      border: 1px solid var(--color-dark-border);
+    }
+
+    .btn-pill-secondary:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .btn-icon-pill {
+      width: 36px;
+      height: 36px;
+      padding: 0;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--color-text-main);
+      border: 1px solid var(--color-dark-border);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer !important;
+      transition: all 0.2s ease;
+    }
+
+    .btn-icon-pill:hover {
+      background: rgba(255, 255, 255, 0.18);
+      transform: translateY(-2px);
+    }
+
+    .btn-icon-pill:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    /* ==========================================================================
+       Main Presentation Stage (View 1: Default Carousel)
+       ========================================================================== */
+    .deck-container {
+      padding-top: var(--header-height);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .deck-view {
+      display: none;
+      width: 100%;
+      flex: 1;
+    }
+
+    .deck-view.active {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* 1. 슬라이드 넘김 모드 (Presentation Mode) */
+    .presentation-stage {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 24px 72px 140px;
+      min-height: calc(100vh - var(--header-height));
+    }
+
+    .slide-card {
+      max-width: 1240px;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000000;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      user-select: none;
+    }
+
+    .slide-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      transition: opacity 0.25s ease;
+    }
+
+    /* 슬라이드 좌우 네비게이션 화살표 (알약 형태) */
+    .stage-arrow-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-pill);
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid var(--color-dark-border);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer !important;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s ease;
+      z-index: 10;
+    }
+
+    .stage-arrow-btn:hover {
+      background: var(--color-brand-green);
+      border-color: var(--color-brand-green);
+      transform: translateY(-50%) scale(1.08);
+      box-shadow: 0 4px 16px rgba(0, 98, 65, 0.4);
+    }
+
+    .stage-arrow-btn:active {
+      transform: translateY(-50%) scale(0.96);
+    }
+
+    .stage-arrow-btn.prev {
+      left: 16px;
+    }
+
+    .stage-arrow-btn.next {
+      right: 16px;
+    }
+
+    .stage-arrow-btn:disabled {
+      opacity: 0.25;
+      cursor: not-allowed !important;
+      transform: translateY(-50%) !important;
+      background: rgba(15, 23, 42, 0.5);
+    }
+
+    /* 하단 고정 컨트롤 독 (Filmstrip + Counter) */
+    .deck-bottom-dock {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(15, 23, 42, 0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-top: 1px solid var(--color-dark-border);
+      padding: 10px 20px 14px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dock-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 0.875rem;
+    }
+
+    .page-counter {
+      font-variant-numeric: tabular-nums;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--color-text-main);
+      background: rgba(255, 255, 255, 0.08);
+      padding: 3px 12px;
+      border-radius: var(--radius-badge);
+      border: 1px solid var(--color-dark-border);
+    }
+
+    .deck-key-hints {
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .kbd-chip {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 1px 6px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      font-family: inherit;
+      font-size: 0.7rem;
+    }
+
+    /* 썸네일 스트립 */
+    .thumbnails-strip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      max-width: 100%;
+      padding: 4px 6px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+    }
+
+    .thumbnails-strip::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    .thumbnails-strip::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 4px;
+    }
+
+    .thumb-item {
+      position: relative;
+      flex: 0 0 76px;
+      aspect-ratio: 16 / 9;
+      border-radius: 6px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 2px solid transparent;
+      opacity: 0.6;
+      transition: all 0.2s ease;
+      background: #000;
+    }
+
+    .thumb-item:hover {
+      opacity: 1;
+      transform: translateY(-2px);
+    }
+
+    .thumb-item.active {
+      opacity: 1;
+      border-color: #34d399;
+      box-shadow: 0 0 12px rgba(52, 211, 153, 0.6);
+      transform: translateY(-2px);
+    }
+
+    .thumb-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .thumb-num {
+      position: absolute;
+      bottom: 2px;
+      right: 4px;
+      font-size: 0.625rem;
+      font-weight: 700;
+      color: #fff;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+      background: rgba(0, 0, 0, 0.6);
+      padding: 0 3px;
+      border-radius: 2px;
+    }
+
+    /* ==========================================================================
+       View 2: 전체 연속 보기 (Continuous Vertical Scroll)
+       ========================================================================== */
+    .continuous-scroll-view {
+      max-width: 1100px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 32px 16px 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .scroll-slide-item {
+      background: #000000;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--color-dark-border);
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      aspect-ratio: 16 / 9;
+    }
+
+    .scroll-slide-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .scroll-slide-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(6px);
+      padding: 3px 10px;
+      border-radius: var(--radius-badge);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: #ffffff;
+      border: 1px solid var(--color-dark-border);
+      cursor: default !important;
+      user-select: none;
+    }
+
+    /* 플로팅 맨 위로 가기 버튼 */
+    .scroll-top-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-pill);
+      background: var(--color-brand-green);
+      color: #ffffff;
+      border: none;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-lg);
+      cursor: pointer !important;
+      transition: all 0.2s ease;
+      z-index: 999;
+    }
+
+    .scroll-top-btn:hover {
+      background: var(--color-brand-green-hover);
+      transform: translateY(-3px);
+    }
+
+    /* ==========================================================================
+       View 3: PDF 내장 뷰어 (Iframe Embed)
+       ========================================================================== */
+    .pdf-embed-view {
+      width: 100%;
+      height: calc(100vh - var(--header-height));
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pdf-embed-frame {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #ffffff;
+    }
+
+    .pdf-fallback-banner {
+      background: var(--color-dark-surface);
+      border-bottom: 1px solid var(--color-dark-border);
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.8125rem;
+      color: var(--color-text-muted);
+    }
+
+    /* ==========================================================================
+       반응형 미디어 쿼리 (태블릿 & 모바일)
+       ========================================================================== */
+    @media (max-width: 900px) {
+      .presentation-stage {
+        padding: 16px 12px 140px;
+      }
+
+      .stage-arrow-btn {
+        width: 42px;
+        height: 42px;
+      }
+
+      .stage-arrow-btn.prev {
+        left: 6px;
+      }
+
+      .stage-arrow-btn.next {
+        right: 6px;
+      }
+
+      .deck-key-hints {
+        display: none;
+      }
+
+      .thumb-item {
+        flex: 0 0 60px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .deck-header {
+        padding: 0 12px;
+      }
+
+      .deck-badge {
+        display: none;
+      }
+
+      .deck-view-tabs {
+        padding: 2px;
+      }
+
+      .view-tab-btn {
+        padding: 5px 10px;
+        font-size: 0.75rem;
+      }
+
+      .btn-pill-label {
+        display: none;
+      }
+
+      .btn-pill {
+        padding: 6px 10px;
+      }
+
+      .presentation-stage {
+        padding: 12px 8px 130px;
+      }
+
+      .slide-card {
+        border-radius: 8px;
+      }
+
+      .stage-arrow-btn {
+        width: 38px;
+        height: 38px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== TOP NAVIGATION HEADER ==================== -->
+  <header class="deck-header">
+    <div class="deck-brand-area">
+      <a href="/" class="deck-brand-link" title="주식회사 뜰레 홈으로 이동">
+        <img src="images/logo-white.svg" alt="주식회사 뜰레" class="deck-brand-logo">
+      </a>
+      <span class="deck-badge">회사소개서</span>
+    </div>
+
+    <!-- 뷰 모드 전환 탭 (슬라이드 넘김 / 전체 연속 스크롤 / PDF 뷰어) -->
+    <nav class="deck-view-tabs" aria-label="회사소개서 보기 모드 선택">
+      <button type="button" class="view-tab-btn active" data-view="presentation" id="tabPresentation">슬라이드 넘김</button>
+      <button type="button" class="view-tab-btn" data-view="continuous" id="tabContinuous">전체 연속 보기</button>
+      <button type="button" class="view-tab-btn" data-view="pdf" id="tabPdf">PDF 내장 뷰어</button>
+    </nav>
+
+    <!-- 우측 상단 액션 버튼 그룹 (MD_RULES 알약형) -->
+    <div class="deck-actions">
+      <!-- PDF 다운로드 버튼 -->
+      <a href="/deck.pdf" download="주식회사_뜰레_회사소개서.pdf" class="btn-pill btn-pill-primary" title="회사소개서 PDF 파일 다운로드">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        <span class="btn-pill-label">PDF 다운로드</span>
+      </a>
+
+      <!-- 홈으로 이동 버튼 -->
+      <a href="/" class="btn-pill btn-pill-secondary" title="홈페이지 메인으로 이동">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+        <span class="btn-pill-label">홈으로</span>
+      </a>
+
+      <!-- 전체화면 토글 버튼 -->
+      <button type="button" class="btn-icon-pill" id="fullscreenToggleBtn" title="전체화면 전환 (F)" aria-label="전체화면 전환">
+        <svg id="fullscreenIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN DECK CONTAINER ==================== -->
+  <main class="deck-container">
+
+    <!-- [VIEW 1]: 슬라이드 넘김 프레젠테이션 모드 (기본) -->
+    <section class="deck-view active" id="viewPresentation" aria-label="슬라이드 넘김 프레젠테이션">
+      <div class="presentation-stage" id="presentationStage">
+        <!-- 이전 슬라이드 버튼 -->
+        <button type="button" class="stage-arrow-btn prev" id="btnPrevSlide" aria-label="이전 슬라이드 (화살표 좌측 키)" title="이전 슬라이드">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+
+        <!-- 현재 슬라이드 카드 -->
+        <div class="slide-card" id="currentSlideCard">
+          <img id="mainSlideImg" src="images/deck/slide_01.png" alt="주식회사 뜰레 회사소개서 1페이지" loading="eager">
+        </div>
+
+        <!-- 다음 슬라이드 버튼 -->
+        <button type="button" class="stage-arrow-btn next" id="btnNextSlide" aria-label="다음 슬라이드 (화살표 우측 키)" title="다음 슬라이드">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+
+      <!-- 하단 고정 컨트롤 독 (Filmstrip + Counter) -->
+      <div class="deck-bottom-dock">
+        <div class="dock-meta">
+          <span class="page-counter" id="pageCounter">01 / 11</span>
+          <div class="deck-key-hints">
+            <span><kbd class="kbd-chip">←</kbd> <kbd class="kbd-chip">→</kbd> 넘김</span>
+            <span><kbd class="kbd-chip">Space</kbd> 다음</span>
+            <span><kbd class="kbd-chip">F</kbd> 전체화면</span>
+          </div>
+        </div>
+
+        <!-- 썸네일 스트립 네비게이션 -->
+        <div class="thumbnails-strip" id="thumbnailsStrip" role="tablist" aria-label="슬라이드 썸네일 목록">
+          <!-- JS로 11개 썸네일 동적 렌더링 -->
+        </div>
+      </div>
+    </section>
+
+    <!-- [VIEW 2]: 전체 연속 스크롤 모드 -->
+    <section class="deck-view" id="viewContinuous" aria-label="전체 연속 스크롤">
+      <div class="continuous-scroll-view" id="continuousList">
+        <!-- JS로 11개 슬라이드 전체 스택 렌더링 -->
+      </div>
+      <button type="button" class="scroll-top-btn" id="scrollTopBtn" title="맨 위로 이동" aria-label="맨 위로 이동">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+      </button>
+    </section>
+
+    <!-- [VIEW 3]: PDF 내장 뷰어 모드 -->
+    <section class="deck-view" id="viewPdf" aria-label="PDF 원본 내장 뷰어">
+      <div class="pdf-fallback-banner">
+        <span>모바일 브라우저나 환경에 따라 PDF 내장 뷰어가 표시되지 않을 경우 상단 <strong>[PDF 다운로드]</strong> 또는 <a href="/deck.pdf" target="_blank" rel="noopener noreferrer" style="color: #34d399; text-decoration: underline;">[새 창에서 PDF 열기]</a>를 이용해 주세요.</span>
+      </div>
+      <div class="pdf-embed-view">
+        <iframe src="/deck.pdf#toolbar=1&navpanes=0&view=FitH" class="pdf-embed-frame" title="주식회사 뜰레 회사소개서 원본 PDF"></iframe>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== JAVASCRIPT ==================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      // 슬라이드 총 11장 구성
+      const TOTAL_SLIDES = 11;
+      let currentSlide = 1;
+
+      // 슬라이드 파일 경로 헬퍼
+      function getSlidePath(num) {
+        const padded = String(num).padStart(2, '0');
+        return `images/deck/slide_${padded}.png`;
+      }
+
+      // DOM 요소
+      const mainSlideImg = document.getElementById('mainSlideImg');
+      const pageCounter = document.getElementById('pageCounter');
+      const btnPrevSlide = document.getElementById('btnPrevSlide');
+      const btnNextSlide = document.getElementById('btnNextSlide');
+      const thumbnailsStrip = document.getElementById('thumbnailsStrip');
+      const continuousList = document.getElementById('continuousList');
+      const scrollTopBtn = document.getElementById('scrollTopBtn');
+      const fullscreenToggleBtn = document.getElementById('fullscreenToggleBtn');
+
+      // 뷰 탭 전환 버튼들
+      const tabButtons = document.querySelectorAll('.view-tab-btn');
+      const views = {
+        presentation: document.getElementById('viewPresentation'),
+        continuous: document.getElementById('viewContinuous'),
+        pdf: document.getElementById('viewPdf')
+      };
+
+      // 1. 썸네일 스트립 초기 생성
+      function initThumbnails() {
+        thumbnailsStrip.innerHTML = '';
+        for (let i = 1; i <= TOTAL_SLIDES; i++) {
+          const item = document.createElement('div');
+          item.className = `thumb-item ${i === currentSlide ? 'active' : ''}`;
+          item.setAttribute('role', 'tab');
+          item.setAttribute('aria-selected', i === currentSlide ? 'true' : 'false');
+          item.setAttribute('title', `${i}번 슬라이드로 이동`);
+          item.innerHTML = `
+            <img src="${getSlidePath(i)}" alt="${i}번 슬라이드 썸네일" loading="lazy">
+            <span class="thumb-num">${i}</span>
+          `;
+          item.addEventListener('click', () => goToSlide(i));
+          thumbnailsStrip.appendChild(item);
+        }
+      }
+
+      // 2. 연속 스크롤 뷰 초기 생성
+      function initContinuousView() {
+        continuousList.innerHTML = '';
+        for (let i = 1; i <= TOTAL_SLIDES; i++) {
+          const slideDiv = document.createElement('article');
+          slideDiv.className = 'scroll-slide-item';
+          slideDiv.id = `scrollSlide${i}`;
+          slideDiv.innerHTML = `
+            <span class="scroll-slide-badge">${String(i).padStart(2, '0')} / ${String(TOTAL_SLIDES).padStart(2, '0')}</span>
+            <img src="${getSlidePath(i)}" alt="주식회사 뜰레 회사소개서 ${i}페이지" loading="${i <= 2 ? 'eager' : 'lazy'}">
+          `;
+          continuousList.appendChild(slideDiv);
+        }
+      }
+
+      // 3. 슬라이드 이동 함수
+      function goToSlide(slideNum) {
+        if (slideNum < 1 || slideNum > TOTAL_SLIDES) return;
+        currentSlide = slideNum;
+
+        // 메인 이미지 업데이트
+        mainSlideImg.style.opacity = '0.4';
+        mainSlideImg.src = getSlidePath(currentSlide);
+        mainSlideImg.alt = `주식회사 뜰레 회사소개서 ${currentSlide}페이지`;
+        mainSlideImg.onload = () => {
+          mainSlideImg.style.opacity = '1';
+        };
+
+        // 카운터 갱신
+        const paddedCurrent = String(currentSlide).padStart(2, '0');
+        const paddedTotal = String(TOTAL_SLIDES).padStart(2, '0');
+        pageCounter.textContent = `${paddedCurrent} / ${paddedTotal}`;
+
+        // 화살표 활성/비활성 상태
+        btnPrevSlide.disabled = (currentSlide === 1);
+        btnNextSlide.disabled = (currentSlide === TOTAL_SLIDES);
+
+        // 썸네일 활성 클래스 업데이트 및 자동 스크롤
+        const thumbItems = thumbnailsStrip.querySelectorAll('.thumb-item');
+        thumbItems.forEach((thumb, idx) => {
+          const isActive = (idx + 1 === currentSlide);
+          thumb.classList.toggle('active', isActive);
+          thumb.setAttribute('aria-selected', isActive ? 'true' : 'false');
+          if (isActive) {
+            thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          }
+        });
+      }
+
+      function nextSlide() {
+        if (currentSlide < TOTAL_SLIDES) goToSlide(currentSlide + 1);
+      }
+
+      function prevSlide() {
+        if (currentSlide > 1) goToSlide(currentSlide - 1);
+      }
+
+      btnNextSlide.addEventListener('click', nextSlide);
+      btnPrevSlide.addEventListener('click', prevSlide);
+
+      // 4. 뷰 탭 전환
+      tabButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const targetView = btn.getAttribute('data-view');
+          
+          tabButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          Object.keys(views).forEach(vKey => {
+            if (views[vKey]) {
+              views[vKey].classList.toggle('active', vKey === targetView);
+            }
+          });
+
+          // 연속 보기 전환 시 현재 슬라이드로 스크롤
+          if (targetView === 'continuous') {
+            const targetEl = document.getElementById(`scrollSlide${currentSlide}`);
+            if (targetEl) {
+              targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }
+        });
+      });
+
+      // 5. 키보드 단축키
+      window.addEventListener('keydown', (e) => {
+        // 입력 필드 포커스 시 단축키 무시
+        if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+
+        if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+          e.preventDefault();
+          nextSlide();
+        } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+          e.preventDefault();
+          prevSlide();
+        } else if (e.key === 'Home') {
+          e.preventDefault();
+          goToSlide(1);
+        } else if (e.key === 'End') {
+          e.preventDefault();
+          goToSlide(TOTAL_SLIDES);
+        } else if (e.key === 'f' || e.key === 'F') {
+          toggleFullscreen();
+        }
+      });
+
+      // 6. 모바일 터치 스와이프 제스처
+      let touchStartX = 0;
+      let touchStartY = 0;
+      const stage = document.getElementById('presentationStage');
+
+      stage.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+      }, { passive: true });
+
+      stage.addEventListener('touchend', (e) => {
+        const touchEndX = e.changedTouches[0].screenX;
+        const touchEndY = e.changedTouches[0].screenY;
+        const deltaX = touchEndX - touchStartX;
+        const deltaY = touchEndY - touchStartY;
+
+        // 가로 스와이프가 세로 이동보다 클 때만 동작 (최소 40px)
+        if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 40) {
+          if (deltaX < 0) {
+            nextSlide(); // 좌측 스와이프 -> 다음 슬라이드
+          } else {
+            prevSlide(); // 우측 스와이프 -> 이전 슬라이드
+          }
+        }
+      }, { passive: true });
+
+      // 7. 전체화면 토글
+      function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(() => {});
+        } else {
+          if (document.exitFullscreen) {
+            document.exitFullscreen().catch(() => {});
+          }
+        }
+      }
+
+      fullscreenToggleBtn.addEventListener('click', toggleFullscreen);
+
+      // 전체화면 변경 시 아이콘 변경
+      document.addEventListener('fullscreenchange', () => {
+        const isFull = !!document.fullscreenElement;
+        const icon = document.getElementById('fullscreenIcon');
+        if (isFull) {
+          icon.innerHTML = '<path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"></path>';
+        } else {
+          icon.innerHTML = '<path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>';
+        }
+      });
+
+      // 8. 맨 위로 가기 버튼 (연속 스크롤 뷰)
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 400 && views.continuous.classList.contains('active')) {
+          scrollTopBtn.style.display = 'flex';
+        } else {
+          scrollTopBtn.style.display = 'none';
+        }
+      });
+
+      scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // 초기화 실행
+      initThumbnails();
+      initContinuousView();
+      goToSlide(1);
+
+    })();
+  </script>
+</body>
+</html>
