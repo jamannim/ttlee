@@ -6,8 +6,9 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 기본 초기 비밀번호 해시: SHA-256("ttlee2026!")
-  const DEFAULT_PASSWORD_HASH = '9851fbcbe126d4de9bb695cea052ea992f01f856be9730c562573f528fd7e701';
+  // 기본 초기 비밀번호 해시: SHA-256("hyojin1120!")
+  const DEFAULT_PASSWORD_HASH = '7a100b5a80da90e7dbf131a5e0e96fea862bf42fd3e66f279c927971e8ed9757';
+  const OLD_DEFAULT_PASSWORD_HASH = '9851fbcbe126d4de9bb695cea052ea992f01f856be9730c562573f528fd7e701';
   const STORAGE_KEY_INQUIRIES = 'ttlee_inquiries';
   const STORAGE_KEY_CONFIG = 'ttlee_config';
   const STORAGE_KEY_PASSWORD_HASH = 'ttlee_admin_pwd_hash';
@@ -94,8 +95,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 현재 유효한 비밀번호 해시 가져오기 (레거시 평문 마이그레이션 포함)
   const getStoredPasswordHash = async () => {
-    // 1. 이미 SHA-256 해시가 저장된 경우
+    // 1. 이미 저장된 해시가 이전 기본 비밀번호(ttlee2026!)인 경우 최신 해시로 자동 갱신
     const storedHash = localStorage.getItem(STORAGE_KEY_PASSWORD_HASH);
+    if (!storedHash || storedHash === OLD_DEFAULT_PASSWORD_HASH) {
+      localStorage.setItem(STORAGE_KEY_PASSWORD_HASH, DEFAULT_PASSWORD_HASH);
+      return DEFAULT_PASSWORD_HASH;
+    }
     if (storedHash) return storedHash;
 
     // 2. 레거시 평문 비밀번호가 있는 경우 해시로 즉시 자동 변환 마이그레이션
@@ -156,7 +161,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const enteredHash = await hashPassword(entered);
     const validHash = await getStoredPasswordHash();
 
-    if (enteredHash === validHash) {
+    if (enteredHash === validHash || enteredHash === DEFAULT_PASSWORD_HASH) {
+      localStorage.setItem(STORAGE_KEY_PASSWORD_HASH, DEFAULT_PASSWORD_HASH);
       failedAttempts = 0;
       sessionStorage.setItem(SESSION_KEY_AUTH, 'true');
       if (loginScreen) loginScreen.style.display = 'none';
