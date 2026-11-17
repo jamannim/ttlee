@@ -454,7 +454,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // 2. [추천 1위 & 2위] 설정된 이메일 및 구글 시트로 비동기 실시간 발송
       try {
         const cfg = JSON.parse(localStorage.getItem('ttlee_config') || '{}');
-        const targetEmail = cfg.email || 'jamannim@gmail.com';
+        const targetEmail = (cfg.email && cfg.email.trim() !== '' && cfg.email !== 'jamannim@gmail.com') ? cfg.email : 'support@ttlee.co.kr';
         const targetSheetWebhookUrl = cfg.googleSheetWebhookUrl || 'https://script.google.com/macros/s/AKfycbyKK4tk5G8qa8Va8WJHXE_KUfEITCk8O-dsVwgtXVnd1jrwskoxpdATzh6uhz447FTWjw/exec';
 
         // [추천 1위] 대표님 이메일 즉시 수신 (스팸 봇 방지 허니팟 포함)

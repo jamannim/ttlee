@@ -506,7 +506,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 7. 추천 1, 2위 연동 설정 센터
   const DEFAULT_CONFIG = {
-    email: 'jamannim@gmail.com',
+    email: 'support@ttlee.co.kr',
     googleSheetWebhookUrl: 'https://script.google.com/macros/s/AKfycbyKK4tk5G8qa8Va8WJHXE_KUfEITCk8O-dsVwgtXVnd1jrwskoxpdATzh6uhz447FTWjw/exec'
   };
 
@@ -515,7 +515,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const stored = localStorage.getItem(STORAGE_KEY_CONFIG);
       let cfg = stored ? JSON.parse(stored) : {};
 
-      const effectiveEmail = (cfg.email && cfg.email.trim() !== '') ? cfg.email : DEFAULT_CONFIG.email;
+      // 기존 임시 이메일(jamannim@gmail.com) 캐시 시 공식 수신처(support@ttlee.co.kr)로 자동 전환
+      const effectiveEmail = (cfg.email && cfg.email.trim() !== '' && cfg.email !== 'jamannim@gmail.com') ? cfg.email : DEFAULT_CONFIG.email;
       const effectiveSheet = (cfg.googleSheetWebhookUrl && cfg.googleSheetWebhookUrl.trim() !== '') ? cfg.googleSheetWebhookUrl : DEFAULT_CONFIG.googleSheetWebhookUrl;
 
       if (settingEmail) settingEmail.value = effectiveEmail;
