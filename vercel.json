@@ -15,6 +15,24 @@
   ],
   "headers": [
     {
+      "source": "/deck.pdf",
+      "headers": [
+        {
+          "key": "Content-Disposition",
+          "value": "inline; filename=\"ttlee_deck_2026.pdf\"; filename*=UTF-8''%EB%9C%B0%EB%A0%88_%ED%9A%8C%EC%82%AC%EC%86%8c%EA%B0%9c%EC%84%9c_2026.pdf"
+        }
+      ]
+    },
+    {
+      "source": "/(뜰레_회사소개서_2026\\.pdf|%EB%9C%B0%EB%A0%88_%ED%9A%8C%EC%82%AC%EC%86%8c%EA%B0%9c%EC%84%9c_2026\\.pdf)",
+      "headers": [
+        {
+          "key": "Content-Disposition",
+          "value": "attachment; filename=\"ttlee_deck_2026.pdf\"; filename*=UTF-8''%EB%9C%B0%EB%A0%88_%ED%9A%8C%EC%82%AC%EC%86%8c%EA%B0%9c%EC%84%9c_2026.pdf"
+        }
+      ]
+    },
+    {
       "source": "/(.*)",
       "headers": [
         {
